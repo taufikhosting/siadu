@@ -1,0 +1,27 @@
+#define	CLA_CAL			0x01
+#define	CLA_MOV			0x02
+#define	CLA_JMP			0x03
+
+#define	INS_INISIALISASI	0xf1
+#define	INS_STATUS		0xf2
+#define	INS_TIMER		0xe0
+#define	INS_NOT			0x01
+#define	INS_AND			0x02
+#define	INS_OR			0x04
+#define	INS_XOR			0x08
+#define	INS_SAMADENGAN		0xc4
+#define	INS_LEBIHBESAR		0xc2
+#define	INS_LEBIHKECIL		0xc8
+#define	INS_TAMBAH		0xa1
+#define	INS_KURANGI		0xa1
+#define	INS_KALI		0xa4
+#define	INS_BAGI		0xa8
+#define	INS_SENSORCAHAYA	0xd1
+#define	INS_SENSORPROXIMITY	0xd2
+#define	INS_PWMKANAN		0xd4
+#define	INS_PWMKIRI		0xd8
+
+#define	REG_AL			0x00
+#define	REG_AH			0x01
+#define	REG_BL			0x02
+#define	REG_BH			0x03

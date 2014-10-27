@@ -1,0 +1,393 @@
+/********************************************
+   TCMS HTML ELEMENTS
+********************************************/ 
+
+/* top elements */
+* { padding: 0; margin: 0; }
+
+body {
+	margin			: 0;
+	padding			: 0;
+	font-size		: 12px;
+	line-height		: 20px;
+	font-family		: Geneva, Arial, Helvetica, sans-serif;
+	color			: #333333; 
+	background		: #30211E url(../images/body.jpg) top center repeat-x;
+	text-align		: center;
+}
+
+/* links */
+a { 
+	color			: #21759B;
+	text-decoration	: none;
+	list-style		: none;
+}
+a:hover {
+	color			: #D54E21;
+	text-decoration	: none;
+	list-style		: none;
+}
+a:visited {
+    text-decoration	: none;
+	list-style		: none;
+}
+a:focus {
+    text-decoration	: none;
+	list-style		: none;
+}
+a:active {
+	text-decoration	: none;
+	list-style		: none;
+}
+a:after {
+	text-decoration	: none;
+	list-style		: none;
+}
+
+ul, ol {
+	margin			: 10px 30px;
+	padding			: 0 15px;
+	color			: #333333;
+}
+ul span, ol span {
+	color			: #333333; 
+}
+
+/* images */
+img {
+	border			: 0px solid #CCC;
+}
+img.no-border {
+	border			: none;
+}
+img.float-right {
+  margin			: 5px 0px 5px 5px;   /*top right bottom left*/ 
+}
+img.float-left {
+  margin			: 5px 5px 5px 0px;   /*top right bottom left*/ 
+}
+
+code {
+  margin			: 5px 0;
+  padding			: 10px;
+  text-align		: left;
+  display			: block;
+  overflow			: auto;  
+  font				: 500 1em/1.5em 'Lucida Console', 'courier new', monospace;
+  background		: #FAFAFA;
+  border			: 1px solid #cccccc;  
+  border-left		: 4px solid #4284B0; 
+}
+acronym {
+  /*cursor: help;*/
+  border-bottom		: 1px solid #777;
+}
+
+blockquote {
+	margin			: 5px 0 5px 0;
+ 	padding			: 0 0 0 40px;  /*top right bottom left*/ 
+	border			: 1px solid #cccccc; 
+  	background		: #FAFAFA url(../images/quote.gif) no-repeat 5px 5px;    
+}
+
+/* search form */
+form.searchform {
+	position		: absolute;
+	background		: transparent;
+	border			: none;
+	margin			: 0; 
+	padding			: 10px;
+	right			: 30px;
+	top				: 35px;
+}
+form.searchform input.textbox { 
+	width			: 350px;
+	background		: #FFF;
+	color			: #333;
+}
+form.searchform input.button { 
+	margin			: 0; 
+	padding			: 3px 10px 3px 10px; 
+	font			: bold 12px Arial, Sans-serif; 
+	background		: #E26421;
+	border			: 1px solid #E26421;
+	color			: #ffffff;
+	height			: 26px;
+	vertical-align	: top;
+}
+
+/***********************
+	LAYOUT
+************************/
+#wrap {
+	background		: #fff;
+	border-top		: 0px solid #DFDFDF;
+	border-bottom	: 0px solid #DFDFDF;
+	border-left		: 0px solid #DFDFDF;
+	border-right	: 0px solid #DFDFDF;
+	width			: 980px; 
+	height			: 100%;
+	margin			: 0px auto 0px auto;	
+	text-align		: left;
+	-webkit-box-shadow: 0px 0px 4px #150D0B;
+	-moz-box-shadow	: 0px 0px 4px #150D0B;
+	box-shadow		: 0px 0px 4px #150D0B;
+}
+
+/* header */
+#header {
+	background		: #30211E url(../images/header.jpg) top center repeat-x;
+	position		: relative;
+	width			: 980px;
+	height			: 120px;	
+	margin			: 0 auto 0 auto; 
+}
+
+#header #logo {
+	background		: url(../images/logo-akper.png) center center no-repeat;
+	position		: absolute;
+	width			: 350px; 
+	height			: 70px;
+	border			: 0px solid #dddddd;
+	top				: 23px; 
+	left			: 20px;	
+}
+
+/* mainmenu */
+#mainmenu {
+	background		: #F39C12;
+	position		: relative;
+	width			: 980px;
+	height			: 40px;	
+	margin			: 0 auto 0 auto; 
+}
+
+/* main */
+#main {
+	float			: left;
+    margin			: 5px 0 10px 10px;
+	padding			: 0;
+	width			: 695px;
+}
+
+#main2 {
+	float			: left;
+	margin-left		: 4px;
+	width			: 75%;	
+}
+
+#main p, h1, h2, h3 ,h4{
+	margin			: 5px 0 5px 0;
+}
+
+.date {
+	font-size		: 9px;
+	color			: #999999;
+}
+
+/* sidebar */
+#sidebar {
+	float			: left;
+	width			: 200px;
+	margin			: 10px 0 0 10px;	
+	padding			: 0; 
+	display			: inline;		
+}
+
+#sidebar p, h1, h2, h3 {
+	margin			: 5px 10px;
+}
+
+#sidebar ul.sidemenu {
+	list-style		: none;
+	margin			: 10px 0 10px 15px;
+	padding			: 0;		
+}
+#sidebar ul.sidemenu li {
+	margin-bottom	: 1px;
+	border			: 1px solid #f2f2f2;
+}
+#sidebar ul.sidemenu a {
+	display			: block;
+	font-weight		: bold;
+	color			: #333;	
+	text-decoration	: none;	
+	padding			: 2px 5px 2px 10px;
+	background		: #f2f2f2;
+	border-left		: 4px solid #CCC;	
+	min-height		: 18px;
+}
+
+* html body #sidebar ul.sidemenu a { 
+	height			: 18px; 
+}
+
+#sidebar ul.sidemenu a:hover {
+	padding			: 2px 5px 2px 10px;
+	background		: #f2f2f2;
+	color			: #339900;
+	border-left		: 4px solid #9EC630;
+}
+
+/* rightbar */
+#rightbar {
+	float			: right;
+	width			: 250px;
+	padding			: 0; 
+	margin			: 10px 10px 5px 0;	
+	display			: inline;		
+}
+
+.judul-halaman {
+	padding-bottom	: 9px;
+	margin			: 15px 0 20px;
+	border-bottom	: 1px solid #eee;
+}
+
+.bg {
+	background		: #55312A;
+	padding			: 6px 10px 6px 10px;
+	border			: 1px solid #55312A;
+	margin			: 5px 0px 5px 0px;
+}
+
+.bg2 {
+	background		: #55312A;
+	color			: #ffffff;
+	padding			: 6px 10px 6px 10px; 
+	border			: 1px solid #55312A;
+	margin			: 5px 0px 0px 0px;
+	z-index			: 999999;
+}
+
+.box {
+	background		: #FFFFFF;
+	border-top		: 0px solid #DFDFDF;
+	border-bottom	: 1px solid #DFDFDF;
+	border-right	: 1px solid #DFDFDF;
+	border-left		: 1px solid #DFDFDF;
+	font-size		: 100%;	
+    padding			: 5px;
+	margin			: 0px 0px 5px 0px;
+	z-index			: -1;
+	/*-webkit-box-shadow: 0px 0px 2px #cccccc;
+	-moz-box-shadow	: 0px 0px 2px #cccccc;
+	box-shadow		: 0px 0px 2px #cccccc;*/
+}
+
+.box a {
+	color			: #30211E;
+	background-color: transparent;
+	text-decoration	: none;
+}
+.box a:hover{
+	color			: #E67E22;
+	background-color: transparent;
+}
+.box li {
+	padding			: 0px 0px 0px 0px;  /*top right bottom left*/ 
+	background-position: left;
+	background-repeat: no-repeat;
+	color			: #333333;
+}
+
+.box ul {
+	margin			: 0px 0 0px 0px;
+	padding			: 0px 0px 0px 0px;
+	list-style-type	: none;
+}
+.box li a {
+	color			: #333333;
+	border-bottom	: 1px dotted #DFDFDF;
+	text-decoration	: none;
+	display			: block;
+    padding			: 4px 5px 4px 10px;
+}
+
+.box li a:hover{
+	color			: #30211E;
+	background-color: #EAF2FA;
+}
+.box ul li {
+	padding			: 0px 0 0px 0;  /*top right bottom left*/ 
+	/*list-style-image:url(../images/external.gif);
+  	border-bottom:1px solid #efefef;*/
+}
+
+.box2 ul {
+	margin			: 0px 0 0px 0px;
+	padding			: 0px 0px 0px 0px;
+	list-style-type	: none;
+}
+.box2 li a {
+	color			: #21759B;
+	border-top		: 1px solid #E3E3E3;
+	border-bottom	: 1px solid #E3E3E3;
+	border-left		: 1px solid #E3E3E3;
+	border-right	: 1px solid #E3E3E3;
+	text-decoration	: none;
+	display			: block;
+    padding 		: 5px 5px 5px 20px;
+}
+.box2 li a:hover{
+	color			: blue;
+	text-decoration	: none;
+}
+
+.border {
+	background-color: #FFFFFF;
+	border			: 1px solid #DFDFDF;
+	padding			: 5px;
+    margin			: 5px 0 5px 0;
+}
+
+.box-berita {
+	padding			: 5px 10px 10px 10px;
+	margin			: 0 0 10px 0;
+	border-top		: 0px solid #dddddd;
+	border-right	: 1px solid #dddddd;
+	border-bottom	: 1px solid #dddddd;
+	border-left		: 1px solid #dddddd;
+}
+
+.box-berita-judul {
+	padding			: 4px 0px 4px 0px;
+	border-bottom	: 1px dashed #dddddd;
+}
+
+/* Footer */
+#footer { 
+	clear			: both;
+	background		: #2A2A2A;
+	color			: #888888;
+	font-size		: 11px;
+	margin			: 0 auto 0 auto; 
+	width			: 980px;
+	height			: 45px;
+}
+#footer a { 
+	text-decoration	: none; 
+	font-weight		: normal;	
+	color			: #999999;
+}
+#footer a:hover { 
+	text-decoration	: none; 
+	font-weight		: normal;	
+	color			: #ffffff;
+}
+#footer .footer-left{
+	float			: left;
+	width			: 60%;
+	margin			: 12px 0px 0px 15px;
+}
+
+#footer .footer-right{
+	float			: right;
+	width			: 35%;
+	margin			: 12px 15px 0px 0px;
+}
+
+.profil-staf {
+	padding			: 10px 0px 20px 0px;
+	border-bottom	: 1px dashed #dddddd;
+}
