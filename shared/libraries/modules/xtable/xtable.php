@@ -468,14 +468,17 @@ class xtable{
 	
 	// row_begin([id],[number],[attibute])
 	function row_begin($id=0,$atr=''){
-		if($this->row_isbegin) $this->row_end();
-		if($this->row_allid!='')$this->row_allid.=',';
+		if($this->row_isbegin)// (default=false):: jika true 
+			$this->row_end();
+		if($this->row_allid!='')
+			$this->row_allid.=',';
 		$this->row_allid.=$id;
 		$this->row_id=$id;
-		if($this->row_strip){
-			if($this->ndata>2)$this->xr=$this->xr==0?1:0;
+		if($this->row_strip){ // (default=true):: true
+			if($this->ndata>2)
+				$this->xr=$this->xr==0?1:0;
 			echo '<tr valign="'.$this->row_valign.'" '.$atr.' id="xt'.$this->xtableid.'r'.$this->row_id.'" class="xtr'.$this->xr.'">';
-		} else {
+		} else { // belang2
 			echo '<tr valign="'.$this->row_valign.'" '.$atr.' id="xt'.$this->xtableid.'r'.$this->row_id.'" class="xtr0">';
 		}
 		
@@ -483,7 +486,9 @@ class xtable{
 			$this->td_urut();
 		}
 		if($this->useselect){
-			echo '<td width="20px" align="center" onclick="xtable'.$this->xtableid.'_sel('.$this->row_num.')"><input id="xt'.$this->xtableid.'cek'.$this->row_num.'" value="'.$this->row_id.'" type="checkbox" onclick="xtable'.$this->xtableid.'_sel('.$this->row_num.')" /></td>';
+			echo'<td width="20px" align="center" onclick="xtable'.$this->xtableid.'_sel('.$this->row_num.')">
+					<input id="xt'.$this->xtableid.'cek'.$this->row_num.'" value="'.$this->row_id.'" type="checkbox" onclick="xtable'.$this->xtableid.'_sel('.$this->row_num.')" />
+				</td>';
 		}
 		$this->row_isbegin=true;
 		$this->col_num=0;
@@ -784,10 +789,22 @@ class xtable{
 	}
 	function btnbar_print($a=''){
 		if($this->ndata>0){
-		if($a=='')$a='E(\'xtable'.$this->xtableid.'_print_form\').submit()';
-		echo '<button class="btn" style="float:left;margin-right:4px" onclick="'.$a.'"><div class="bi_pri">Cetak</div></button>';
+			if($a=='')
+				// $a='E(\'xtable'.$this->xtableid.'_print_form\').submit()';
+				$a='E(\'xtable'.$this->xtableid.'_print_form\').submit()';
+			// var_dump($a);
+			echo '<button class="btn" style="float:left;margin-right:4px" onclick="'.$a.'">
+						<div class="bi_pri">Cetak</div>
+				  </button>';
 		}
 	}
+	function btnbar_print2($a='',$t=''){
+		$o = 'window.open(\'print/'.$a.'.php?token='.$t.'\',\'_blank\');';
+		echo '<button class="btn" style="float:left;margin-right:4px" onclick="'.$o.'">
+					<div class="bi_pri">Cetak</div>
+			  </button>';
+	}
+	
 	function btnbar_help(){
 		echo '<button class="btn" title="Bantuan" style="float:left;margin-right:4px" onclick="'.$this->fmod.'_form(\'hf\')"><div class="bi_helpb">&nbsp;</div></button>';
 	}
@@ -804,34 +821,49 @@ class xtable{
 	function btnbar_f(){
 		echo '<div class="tbltopbar" style="width:100%">'; $this->btnbar_isbegin=true;
 		if($this->xtopt!='urut'){
-		$a=func_get_args();
-		$n=count($a);
-		for($i=0;$i<$n;$i++){
-			if($a[$i]=='add') $this->btnbar_add();
-			else if($a[$i]=='print') $this->btnbar_print();
-			else if($a[$i]=='updn') $this->btnbar_updn();
-			else if($a[$i]=='help') $this->btnbar_help();
-			else if($a[$i]=='srcbox') $this->search_box();
-			else echo $a[$i];
-		}} else {
+			$a=func_get_args();
+			$n=count($a);
+			for($i=0;$i<$n;$i++){
+				if($a[$i]=='add') 
+					$this->btnbar_add();
+				else if($a[$i]=='print') 
+					$this->btnbar_print();
+				else if($a[$i]=='updn') 
+					$this->btnbar_updn();
+				else if($a[$i]=='help') 
+					$this->btnbar_help();
+				else if($a[$i]=='srcbox') 
+					$this->search_box();
+				else 
+					echo $a[$i];
+			}
+		} else {
 			$this->btnbar_updn();
 		}
-		echo '</div>'; $this->btnbar_isbegin=false;
-		if($this->cari!=0 && !$this->search_infodisp) $this->search_info();
+		echo '</div>'; 
+		$this->btnbar_isbegin=false;
+		if($this->cari!=0 && !$this->search_infodisp) 
+			$this->search_info();
 	}
+
 	function search_kformat($a1){
 		//$a1="nopendaftaran(no pendaftaran)=>nama:EQ-1";
 		//echo " a1:".$a1."; ";
-		$skf=array();
-		$pindex="/^[\w]+(\([\w ]+\))?/";
-		$pfield="/\=\>[\w\.]+(\:|\-)/";
-		$pmfield="/\=\>[\w\.\:]+(\s*(\&|\|)\s*[\w\.\:]+)+\-/";
-		$pcond="/(EQ|LIKE)/";
-		$pcol="/\-[0-9,]+/";
-		$index="";$opt="";$field="";$cond="LIKE";$col='';$mf='NO';
+		$skf     =array();
+		$pindex  ="/^[\w]+(\([\w ]+\))?/";
+		$pfield  ="/\=\>[\w\.]+(\:|\-)/";
+		$pmfield ="/\=\>[\w\.\:]+(\s*(\&|\|)\s*[\w\.\:]+)+\-/";
+		$pcond   ="/(EQ|LIKE)/";
+		$pcol    ="/\-[0-9,]+/";
+		$index   ="";
+		$opt     ="";
+		$field   ="";
+		$cond    ="LIKE";
+		$col     ='';
+		$mf      ='NO';
 		if(preg_match($pindex,$a1,$mat)){
-			$index=str_replace("=>","",$mat[0]);
-			$popt="/\([\w ]+\)/";
+			$index =str_replace("=>","",$mat[0]);
+			$popt  ="/\([\w ]+\)/";
 			if(preg_match($popt,$a1,$mat)){
 				$opt=str_replace("(","",$mat[0]);
 				$opt=str_replace(")","",$opt);
@@ -842,18 +874,19 @@ class xtable{
 		}
 		if(preg_match($pcol,$a1,$mat)){
 			//echo "asd";
-			$col=str_replace("-","",$mat[0]);
+			$col  =str_replace("-","",$mat[0]);
 			//echo "COL: ".$col."; ";
-			$tcol=explode(",",$col);
-			$ncol=count($tcol);
-			if($ncol>1) $col=$tcol;
+			$tcol =explode(",",$col);
+			$ncol =count($tcol);
+			if($ncol>1) 
+				$col=$tcol;
 		}
 		if(preg_match($pmfield,$a1,$mat)){
-			$field=$mat[0];
-			$field=str_replace("=>","",$mat[0]);
-			$field=str_replace("-","",$field);
-			$mf='MULTI';
-			$cond='MULTI';
+			$field =$mat[0];
+			$field =str_replace("=>","",$mat[0]);
+			$field =str_replace("-","",$field);
+			$mf    ='MULTI';
+			$cond  ='MULTI';
 		} else {
 			if(preg_match($pcond,$a1,$mat)){
 				$cond=$mat[0];
@@ -873,14 +906,19 @@ class xtable{
 		$skf=array('index'=>$index,'field'=>$field,'cond'=>$cond,'col'=>$col,'opt'=>$opt);
 		return $skf;
 	}
+
+	// $xtable->search_keyon('kunci=>aka_siswa.nis:EQ|aka_siswa.nama:LIKE-0,1');
 	// searching
 	function search_keyon(){
-		$a=func_get_args();
-		$n=count($a); $ksql=array();
+		$a    =func_get_args();
+		$n    =count($a); 
+		$ksql =array();
+		
 		for($i=0;$i<$n;$i++){
 			$skf=$this->search_kformat($a[$i]);
 			$this->keyons[$skf['index']]=$skf['opt'];
-			if($i==0 && $this->keyn=='')$this->keyn=$skf['index'];
+			if($i==0 && $this->keyn=='')
+				$this->keyn=$skf['index'];
 			//echo " skf[index]=".$skf['index'].";";
 			//echo " count this->keyon:".count($this->keyons)."; ";
 			$this->keycol[$skf['index']]=$skf['col'];
@@ -893,6 +931,7 @@ class xtable{
 		}
 		$this->search_sql_set($ksql);
 	}
+	
 	function search_info($fi='',$l=1){
 		if($this->cari!=0){
 			if($l===1){
