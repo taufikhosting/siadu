@@ -2,6 +2,8 @@ var fRp_shownul=true;
 
 function E(e){
 	return document.getElementById(e);
+	// alert(document.getElementById(e));
+	// return false;
 }
 function Efoc(a){
 	E(a).focus();

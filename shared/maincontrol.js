@@ -975,13 +975,13 @@ function userlogin(){
 	var username=E("username").value;
 	E("userpasswd").blur();
 	E("username").blur();
-	EHide("loginbtn");
+	// EHide("loginbtn");
 	EShow("loader4");
 	_("_apps&app=checkuser&passwd="+userpasswd+"&uname="+username,function(r){
-		EHide("loader4");
+		// EHide("loader4");
 		if(r!="0") {
 			setCookie("sarprasdemo","admin",365);
-			EHide("userwarn");
+			// EHide("userwarn");
 			openApp(r);
 		}
 		else {
@@ -989,6 +989,7 @@ function userlogin(){
 		}
 	});
 }
+
 function retypeuser(){
 	EHide("userwarn");
 	EShow("loginbtn");
