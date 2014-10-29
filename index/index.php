@@ -88,7 +88,7 @@ body{
 </tr>
 <tr height="110px">
 	<td align="center" width="160px">
-		<div class="blok" style="background:url('employee.png') center no-repeat #0858c6" onclick="jumpTo('../sisfohrd/')"></div>
+		<div class="blok" style="background:url('employee.png') center no-repeat #0858c6" onclick="jumpTo('../sisterhrd/')"></div>
 	</td>
 	<td align="center" width="160px">
 		<div class="blok" style="background:url('keuangan.png') center no-repeat #009400" onclick="jumpTo('../keuangan/')"></div>
