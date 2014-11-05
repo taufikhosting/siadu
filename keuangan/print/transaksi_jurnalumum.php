@@ -2,19 +2,18 @@
   session_start();
   require_once('../../shared/config.php');
   require_once('../system/config.php');
-  // require_once '../../shared/db.php';
+  require_once '../../shared/db.php';
   require_once(DBFILE);
   require_once(LIBDIR.'common.php');
   require_once(MODDIR.'date.php');
   require_once(MODDIR.'xtable/xtablepf.php');
-  require_once '../../shared/libraries/mpdf/mpdf.php';  //added by epiii
-  require_once '../../shared/tglindo.php'; // added by epiii
+  require_once '../../shared/libraries/mpdf/mpdf.php';
+  require_once '../../shared/tglindo.php';
   
   $token = base64_encode(md5('transaksi_jurnalumum'.$_SESSION['keu_admin_id'].$_SESSION['keu_admin_name']));
   if(!isset($_SESSION)){ // login 
     echo 'user has been logout';
   }else{ // logout
-    echo 'haha';
     if(isset($_GET['token']) and $token===$_GET['token']){
           ob_start(); // digunakan untuk convert php ke html
           $out='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
