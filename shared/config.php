@@ -22,7 +22,8 @@ define('DBFILE',ROOTDIR.'shared/db.php');
 define('SHAREDOBJ',SHAREDLIB.'obj/');
 
 
-define('DB_HRD','`josh`.`hrd_pegawai`');
+// define('DB_HRD','`josh`.`hrd_pegawai`');
+define('DB_HRD','josh');
 
 
 /* Database */
