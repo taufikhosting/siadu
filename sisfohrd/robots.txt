@@ -1,2 +1,0 @@
-
-Sitemap : http://www.teamworks.co.id/sitemap.php?do=showsitemap&sm=sitemap.xml.gz
