@@ -1,0 +1,126 @@
+#featured{ 
+	width:365px; 
+	padding-right:255px; 
+	position:relative;
+    margin:5px 0px 0px 5px;	
+	border:5px solid #bbbbbb; 
+	height:255px; 
+	background:#f2f2f2;
+}
+#featured ul.ui-tabs-nav{ 
+	position:absolute; 
+	top:0; left:365px; 
+	list-style:none; 
+	padding:0; margin:0; 
+	width:255px; 
+}
+#featured ul.ui-tabs-nav li{ 
+	padding:0; 
+	padding-left:13px;  
+	font-size:12px; 
+	color:#666; 
+}
+#featured ul.ui-tabs-nav li img{ 
+	float:left; 
+	margin:0px 5px 0px 0px; 
+	background:#cccccc; 
+	padding:3px; 
+	border:0px solid #333333;
+max-height:48px;
+}
+#featured ul.ui-tabs-nav li img:hover{ 
+	float:left; 
+	margin:0px 5px 0px 0px; 
+	background:#fff; 
+	padding:3px; 
+	border:0px solid #333333;
+}
+#featured ul.ui-tabs-nav li span{ 
+	font-size:11px; font-family:Verdana; 
+	color:#333333;
+	line-height:18px; 
+}
+#featured li.ui-tabs-nav-item a{ 
+	display:block; 
+	padding:3px;
+	height:55px;
+	color:#333;  
+	background:#e2e2e2;
+	border-bottom:1px solid #cccccc;
+	line-height:20px;
+}
+#featured li.ui-tabs-nav-item a:hover{ 
+	background:#d2d2d2; 
+}
+#featured li.ui-tabs-selected{ 
+	background:url('../images/selected-item.gif') top left no-repeat;  
+}
+#featured ul.ui-tabs-nav li.ui-tabs-selected a{ 
+	color:#111111; 
+	background:#f2f2f2; 
+}
+#featured .ui-tabs-panel{ 
+	width:380px; 
+	height:255px; 
+	background:#999; 
+	position:relative;
+}
+#featured .ui-tabs-panel .info{ 
+	position:absolute; 
+	top:175px; left:0; 
+	height:75px; 
+	background: url('../images/transparent-bg.png'); 
+}
+#featured .ui-tabs-panel img{ 
+width:385px;
+max-height:250px;
+}
+#featured .info h2{ 
+	font-size:18px; font-family:Georgia, serif; 
+	color:#fff; 
+	padding:5px; 
+	margin:0;
+	overflow:hidden; 
+}
+#featured .info p{ 
+	margin:0 5px; 
+	font-family:Verdana; font-size:11px; 
+	line-height:15px; color:#f0f0f0;
+}
+#featured .info a{ 
+	text-decoration:none; 
+	color:#fff; 
+}
+#featured .info a:hover{ 
+	text-decoration:underline; 
+}
+#featured .ui-tabs-hide{ 
+	display:none; 
+}
+.datehead {
+font-size:10px; 
+color:#ffffff; 
+font-style:italic; 
+position:absolute; 
+left:5px;
+}
+.judulhead {
+font-size:16px; 
+color:#ffffff; 
+font-family:Georgia; 
+font-weight:bold; 
+position:relative; 
+margin-top:0px; 
+margin-bottom:0px; 
+margin-left:20px;
+}
+.headjud {
+font-size:16px; 
+color:#ffffff; 
+font-family:Georgia; 
+font-weight:bold; 
+position:relative; 
+margin-top:0px; 
+margin-bottom:0px; 
+margin-left:5px;
+}
