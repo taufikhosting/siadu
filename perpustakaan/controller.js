@@ -128,6 +128,34 @@ function penerbit_print(){
 	window.open("print/?file=penerbit","_blank");
 }
 
+function pus_getpenerbit(c){
+	_("getpenerbit&c="+c,function(r){
+		E('fform2').innerHTML=r;
+		open_fform2();
+		Efoc("srcname");
+	});
+}
+function pus_setpenerbit(a){
+	E("nama").value=a;
+	// E("namapegawai").value=b;
+	// E("pegawai").value=c;
+}
+function pus_findpenerbit(a){
+	var n=E("srcname").value;
+	var c=E("srccback").value;
+	if(a==0) n="";
+	if(n=="") a=0;
+	EHide("databox");EShow("loader7");
+	_("getpenerbit&opt=find&nama="+n+"&c="+c,function(r){
+		E('databox').innerHTML=r;
+		EHide("loader7");
+		EShow("databox");
+		if(a==0)EHide("showallbtn");
+		else EShow("showallbtn");
+	});
+}
+
+
 /** Halaman bahasa **/
 function bahasa_get(){
 	gPage("bahasa");

@@ -21,10 +21,12 @@ $PSBar->end();
 $db=new xdb("sar_grup","","lokasi='$lok'");
 $t=$xtable->use_db($db,$xtable->pageorder_sql('kode','nama'));
 
+		$a = 'inventaris';
+		$token=base64_encode(md5($a.$_SESSION['sar_admin_id'].$_SESSION['sar_admin_name']));
 $xtable->btnbar_begin();
 	$xtable->btnbar_add();
-	echo '<button class="btn" style="float:left;margin-right:4px" onclick="E(\'pageprinter\').submit()"><div class="bi_pri">Cetak</div></button>';
- // $xtable->btnbar_print();	
+	// echo '<button class="btn" style="float:left;margin-right:4px" onclick="E(\'pageprinter\').submit()"><div class="bi_pri">Cetak</div></button>';
+ $xtable->btnbar_print2($a,$token);	
  echo '<div class="sfont" style="float:right;margin-top:4px">Total aset: '.fRp(lokasi_aset($lok)).'</div>';
 $xtable->btnbar_end();
 

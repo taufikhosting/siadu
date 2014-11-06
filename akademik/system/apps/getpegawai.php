@@ -59,7 +59,7 @@ $fwidth=500;
 						<table class="xtable" border="0" cellspacing="1px" cellpadding="4px" width="100%">
 						<tr>
 							<th>Nama</th>
-							<th>NIP</th>
+							<th>NIP Guru</th>
 							<th class="alc">Pilihan</th>
 						</tr>
 						<?php $x=$ndata>2?0:2;

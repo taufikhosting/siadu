@@ -49,8 +49,10 @@ $xform->table_begin();
 		$xform->fi('Penerjemah',iText('penerjemah',$data['penerjemah'],$xform->fieldws));
 		$xform->fi('Editor',iText('editor',$data['editor'],$xform->fieldws));
 		
+		// $fform->fi('Pegawai',app_form_getpegawai('pegawai',$r));		
 		$s=iSelect('penerbit',$penerbit,$data['penerbit'],'float:left;margin-right:4px;width:244px');
 		$s.='<button title="Penerbit baru..." class="btn" style="float:left;margin-right:4px" onclick="katalog_penerbit_form(\'af\')"><div class="bi_addb">&nbsp;</div></button>';
+		$s.='<button title="Cari Penerbit" class="btn" style="float:left;margin-right:4px" onclick="pus_getpenerbit()"><div class="bi_srcb">&nbsp;</div></button>';
 		$xform->fi('Penerbit',$s);
 		
 		$tahun=array(); $tahun[0]='tahun:'; $thn=intval(date("Y"))+5;
