@@ -315,7 +315,7 @@ function app_form_gpost(){
 	$a=func_get_args();
 	$n=count($a);
 	for($i=0;$i<$n;$i++){
-		if($a[$i]=='photo'){
+		if($a[$i]=='photo'){ //img
 			$id=gpost('photo');
 			if($id!=''){
 				if(intval($id)!=0){
@@ -326,8 +326,7 @@ function app_form_gpost(){
 					$s['photo']='';
 				}
 			}
-		}
-		else {
+		}else { // others 
 			$s[$a[$i]]=gpost($a[$i]);
 		}
 	}

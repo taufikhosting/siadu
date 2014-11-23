@@ -83,6 +83,9 @@ function katalog_name($a){
 function katalog_kode($a){
 	return dbFetch("kode"," sar_katalog","W/replid='$a'");
 }
+function tempat_kode($a){
+	return dbFetch("kode"," sar_tempat","W/replid='$a'");
+}
 function katalog_warn($a=0){
 	if(!admin_isoperator()) $a=1;
 	if($a==0){

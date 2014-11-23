@@ -32,7 +32,8 @@ if($opt=='a'||$opt=='u'||$opt=='d'){ $q=false;
 		$r['kapasitas']=1;
 	}
 	$fform->head();
-	if($opt=='af' || $opt=='uf'){ require_once(MODDIR.'control.php'); // Add or Edit form
+	if($opt=='af' || $opt=='uf'){ 
+		require_once(MODDIR.'control.php'); // Add or Edit form
 		
 		$fform->fl('Departemen',departemen_name($r['departemen']),$fform->rwidths);
 		$fform->fi('Nama periode',iText('proses',$r['proses'],$fform->rwidths));

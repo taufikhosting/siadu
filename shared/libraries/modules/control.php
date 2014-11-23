@@ -97,16 +97,36 @@ function iPswd($d='',$v='',$s='',$p='',$cb='',$at=''){ $bc=""; $bc2="";
 	return "<input type=\"password\" class=\"iText\"".(($d=="")?"":" id=\"".$d."\" name=\"".$d."\" ").(($s=="")?"":" style=\"".$s."\" ").(($s=="")?"":" value=\"".$v."\" ").(($p=="")?"":" placeholder=\"".$p."\" ").($cb==""?"":" ".$cb." ").($at==""?"":" ".$at." ")."onfocus=\"this.className='iTextx'".$bc2."\" onblur=\"this.className='iText'".$bc."\"/>";
 }
 
-// iTextarea (id, array option, value, style, callback)
+// iSelect (id, array_option, selected_value, style, function, attribute)
 function iSelect($d,$a,$s='',$y='',$cb='',$atr=''){
-	if(is_array($s)) $s=$s[$d];
+	if(is_array($s)) 
+		$s=$s[$d];
 	$r="<select class=\"iSelect\" id=\"".$d."\" name=\"".$d."\" ".($y==""?"":" style=\"".$y."\" ").($cb==""?"":" onchange=\"".$cb."\" ")." onfocus=\"this.className='iSelectx'\" onblur=\"this.className='iSelect'\" ".$atr." >";
-	if(is_array($a)){if(count($a)>0){foreach($a as $k=>$v){
-		$r.="<option value=\"".$k."\"".isSelect($k,$s).">".$v."</option>";
-	}}}
-	$r.="</select>";
+	if(is_array($a)){
+		if(count($a)>0){
+			foreach($a as $k=>$v){
+				$r.="<option value=\"".$k."\"".isSelect($k,$s).">".$v."</option>";
+			}
+		}
+	}$r.="</select>";
 	return $r;
 }
+
+//iSelect(id, array option, selected, style, fungsi, atribute)
+// function iSelect($d,$a,$s='',$y='',$cb='',$atr=''){
+// 	if(is_array($s)) 
+// 		$s=$s[$d];
+// 	$r='<select class="iSelect" id="'.$d.'" name="'.$d.'" "'.($y==''?'':' style="'.$y.'"').($cb==''?'':' onchange="'.$cb.'"').' onfocus="this.className=\'iSelectx\'" onblur="this.className=\'iSelect\'" '.$atr.'>';
+// 	if(is_array($a)){
+// 		if(count($a)>0){
+// 			foreach($a as $k=>$v){
+// 				$r.='<option value="'.$k.'" '.isSelect($k,$s).'>'.$v.'</option>';
+// 			}
+// 		}
+// 	}$r.='</select>';
+// 	return $r;
+// }
+
 
 // iSOpt array option, value
 function iSelectOpt($a,$s=''){
