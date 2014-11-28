@@ -4,7 +4,8 @@
 	date_default_timezone_set('Asia/Jakarta');
 
 	define('ROOTLNK','../');
-	define('ROOTDIR','/xampp/htdocs/siadu/');
+	define('ROOTDIR','/xampp/htdocs/backup/siadu/');
+	// define('ROOTDIR','/xampp/htdocs/siadu/');
 
 	define('SHAREDDIR',ROOTDIR.'shared/');
 
