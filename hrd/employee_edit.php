@@ -375,7 +375,7 @@ function addSdRow(){
 		<table cellspacing="0" cellpadding="0" width="940px" style="margin-bottom:2px"><tr height="30px"><td><?php if(gets('opt')=='table'){?>
 			<button class="btn" title="Back to employee list" onclick="jumpTo('<?=RLNK?>employee.php')" style="margin-right:6px">
 				<div style="background:url('<?=IMGR?>larrow.png') no-repeat;padding-left:16px;padding-right:4px">Employee list</div>
-			</button><button class="btn" onclick="jumpTo('<?=RLNK?>employee_view.php?nid=<?=$dcid?>')" style="margin-right:20px">Show profile</button><?php } else { if(!empty($_SESSION['joshreditinfo']) && $_SESSION['joshreditinfo']!=''){ ?><button class="btn" onclick="jumpTo('<?=RLNK?>employee_view.php?nid=<?=$dcid?>')" style="margin-right:20px">Show profile</button><?php }else{?><button class="btn" title="Back to employee list" onclick="jumpTo('<?=RLNK?>employee_view.php?nid=<?=$dcid?>')" style="margin-right:6px">
+			</button><button class="btn" onclick="jumpTo('<?=RLNK?>employee_view.php?nid=<?=$dcid?>')" style="margin-right:20px">Show profile</button><?php } else { if(!empty($_SESSION['sister_siadureditinfo']) && $_SESSION['sister_siadureditinfo']!=''){ ?><button class="btn" onclick="jumpTo('<?=RLNK?>employee_view.php?nid=<?=$dcid?>')" style="margin-right:20px">Show profile</button><?php }else{?><button class="btn" title="Back to employee list" onclick="jumpTo('<?=RLNK?>employee_view.php?nid=<?=$dcid?>')" style="margin-right:6px">
 				<div style="background:url('<?=IMGR?>larrow.png') no-repeat;padding-left:16px;padding-right:4px">Back to profile</div>
 			</button>
 			<?php }}?>

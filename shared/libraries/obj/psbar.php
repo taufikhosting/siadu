@@ -107,9 +107,9 @@ class PSBar_2{
 		$a=0; $departemen=departemen_r($a);
 		echo '<tr height="26px"><td width="100px" align="left"><b>Departemen:</b></td>';
 			if(admin_is_alldept()){
-			echo '<td width="'.$this->lblw.'">'.iSelect('departemen',$departemen,$dept,"width:".$this->selw,$fmod."_get()").'</td>';
+				echo '<td width="'.$this->lblw.'">'.iSelect('departemen',$departemen,$dept,"width:".$this->selw,$fmod."_get()").'</td>';
 			} else {
-			echo '<td width="150px" align="left"><b>'.departemen_name($dept).'</b><input type="hidden" id="departemen" value="'.$dept.'"/></td>';
+				echo '<td width="150px" align="left"><b>'.departemen_name($dept).'</b><input type="hidden" id="departemen" value="'.$dept.'"/></td>';
 			}
 		echo '<td width="*">&nbsp;</td></tr>';
 	}

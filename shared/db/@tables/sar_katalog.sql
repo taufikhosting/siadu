@@ -4,7 +4,7 @@ Navicat MySQL Data Transfer
 Source Server         : lumba2
 Source Server Version : 50616
 Source Host           : 127.0.0.1:3306
-Source Database       : josh
+Source Database       : sister_siadu
 
 Target Server Type    : MYSQL
 Target Server Version : 50616

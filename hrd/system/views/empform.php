@@ -397,12 +397,12 @@
 			<tr><td>&nbsp;</td><td colspan="2"></td></tr> <tr height="30px"><td align="center" colspan="3"><input type="button" class="btn" onclick="jumpTo('<?=RLNK?>employee_view.php?nid=<?=$dcid?>')" value="Back to profile" /></td></tr>
 			<?php }?>
 		</table>
-		<?php if(!empty($_SESSION['joshreditinfo']) && $_SESSION['joshreditinfo']!=''){ ?>
-		<div id="notifx" style="text-align:;width:930px;position:absolute;top:0;left:0;padding:6px 4px;font:11px Verdana,Tahoma,Arial;color:#444444;background:#d6edff"><?=$_SESSION['joshreditinfo']?></div>
+		<?php if(!empty($_SESSION['sister_siadureditinfo']) && $_SESSION['sister_siadureditinfo']!=''){ ?>
+		<div id="notifx" style="text-align:;width:930px;position:absolute;top:0;left:0;padding:6px 4px;font:11px Verdana,Tahoma,Arial;color:#444444;background:#d6edff"><?=$_SESSION['sister_siadureditinfo']?></div>
 		<script>
 			$("document").ready(function(){
 				setTimeout("$('#notifx').animate({ opacity: '0' }, 500)",3000);
 			});
 		</script>
-		<?php $_SESSION['joshreditinfo']='';  }?>
+		<?php $_SESSION['sister_siadureditinfo']='';  }?>
 		</div>

@@ -1,6 +1,6 @@
 <?php
 $mid=gets('mid');
-$sql="SELECT * FROM joshr.employee WHERE `nip`='$mid' LIMIT 0,1";
+$sql="SELECT * FROM sister_siadur.employee WHERE `nip`='$mid' LIMIT 0,1";
 //echo $sql;
 $t=dbQsql($sql);
 $ndata=dbNRow($t);
@@ -83,7 +83,7 @@ $("document").ready(function(){
 <table class="stable" cellspacing="0" cellpadding="4px" width="100%" style="" border="0"><tr valign="top" height="130px">
 	<td width="70px" align="center" style="padding-top:10px">
 		<?php 
-		$sql="SELECT * FROM joshr.emp_photo WHERE empid='".$r['dcid']."'";
+		$sql="SELECT * FROM sister_siadur.emp_photo WHERE empid='".$r['dcid']."'";
 		$np=mysql_num_rows(mysql_query($sql));
 		if($np>0){ ?>
 			<div id="pf_photo"><img src="<?=HRD_RLNK?>photo.php?id=<?=$r['dcid']?>" width="60px"/></div><br/>

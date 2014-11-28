@@ -489,8 +489,7 @@ function farray(){
 	$n=count($a);
 	for($i=0;$i<$n;$i++){
 		$s[$a[$i]]='';
-	}
-	return $s;
+	}return $s;
 }
 
 function appmod_use(){

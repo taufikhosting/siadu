@@ -9,7 +9,7 @@ require_once(LIBDIR.'common.php');
 if(dbInsert("so_history",Array('date'=>gpost('date'),'name'=>gpost('name'),'description'=>gpost('description')))){
 	$id=mysql_insert_id();
 	$tbl="so_".$id;
-	$sql="CREATE TABLE  `joshlib`.`".$tbl."` (
+	$sql="CREATE TABLE  `sister_siadulib`.`".$tbl."` (
 	`dcid` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 	`shelf` SMALLINT UNSIGNED NOT NULL DEFAULT  '1',
 	`catalog` SMALLINT UNSIGNED NOT NULL DEFAULT  '0',

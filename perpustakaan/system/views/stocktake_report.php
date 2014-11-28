@@ -3,7 +3,7 @@ $cid=gpost('cid');
 stocktake_ptrack(5);
 $t=mysql_query("SELECT * FROM pus_stockhist WHERE replid='$cid' LIMIT 0,1");
 $r=mysql_fetch_array($t);
-$tbl="joshso.".$r['tabel'];
+$tbl="sister_siaduso.".$r['tabel'];
 
 $tot=$r['nitem'];
 $ncek=$r['nceky'];

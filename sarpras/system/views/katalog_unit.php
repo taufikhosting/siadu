@@ -1,16 +1,19 @@
 <?php 
-	$opt=gpost('opt'); $cid=gpost('cid',0);
-
-	$fmod='katalog_unit';
-	$xtable=new xtable($fmod,'Unit barang');
-
-	$lok  =gpost('lokasi');
-	$grup =gpost('grup');
-	$kat  =$cid;
+	$opt    =gpost('opt'); 
+	$cid    =gpost('cid',0); //KATALOG ID
+	
+	$fmod   ='katalog_unit';
+	$xtable =new xtable($fmod,'Unit barang');
+	
+	$lok    =gpost('lokasi');
+	$grup   =gpost('grup');
+	$tempat =gpost('tempat'); //epiii
+	$kat    =$cid;
 
 	hiddenval('lokasi',$lok);
 	hiddenval('grup',$grup);
 	hiddenval('katalog',$kat);
+	hiddenval('tempat',$tempat); //epiii
 
 	if($opt=='af'||$opt=='uf') 
 		require_once(VWDIR.'katalog_form.php');
@@ -22,9 +25,17 @@
 		// Query
 		//$sql="SELECT * FROM sar_barang WHERE katalog='$cid'";
 		$t=$xtable->use_db(new xdb("sar_barang","","katalog='$cid'"),$xtable->pageorder_sql('kode','barkode','kondisi'));
+		// $t=$xtable->use_db(new xdb("sar_barang","","katalog='$cid' and tempat ='$tempat'"),$xtable->pageorder_sql('kode','barkode','kondisi'));
+		// $t=$xtable->use_db(new xdb("sar_barang","","katalog='$cid and tempat='"),$xtable->pageorder_sql('kode','barkode','kondisi'));
 
 		$xtable->btnbar_f(iBtn('Grup barang','bi_arrow','title="Kembali ke grup barang" onclick="katalog_unit_back()"'),
-			iBtn('Edit informasi barang','bi_edit','onclick="katalog_form(\'uf\',\''.$rk['replid'].'\')"'),'add','print');
+			iBtn('Edit informasi barang','bi_edit','onclick="katalog_form(\'uf\',\''.$rk['replid'].'\')"'),'add');
+			// iBtn('Edit informasi barang','bi_edit','onclick="katalog_form(\'uf\',\''.$rk['replid'].'\')"'),'add','print');
+
+		$a = 'katalog_unit';
+		$token=base64_encode(md5($a.$_SESSION['sar_admin_id'].$_SESSION['sar_admin_name']));
+		// $xtable->btnbar_begin();
+			$xtable->btnbar_print2($a,$token);
 
 		notifbox();
 		hiddenval('opf','uni');
@@ -74,19 +85,23 @@
 			// Table head
 			$xtable->head('@kode','@barkode','tempat','sumber','harga~R','@kondisi','status','keterangan');
 			$nom = 1;
-			while($r=mysql_fetch_array($t)){$xtable->row_begin();
-						
+			$xx=array();
+			while($r=mysql_fetch_array($t)){
+				$s2='SELECT nama as tempat from sar_tempat where replid ='.$r['tempat'];
+				$e2=mysql_query($s2);
+				$r2=mysql_fetch_assoc($e2);
+				$xtable->row_begin();
 				$xtable->td($r['kode'],200);
 				$xtable->td($r['barkode'],100);
-				$xtable->td($r['tempat'],100);
+				$xtable->td($r2['tempat'],100);
 				$xtable->td(sumber_name($r['sumber']),100);
 				$xtable->td(fRp($r['harga']),120,'r');
 				$xtable->td(kondisi_name($r['kondisi']),100);
 				$xtable->td($r['status']==1?'Tersedia':'Dipinjam',100);
 				$xtable->td(nl2br($r['keterangan']));
 				$xtable->opt_ud($r['replid']);
-				
-			$xtable->row_end();}$xtable->foot();
+				$xtable->row_end();
+			}$xtable->foot();
 		}else{
 			$xtable->nodata();
 		}

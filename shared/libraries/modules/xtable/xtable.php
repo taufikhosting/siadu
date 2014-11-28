@@ -174,12 +174,12 @@ class xtable{
 	}
 	function use_db(&$db,$a=-1,$s=0){
 		$this->ndata=mysql_num_rows($db->query());
-		if($a==-1)$a=$this->page_order_sql;
+		if($a==-1)
+			$a=$this->page_order_sql;
 		$this->tbl_sql=$db->getsql();
 		if($a!=-1 && $a!=''){
 			$this->tbl_sql.=$a;
-		}
-		return $db->query($a,$s);
+		}return $db->query($a,$s);
 	}
 	// Text formatting for display
 	function format_title($a){
@@ -761,6 +761,14 @@ class xtable{
 		echo '<div class="tbltopbar" style="width:'.$w.'">';
 		$this->btnbar_isbegin=true;
 	}
+
+	function btnbar_print2($a='',$t=''){
+		$o = 'window.open(\'print/'.$a.'.php?token='.$t.'\',\'_blank\');';
+		echo '<button class="btn" style="float:left;margin-right:4px" onclick="'.$o.'">
+					<div class="bi_pri">Cetak</div>
+			  </button>';
+	}
+
 	function btnbar_end(){
 		echo '</div>';
 		$this->btnbar_isbegin=false;

@@ -19,10 +19,10 @@ if($tamp==0){
 	$f="";
 }
 if($keyw!=""){
-	if($f=="")$f=" WHERE josh.pus_buku.barkode='$keyw' OR josh.pus_katalog.judul LIKE '%$keyw%'";
-	else $f.=" AND ( josh.pus_buku.barkode='$keyw' OR josh.pus_katalog.judul LIKE '%$keyw%' )";
+	if($f=="")$f=" WHERE sister_siadu.pus_buku.barkode='$keyw' OR sister_siadu.pus_katalog.judul LIKE '%$keyw%'";
+	else $f.=" AND ( sister_siadu.pus_buku.barkode='$keyw' OR sister_siadu.pus_katalog.judul LIKE '%$keyw%' )";
 }
-$sql="SELECT ".$tbl.".*,josh.pus_buku.barkode,josh.pus_katalog.judul FROM ".$tbl." LEFT JOIN josh.pus_buku ON josh.pus_buku.replid=".$tbl.".buku LEFT JOIN josh.pus_katalog ON josh.pus_katalog.replid=josh.pus_buku.katalog".$f;
+$sql="SELECT ".$tbl.".*,sister_siadu.pus_buku.barkode,sister_siadu.pus_katalog.judul FROM ".$tbl." LEFT JOIN sister_siadu.pus_buku ON sister_siadu.pus_buku.replid=".$tbl.".buku LEFT JOIN sister_siadu.pus_katalog ON sister_siadu.pus_katalog.replid=sister_siadu.pus_buku.katalog".$f;
 $t=mysql_query($sql);
 $xtable->ndata=mysql_num_rows($t);
 $t=mysql_query($sql.$xtable->pageorder_sql('pus_buku.barkode','pus_katalog.judul',$tbl.'.cek'));

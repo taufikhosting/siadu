@@ -11,6 +11,16 @@ function lokasi_opt(&$a,$s=0){
 	if(!$in)$a=$s==1?0:$d;
 	return $res;
 }
+function tempat_r($lok){
+	$s = 'SELECT * from sar_tempat WHERE lokasi='.$lok;
+	$e = mysql_query($s);
+	$a=array();
+	// while($r=mysql_fetch_assoc($e)){
+	// 	$a[]=array('replid'=>$r['replid'],'tempat'=>$['nama']);
+	// }
+	return $e;
+}
+
 function lokasi_r(&$a,$s=0){
 	$res=Array();
 	if($s==1) $res[0]='- Semua lokasi -';
@@ -212,6 +222,7 @@ function sumber_name($a){
 	$s=array('Beli','Pemberian','Membuat sendiri');
 	return $s[$a];
 }
+
 
 function kondisi_a(){
 	return array(1=>'Sangat baik',2=>'Baik',3=>'Buruk',4=>'Sangat buruk');
