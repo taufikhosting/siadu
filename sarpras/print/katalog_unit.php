@@ -47,7 +47,7 @@
                       <td align="center">Keterangan</td>
                     </tr>';
 
-                    $sql = 'SELECT (
+                    $s = 'SELECT (
                               SELECT 
                                 CONCAT(ll.kode,"/",gg.kode,"/",tt.kode,"/",kk.kode,"/",LPAD(b.urut,5,0))
                               from 
@@ -80,11 +80,11 @@
                             LEFT JOIN sar_tempat t on t.replid = b.tempat
                           WHERE
                             b.katalog = '.$_GET['katalog'];
-                            // var_dump($sql);exit();
-                    $exe = mysql_query($sql);
-                    $jum = mysql_num_rows($exe);
+                            // print_r($s);exit();
+                    $e   = mysql_query($s);
+                    $n   = mysql_num_rows($e);
                     $nox = 1;
-                    if($jum==0){
+                    if($n==0){
                       $out.='<tr>
                         <td>-</td>
                         <td>-</td>
@@ -96,16 +96,16 @@
                         <td>-</td>
                       </tr>';
                     }else{
-                      while ($res=mysql_fetch_assoc($exe)) {
+                      while ($r=mysql_fetch_assoc($e)) {
                         $out.='<tr>
-                                <td>'.$res['kode'].'</td>
-                                <td>'.$res['barkode'].'</td>
-                                <td>'.$res['tempat'].'</td>
-                                <td>'.$res['sumber'].'</td>
-                                <td>'.$res['harga'].'</td>
-                                <td>'.$res['kondisi'].'</td>
-                                <td>'.$res['status'].'</td>
-                                <td>'.$res['keterangan'].'</td>
+                                <td>'.$r['kode'].'</td>
+                                <td>'.$r['barkode'].'</td>
+                                <td>'.$r['tempat'].'</td>
+                                <td>'.$r['sumber'].'</td>
+                                <td>'.$r['harga'].'</td>
+                                <td>'.$r['kondisi'].'</td>
+                                <td>'.$r['status'].'</td>
+                                <td>'.$r['keterangan'].'</td>
                               </tr>';
                         $nox++;
                       }

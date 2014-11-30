@@ -34,7 +34,7 @@
 
 		$a = 'katalog_unit';
 		$token=base64_encode(md5($a.$_SESSION['sar_admin_id'].$_SESSION['sar_admin_name']));
-		$par=array('katalog'=>$kat);
+		$par=array('katalog'=>$cid);
 		// $xtable->btnbar_begin();
 			$xtable->btnbar_print2($a,$token,$par);
 
@@ -107,4 +107,4 @@
 			$xtable->nodata();
 		}
 	}
-?>
+?> 	

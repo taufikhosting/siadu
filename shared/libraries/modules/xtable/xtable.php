@@ -767,6 +767,7 @@ class xtable{
 		foreach ($p as $key => $val) {
 			$par.='&'.$key.'='.$val;
 		}
+		// var_dump($par);exit();
 		$o = 'window.open(\'print/'.$a.'.php?token='.$t.$par.'\',\'_blank\');';
 		echo '<button class="btn" style="float:left;margin-right:4px" onclick="'.$o.'">
 					<div class="bi_pri">Cetak</div>
