@@ -764,11 +764,9 @@ class xtable{
 
 	function btnbar_print2($a='',$t='',$p){
 		$par='';
-		// is_array($p){
-			foreach ($p as $key => $val) {
-				$par.='&'.$key.'='.$val;
-			}
-		// }
+		foreach ($p as $key => $val) {
+			$par.='&'.$key.'='.$val;
+		}
 		$o = 'window.open(\'print/'.$a.'.php?token='.$t.$par.'\',\'_blank\');';
 		echo '<button class="btn" style="float:left;margin-right:4px" onclick="'.$o.'">
 					<div class="bi_pri">Cetak</div>

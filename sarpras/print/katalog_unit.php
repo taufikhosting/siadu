@@ -37,13 +37,50 @@
 
                 <table class="isi" width="100%">
                     <tr class="head">
-                      <td align="center">Tanggal</td>
-                      <td align="center">No. Jurnal / No. Bukti</td>
-                      <td align="center">Uraian</td>
-                      <td align="center">Detil Jurnal</td>
+                      <td align="center">Kode</td>
+                      <td align="center">Barkode</td>
+                      <td align="center">Tempat</td>
+                      <td align="center">Sumber</td>
+                      <td align="center">Harga</td>
+                      <td align="center">Kondisi</td>
+                      <td align="center">Status</td>
+                      <td align="center">Keterangan</td>
                     </tr>';
 
-                    $sql = 'SELECT * FROM keu_transaksi';
+                    $sql = 'SELECT (
+                              SELECT 
+                                CONCAT(ll.kode,"/",gg.kode,"/",tt.kode,"/",kk.kode,"/",LPAD(b.urut,5,0))
+                              from 
+                                sar_katalog kk,
+                                sar_grup gg,
+                                sar_tempat tt,
+                                sar_lokasi ll
+                              where 
+                                kk.replid = b.katalog AND
+                                kk.grup   = gg.replid AND
+                                b.tempat  = tt.replid AND
+                                tt.lokasi = ll.replid
+                            )as kode,
+                            b.replid,
+                            LPAD(b.urut,5,0) as barkode,(
+                              case b.sumber
+                                when 0 then "Beli"
+                                when 1 then "Pemberian" 
+                                when 2 then "Membuat Sendiri" 
+                              end
+                            )as sumber,
+                            b.harga,
+                            IF(b. STATUS=1,"Tersedia","Dipinjam")AS status,
+                            k.nama as kondisi,
+                            t.nama as tempat,
+                            b.keterangan
+                          FROM
+                            sar_barang b 
+                            LEFT JOIN sar_kondisi k on k.replid = b.kondisi
+                            LEFT JOIN sar_tempat t on t.replid = b.tempat
+                          WHERE
+                            b.katalog = '.$_GET['katalog'];
+                            // var_dump($sql);exit();
                     $exe = mysql_query($sql);
                     $jum = mysql_num_rows($exe);
                     $nox = 1;
@@ -53,43 +90,23 @@
                         <td>-</td>
                         <td>-</td>
                         <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
                       </tr>';
                     }else{
                       while ($res=mysql_fetch_assoc($exe)) {
                         $out.='<tr>
-                                <td>'.tgl_indo4($res['tanggal']).'</td>
-                                <td>'.$res['nomer'].'</td>
-                                <td>'.$res['uraian'].'</td>
-                                <td valgin="top">';
-                        
-                        // detil jurnal --------
-                          $sql2  = 'SELECT 
-                                      kr.nama,  
-                                      kr.kode,  
-                                      kj.debet,  
-                                      kj.kredit  
-                                    from 
-                                      keu_jurnal kj, 
-                                      keu_rekening kr 
-                                    where 
-                                      kj.rek=kr.replid and 
-                                      kj.transaksi='.$res['replid'].' 
-                                    order by 
-                                      kj.kredit asc';  
-                          $exe2 = mysql_query($sql2);
-                          $out.='<table class="isi" >';
-                          while($res2=mysql_fetch_assoc($exe2)){
-                            $out.='<tr>
-                                    <td width="200px">'.$res2['nama'].'</td>
-                                    <td width="60px">'.$res2['kode'].'</td>
-                                    <td width="80px">'.fRp($res2['debet']).'</td>
-                                    <td width="80px">'.fRp($res2['kredit']).'</td>
-                                  </tr>';
-                          }
-                          $out.='</table>';
-                        // end of detil jurnal --------
-                          $out.='</td>';
-                        $out.='</tr>';
+                                <td>'.$res['kode'].'</td>
+                                <td>'.$res['barkode'].'</td>
+                                <td>'.$res['tempat'].'</td>
+                                <td>'.$res['sumber'].'</td>
+                                <td>'.$res['harga'].'</td>
+                                <td>'.$res['kondisi'].'</td>
+                                <td>'.$res['status'].'</td>
+                                <td>'.$res['keterangan'].'</td>
+                              </tr>';
                         $nox++;
                       }
                     }
@@ -102,7 +119,7 @@
           ob_end_clean(); 
           $mpdf=new mPDF('c','A4','');   
           $mpdf->SetDisplayMode('fullpage');   
-          // $stylesheet = file_get_contents('../../shared/libraries/mpdf/r_cetak.css');
+          $stylesheet = file_get_contents('../../shared/libraries/mpdf/r_cetak.css');
           $mpdf->WriteHTML($stylesheet,1);  // The parameter 1 tells that this is css/style only and no body/html/text
           $mpdf->WriteHTML($out);
           $mpdf->Output();

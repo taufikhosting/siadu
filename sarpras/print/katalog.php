@@ -1,66 +1,108 @@
 <?php
-$token=gets('token');
+  session_start();
+  require_once('../../shared/config.php');
+  require_once('../system/config.php');
+  require_once '../../shared/db.php';
+  require_once(DBFILE);
+  require_once(LIBDIR.'common.php');
+  require_once(MODDIR.'date.php');
+  require_once(MODDIR.'xtable/xtablepf.php');
+  require_once '../../shared/libraries/mpdf/mpdf.php';
+  require_once '../../shared/tglindo.php';
+  
+  $token = base64_encode(md5('katalog'.$_SESSION['sar_admin_id'].$_SESSION['sar_admin_name']));
+  // print_r($token);exit();
+  if(!isset($_SESSION)){ // login 
+    echo 'user has been logout';
+  }else{ // logout
+    if(isset($_GET['token']) and $token===$_GET['token']){
+        // echo 'token udah bener n tampil';
+          ob_start(); // digunakan untuk convert php ke html
+          $out='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+            <html xmlns="http://www.w3.org/1999/xhtml">
+              <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <title>SIADU::Sar - Katalog</title>
+              </head>
 
-$t=mysql_query("SELECT * FROM  `keu_transaksi` WHERE nomer='$token'");
-if(mysql_num_rows($t)>0){
-// Queries:
-$trans=mysql_fetch_array($t);
-$kodetrans=substr($trans['nomer'],0,3);
-if($kodetrans=='BKM') $ttl='BUKTI KAS MASUK';
-else if($kodetrans=='BKK') $ttl='BUKTI KAS KELUAR';
-else if($kodetrans=='BBM') $ttl='BUKTI BANK MASUK';
-else if($kodetrans=='BBK') $ttl='BUKTI BANK KELUAR';
-else $ttl='BUKTI TRANSAKSI';
+              <body>
+                <p align="center">
+                  <b>
+                    Katalog<br>
+                  </b>
+                </p>
 
-?>
-<table cellspacing="0" cellpadding="4px" style="border-collapse:collapse" width="<?=DOCPAPERWIDTH?>">
-<tr valign="top">
-	<td class="dochead1" colspan="3" align="center"><?=$ttl?></td>
-</tr>
-<tr height="10px">
-	<td colspan="3"></td>
-</tr>
-<tr>
-	<td>No. Transaksi</td><td colspan="2">: <?=$trans['nomer']?></td>
-</tr>
-<tr>
-	<td>Tanggal</td><td colspan="2">: <?=fftgl($trans['tanggal'])?></td>
-</tr>
-<tr>
-	<td>Diterima dari</td><td colspan="2">: </td>
-</tr>
-<tr height="10px">
-	<td colspan="3"></td>
-</tr>
-<tr>
-	<td class="cell" align="center" width="100px">Perkiraan</td>
-	<td class="cell" align="center" width="300px">Uraian</td>
-	<td class="cell" align="center" width="100px">Nominal</td>
-</tr>
-<?php
-$t=mysql_query("SELECT * FROM keu_transaksi WHERE keu_transaksi.nomer='$token'");
-$total=0;
-while($r=mysql_fetch_array($t)){
-	$t1=mysql_query("SELECT keu_jurnal.rek,keu_jurnal.debet,keu_jurnal.kredit,keu_rekening.kode as koderek,keu_rekening.nama as nrek FROM keu_jurnal LEFT JOIN keu_rekening ON keu_rekening.replid=keu_jurnal.rek WHERE keu_jurnal.transaksi='".$r['replid']."' AND keu_rekening.kategorirek<>'1' AND keu_rekening.kategorirek<>'2' ORDER BY keu_jurnal.replid");
+                <table class="isi" width="100%">
+                    <tr class="head">
+                      <td align="center">Kode</td>
+                      <td align="center">Nama Barang</td>
+                      <td align="center">Jenis</td>
+                      <td align="center">Jumlah Unit</td>
+                      <td align="center">Aset</td>
+                      <td align="center">Penyusutan/th</td>
+                      <td align="center">Keterangan</td>
+                    </tr>';
 
-	while($r1=mysql_fetch_array($t1)){
-		if($r1['rek']!=1){
-			echo '<tr>';
-			echo '<td class="cell" width="100px" align="center" x:str>'.$r1['koderek'].'</td>';
-			echo '<td class="cell">'.$r['uraian'].'</td>';
-			echo '<td class="cell" width="100px" align="right">'.fRp($r['nominal']).'</td>';
-			echo '</tr>';
-			$total+=$r['nominal'];
-		}
-	}
-			
+                    $s = 'SELECT
+                            k.replid,
+                            k.kode,
+                            k.nama,
+                            j.nama jenis,
+                            COUNT(*) jum_unit,
+                            SUM(b.harga) aset,
+                            k.susut,
+                            k.keterangan
+                          FROM  
+                            sar_katalog k
+                            LEFT JOIN sar_jenis  j on j.replid = k.jenis
+                            LEFT JOIN sar_barang b on b.katalog = k.replid
+                          WHERE
+                            k.grup = '.$_GET['grup'].' 
+                          GROUP BY 
+                            k.replid
+                          ORDER BY
+                            k.kode asc';
+                            // var_dump($s);exit();
+                    $e = mysql_query($s);
+                    $n = mysql_num_rows($e);
+                    $nox = 1;
+                    if($n==0){
+                      $out.='<tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>';
+                    }else{
+                      while ($r=mysql_fetch_assoc($e)) {
+                        $out.='<tr>
+                                  <td>'.$r['kode'].'</td>
+                                  <td>'.$r['nama'].'</td>
+                                  <td>'.$r['jenis'].'</td>
+                                  <td>'.$r['jum_unit'].'</td>
+                                  <td>'.fRp($r['aset']).'</td>
+                                  <td>'.$r['susut'].'</td>
+                                  <td>'.$r['keterangan'].'</td>
+                            </tr>';
+                        $nox++;
+                      }
+                    }
+            $out.='</table><br>';
+          echo $out;
+  
+        #generate html -> PDF ------------
+          $out2 = ob_get_contents();
+          ob_end_clean(); 
+          $mpdf=new mPDF('c','A4','');   
+          $mpdf->SetDisplayMode('fullpage');   
+          $stylesheet = file_get_contents('../../shared/libraries/mpdf/r_cetak.css');
+          $mpdf->WriteHTML($stylesheet,1);  // The parameter 1 tells that this is css/style only and no body/html/text
+          $mpdf->WriteHTML($out);
+          $mpdf->Output();
+    }else{
+      echo 'maaf token - url tidak valid';
+    }
 }
-		echo '<tr>';
-		echo '<td class="cell" width="100px"></td>';
-		echo '<td class="cell" align="right">Jumlah</td>';
-		echo '<td class="cell" width="100px" align="right" x:fmla="=SUM(C8:C9)">'.fRp($total).'</td>';
-		echo '</tr>';
-?>
-</table>
-
-<?php } else { doc_nofile(); } ?>

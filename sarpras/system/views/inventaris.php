@@ -22,7 +22,7 @@
 	$t  =$xtable->use_db($db,$xtable->pageorder_sql('kode','nama'));
 
 	// epiii edit ------------------------------------
-	$a     = 'inventaris_grup';
+	$a     = 'inventaris';
 	$token = base64_encode(md5($a.$_SESSION['sar_admin_id'].$_SESSION['sar_admin_name']));
 	$xtable->btnbar_begin();
 		$xtable->btnbar_add();
