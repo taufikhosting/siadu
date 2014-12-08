@@ -48,8 +48,6 @@
                             b.katalog ='.$_GET['katalog'];
                     $e1 = mysql_query($s1);
                     $r1 = mysql_fetch_assoc($e1);
-                    // print_r($r1);exit();
-
   
             $out.='<table width="100%">
                 <tr >
