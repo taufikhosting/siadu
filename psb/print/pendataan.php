@@ -30,11 +30,19 @@
               </head>
   
               <body>
-                <p align="center">
+                <!--<p align="center">
                   <b>
                     Pendataan Calon Siswa<br>
                   </b>
-                </p>
+                </p>-->
+                
+                <table width="100%">
+                  <tr>
+                    <td width="40%"><img width="150px" src="../../shared/images/logo.png" alt="" /></td>
+                    <td width="60%">Pendataan Calon Siswa</td>
+                  </tr>
+                </table>
+
                 <table>
                   <tr>
                     <td>Departemen</td>
@@ -79,7 +87,7 @@
                             sumnet,
                             angsuran
                           FROM
-                            psb_calonsiswa'.($_GET['nopendaftaran']!='where nopendaftaran '.$_GET['nopendaftaran']?'');
+                            psb_calonsiswa';//.($_GET['nopendaftaran']!='where nopendaftaran '.$_GET['nopendaftaran']?'');
                     $e = mysql_query($s);
                     $n = mysql_num_rows($e);
                             // var_dump($n);exit();
