@@ -797,8 +797,11 @@ class xtable{
 	}
 	function btnbar_print($a=''){
 		if($this->ndata>0){
-		if($a=='')$a='E(\'xtable'.$this->xtableid.'_print_form\').submit()';
-		echo '<button class="btn" style="float:left;margin-right:4px" onclick="'.$a.'"><div class="bi_pri">Cetak</div></button>';
+			if($a=='')
+				 $a='E(\'xtable'.$this->xtableid.'_print_form\').submit()';
+			echo '<button class="btn" style="float:left;margin-right:4px" onclick="'.$a.'">
+					<div class="bi_pri">Cetak</div>
+				</button>';
 		}
 	}
 	function btnbar_help(){
