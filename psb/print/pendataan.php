@@ -30,15 +30,9 @@
               </head>
   
               <body>
-                <!--<p align="center">
-                  <b>
-                    Pendataan Calon Siswa<br>
-                  </b>
-                </p>-->
-                
                 <table width="100%">
                   <tr>
-                    <td width="40%"><img width="150px" src="../../shared/images/logo.png" alt="" /></td>
+                    <td align="left" width="40%"><img width="150px" src="../../shared/images/logo.png" alt="" /></td>
                     <td width="60%">Pendataan Calon Siswa</td>
                   </tr>
                 </table>

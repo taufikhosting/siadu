@@ -37,13 +37,13 @@
 	$cicil      =gpost('cicilan');
 	$cicilan    =cicilan_r($cicil);
 
-	if($opt=='uf'){ $ttl='Edit'; // Nilai field editan
-		$t=mysql_query("SELECT * FROM psb_calonsiswa WHERE replid='$cid' LIMIT 0,1");
-		$data=mysql_fetch_array($t);
-	}
-	else { 
-		$ttl='Tambah'; // Nilai field default
-		$data=Array();
+	if($opt=='uf'){  //form : update
+		$ttl  ='Edit'; // Nilai field editan
+		$t    =mysql_query("SELECT * FROM psb_calonsiswa WHERE replid='$cid' LIMIT 0,1");
+		$data =mysql_fetch_array($t);
+	}else { // form : add
+		$ttl  ='Tambah'; // Nilai field default
+		$data =Array();
 		$data['replid']=0;
 		$data['kriteria']=$krit;
 		$data['golongan']=$gol;
@@ -146,17 +146,17 @@
 		$xform->group_begin('Data Pribadi Siswa');
 			if($opt=='af'){
 			// No Pendaftaran
-			$sql="SELECT * FROM psb_calonsiswa WHERE proses='$pros' ORDER BY replid DESC LIMIT 0,1";
-			$res=mysql_query($sql);
-			$row=mysql_fetch_array($res);
-			$nom=$row['replid'];
-			$sql="SELECT kodeawalan FROM psb_proses WHERE replid='$pros'";
-			$res=mysql_query($sql);
-			$row=mysql_fetch_array($res);
-			$kode_no=$row['kodeawalan'];
-			$thn_no=substr(date("Y"), 2, 2);
-			$nomor=sprintf("%04d",intval($nom) + 1);
-			$no=sprintf("%s%02d%04d", $kode_no, $thn_no, $nomor);
+			$sql     ="SELECT * FROM psb_calonsiswa WHERE proses='$pros' ORDER BY replid DESC LIMIT 0,1";
+			$res     =mysql_query($sql);
+			$row     =mysql_fetch_array($res);
+			$nom     =$row['replid'];
+			$sql     ="SELECT kodeawalan FROM psb_proses WHERE replid='$pros'";
+			$res     =mysql_query($sql);
+			$row     =mysql_fetch_array($res);
+			$kode_no =$row['kodeawalan'];
+			$thn_no  =substr(date("Y"), 2, 2);
+			$nomor   =sprintf("%04d",intval($nom) + 1);
+			$no      =sprintf("%s%02d%04d", $kode_no, $thn_no, $nomor);
 			$data['nopendaftaran']=$no;
 			}
 			//if($opt=='uf'){

@@ -98,9 +98,8 @@
 			$xtable->td(fRp($r['sumnet']),90,'r');
 			$xtable->td(fRp($r['angsuran']).'<br/>x '.$r['jmlangsur'].' bulan',90,'r');
 			$xtable->opt($r['replid'],'v','u','d');
-		$xtable->row_end(); } $xtable->foot();
-
-	}
+			$xtable->row_end(); } $xtable->foot();
+		}
 	}
 }else 
 	departemen_warn(1);
