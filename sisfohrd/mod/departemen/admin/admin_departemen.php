@@ -34,14 +34,14 @@ $id = int_filter ($_GET['id']);
 if(isset($_POST['submit'])){
 	$nama 		= $_POST['nama'];
 	$tunjangan 		= $_POST['tunjangan'];
-
+	$masterdepartemen 		= $_POST['masterdepartemen'];
 	$error 	= '';
 	if (!$nama)  	$error .= "Error: Silahkan Isi Nama Departemen<br />";
 	if (!$tunjangan)  	$tunjangan ='0';	
 	if ($error){
 		$tengah .= '<div class="error">'.$error.'</div>';
 	}else{
-		$hasil  = mysql_query( "UPDATE `hrd_departemen` SET `nama`='$nama' ,`tunjangan`='$tunjangan' WHERE `id`='$id'" );
+		$hasil  = mysql_query( "UPDATE `hrd_departemen` SET `nama`='$nama' ,`tunjangan`='$tunjangan',`masterdepartemen`='$masterdepartemen' WHERE `id`='$id'" );
 		if($hasil){
 			$admin .= '<div class="sukses"><b>Berhasil di Update.</b></div>';
 			$style_include[] ='<meta http-equiv="refresh" content="1; url=admin.php?pilih=departemen&amp;mod=yes" />';	
@@ -53,13 +53,30 @@ if(isset($_POST['submit'])){
 }
 $query 		= mysql_query ("SELECT * FROM `hrd_departemen` WHERE `id`='$id'");
 $data 		= mysql_fetch_array($query);
+	$masterdepartemen = $data['masterdepartemen'];
 $admin .= '<div class="panel panel-info">
 <div class="panel-heading"><h3 class="panel-title">Edit</h3></div>';
 $admin .= '
 <form method="post" action=""class="form-inline">
 <table border="0" cellspacing="0" cellpadding="0"class="table table-striped table-hover">
 	<tr>
-		<td>Nama Departemen</td>
+		<td>Master Departemen</td>
+		<td>:</td>
+		<td><select name="masterdepartemen" class="form-control" required>';
+$hasil = $koneksi_db->sql_query("SELECT * FROM departemen ORDER BY nama");
+$admin .= '<option value="">== Master Departemen ==</option>';
+
+while ($datas =  $koneksi_db->sql_fetchrow ($hasil)){
+
+	$pilihan = ($datas['replid']==$masterdepartemen)?"selected":'';
+$replid = $datas['replid'];
+$namamaster = $datas['nama'];
+$admin .= '<option value="'.$replid.'"'.$pilihan.'>'.$namamaster.'</option>';
+}
+$admin .='</select></td>
+	</tr>
+	<tr>
+		<td>Sub Departemen</td>
 		<td>:</td>
 		<td><input type="text" name="nama" value="'.$data['nama'].'" size="25"class="form-control"></td>
 	</tr>
@@ -77,24 +94,27 @@ if($_GET['aksi']==""){
 if(isset($_POST['submit'])){
 	$nama 		= $_POST['nama'];
 	$tunjangan 		= $_POST['tunjangan'];
-	
+	$masterdepartemen 		= $_POST['masterdepartemen'];	
 	$error 	= '';
-	if (!$nama)  	$error .= "Error: Silahkan Isi Nama Departemen<br />";
+	if (!$nama)  	$error .= "Error: Silahkan Isi Nama Sub Departemen<br />";
 	if (!$tunjangan)  	$tunjangan ='0';	
 	if ($error){
 		$admin .= '<div class="error">'.$error.'</div>';
 	}else{
-		$hasil  = mysql_query( "INSERT INTO `hrd_departemen` (`nama` ,`tunjangan`) VALUES ('$nama','$tunjangan')" );
+		$hasil  = mysql_query( "INSERT INTO `hrd_departemen`(nama,tunjangan,masterdepartemen) VALUES ('$nama','$tunjangan','$masterdepartemen')" );
 		if($hasil){
-			$admin .= '<div class="sukses"><b>Berhasil di Buat.</b></div>';
+			$admin .= '<div class="sukses"><b>Berhasil di Buat.</b>
+			</div>';
 		}else{
-			$admin .= '<div class="error"><b> Gagal di Buat.</b></div>';
+			$admin .= '<div class="error"><b> Gagal di Buat.</b><br>
+			</div>';
 		}
 		unset($nama);
 		unset($tunjangan);
 	}
 
 }
+$namamaster     		= !isset($namamaster) ? '' : $namamaster;
 $nama     		= !isset($nama) ? '' : $nama;
 $tunjangan     		= !isset($tunjangan) ? '' : $tunjangan;
 $admin .= '<div class="panel panel-info">
@@ -103,9 +123,22 @@ $admin .= '
 <form method="post" action="" class="form-inline">
 <table class="table table-striped table-hover">
 	<tr>
-		<td>Nama Departemen</td>
+		<td>Master Departemen</td>
 		<td>:</td>
-		<td><input type="text" name="nama" value="'.$nama.'" size="30" class="form-control"></td>
+		<td><select name="masterdepartemen" class="form-control" required>';
+$hasil = $koneksi_db->sql_query("SELECT * FROM departemen ORDER BY nama");
+$admin .= '<option value="">== Master Departemen ==</option>';
+while ($datas =  $koneksi_db->sql_fetchrow ($hasil)){
+$replid = $datas['replid'];
+$namamaster = $datas['nama'];
+$admin .= '<option value="'.$replid.'">'.$namamaster.'</option>';
+}
+$admin .='</select></td>
+	</tr>
+	<tr>
+		<td>Sub Departemen</td>
+		<td>:</td>
+		<td><input type="text" name="nama" value="'.$nama.'" size="30" class="form-control" required></td>
 	</tr>
 	<tr>
 		<td></td>
@@ -122,14 +155,17 @@ $admin.='
 <table id="example"class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
+                    <th>Master</th>
             <th>Departemen</th>
             <th width="30%">Aksi</th>
         </tr>
     </thead>';
 $hasil = $koneksi_db->sql_query( "SELECT * FROM hrd_departemen" );
 while ($data = $koneksi_db->sql_fetchrow($hasil)) {
+$masterdepartemen=$data['masterdepartemen'];
 $nama=$data['nama'];
 $admin .='<tr>
+<td>'.getmasterdepartemen($masterdepartemen).'</td>
 <td>'.$nama.'</td>
 <td><a href="?pilih=departemen&amp;mod=yes&amp;aksi=del&amp;id='.$data['id'].'" onclick="return confirm(\'Apakah Anda Yakin Ingin Menghapus Data Ini ?\')"><span class="btn btn-danger">Hapus</span></a> <a href="?pilih=departemen&amp;mod=yes&amp;aksi=edit&amp;id='.$data['id'].'"><span class="btn btn-warning">Edit</span></a></td>
 </tr>';
