@@ -1,4 +1,5 @@
-<?php require_once(MODDIR.'fform/fform.php'); $opt=gpost('opt');$cid=gpost('cid');if($cid=='')$cid=0;
+<?php 
+require_once(MODDIR.'fform/fform.php'); $opt=gpost('opt');$cid=gpost('cid');if($cid=='')$cid=0;
 appmod_use('aka/tahunajaran','aka/pelajaran');
 // form Module
 $fmod='guru';
