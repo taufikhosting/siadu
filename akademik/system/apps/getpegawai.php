@@ -6,7 +6,7 @@
 		$keyw =gpost('nama');
 		$c    =gpost('c');
 		// $sql  ="SELECT * FROM ".DB_HRD." WHERE nip='$keyw' OR nama LIKE '%$keyw%' ORDER BY nama";
-		$sql  ="SELECT * FROM hrd_pegawai WHERE nip	='$keyw' OR nama LIKE '%$keyw%' ORDER BY nama";
+		$sql  ="SELECT * FROM hrd_karyawan WHERE nip	='$keyw' OR nama LIKE '%$keyw%' ORDER BY nama";
 		// print_r($sql);exit();
 
 		$t     =mysql_query($sql);
@@ -41,7 +41,7 @@
 	<?php }
 } else {
 	// $sql   ="SELECT * FROM ".DB_HRD." ORDER BY nama";
-	$sql   ="SELECT * FROM hrd_pegawai ORDER BY nama";
+	$sql   ="SELECT * FROM hrd_karyawan ORDER BY nama";
 	// var_dump($sql);exit();	
 	$t     =mysql_query($sql);
 	$ndata =mysql_num_rows($t);
