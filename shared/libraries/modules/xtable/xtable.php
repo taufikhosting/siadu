@@ -747,12 +747,10 @@ class xtable{
 		if($this->cari!=0){
 			if(!$this->search_infodisp) $this->search_info();
 			else hiddenval('xtable'.$this->xtableid.'_usesearch',$this->usesearch);
-		}
-		else {
-		if($b!=''){
-			echo '<div class="infobox2" style="margin-top:10px">'.$b.'</div>';
-		}
-		hiddenval('xtable'.$this->xtableid.'_usesearch',$this->usesearch);
+		}else {
+			if($b!=''){
+				echo '<div class="infobox2" style="margin-top:10px">'.$b.'</div>';
+			}hiddenval('xtable'.$this->xtableid.'_usesearch',$this->usesearch);
 		}
 	}
 	// button bar

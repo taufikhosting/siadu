@@ -2,8 +2,9 @@
 	require_once(MODDIR.'control.php');
 	$opt =gpost('opt');
 	$c   =gpost('c');
-	if($opt=='find'){
-		$keyw =gpost('nama');
+
+	if($opt=='find'){ //search view 
+ 		$keyw =gpost('nama');
 		$c    =gpost('c');
 		// $sql  ="SELECT * FROM ".DB_HRD." WHERE nip='$keyw' OR nama LIKE '%$keyw%' ORDER BY nama";
 		$sql  ="SELECT * FROM hrd_karyawan WHERE nip	='$keyw' OR nama LIKE '%$keyw%' ORDER BY nama";
@@ -26,13 +27,13 @@
 			$x=$x==0?2:0; 
 		else 
 			$x=2; ?>
-		<tr class="xtr<?=$x?>">
-			<td width="*"><?=$r['nama']?></td>
-			<td width="100px"><?=$r['nip']?></td>
-			<td width="40px" align="center">
-				<button class="btn" onclick="<?=($c==""?"aka_setpegawai":$c)?>('<?=$r['nip']?>','<?=$r['nama']?>',<?=$r['replid']?>);close_fform2();">Pilih</button>
-			</td>
-		</tr>
+			<tr class="xtr<?=$x?>">
+				<td width="*"><?=$r['nama']?></td>
+				<td width="100px"><?=$r['nip']?></td>
+				<td width="40px" align="center">
+					<button class="btn" onclick="<?=($c==""?"aka_setpegawai":$c)?>('<?=$r['nip']?>','<?=$r['nama']?>',<?=$r['id']?>);close_fform2();">Pilih</button>
+				</td>
+			</tr>
 	<?php }?>
 	</table>
 	</div>
@@ -70,7 +71,12 @@
 							<th class="alc">Pilihan</th>
 						</tr>
 						<?php $x=$ndata>2?0:2;
-						while($r=mysql_fetch_array($t)){ 
+						// while($r=mysql_fetch_array($t)){ // default view
+						while($r=mysql_fetch_assoc($t)){ // default view
+							// echo '<pre>';
+							// print_r($r);
+							// echo '</pre>';
+							// exit();
 							if($ndata>2) 
 								$x=$x==0?2:0; 
 							else 
@@ -79,7 +85,7 @@
 								<td width="*"><?=$r['nama']?></td>
 								<td width="100px"><?=$r['nip']?></td>
 								<td width="40px" align="center">
-									<button class="btn" onclick="<?=($c==""?"aka_setpegawai":$c)?>('<?=$r['nip']?>','<?=$r['nama']?>',<?=$r['replid']?>);close_fform2();">Pilih</button>
+									<button class="btn" onclick="<?=($c==""?"aka_setpegawai":$c)?>('<?=$r['nip']?>','<?=$r['nama']?>',<?=$r['id']?>);close_fform2();">Pilih</button>
 								</td>
 							</tr>
 						<?php }?>
