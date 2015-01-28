@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.6.20)
-# Date: 2015-01-28 15:08:32
+# Date: 2015-01-29 04:55:39
 # Generator: MySQL-Front 5.3  (Build 4.187)
 
 /*!40101 SET NAMES utf8 */;
@@ -24,4 +24,4 @@ CREATE TABLE `aka_tingkat` (
 # Data for table "aka_tingkat"
 #
 
-INSERT INTO `aka_tingkat` VALUES (4,'PG',1,'Playgroup',0,'2014-03-19 11:45:41'),(5,'KG',1,'Kindergarten (TK)',0,'2014-03-19 11:48:34'),(6,'Primary',1,'SD',0,'2014-03-19 11:48:55'),(7,'Secondary',1,'SMP',0,'2014-03-19 11:49:14'),(8,'HS',1,'High School (SMA)',0,'2014-03-19 11:49:27'),(9,'P',2,'Primary',0,'2014-03-19 11:57:13'),(10,'Sec',2,'Secondary',0,'2014-03-19 11:57:25'),(11,'PG',3,'Playgroup',0,'2014-03-19 11:57:42'),(12,'KG',3,'Kindergarten',0,'2014-03-19 11:57:58'),(13,'HS',2,'High School',0,'2014-03-19 12:15:25'),(14,'Toddler',1,'',0,'2014-03-20 11:53:35'),(15,'Toddler',3,'',0,'2014-03-20 11:54:12');
+INSERT INTO `aka_tingkat` VALUES (4,'PG',1,'Playgroup',0,'2014-03-19 11:45:41'),(5,'KG',1,'Kindergarten (TK)',0,'2014-03-19 11:48:34'),(6,'Primary',1,'SD',0,'2014-03-19 11:48:55'),(7,'Secondary',1,'SMP',0,'2014-03-19 11:49:14'),(8,'HS',1,'High School (SMA)',0,'2014-03-19 11:49:27'),(9,'P',2,'Primary',0,'2014-03-19 11:57:13'),(10,'Sec',2,'Secondary',0,'2014-03-19 11:57:25'),(11,'PG',3,'Playgroup',0,'2014-03-19 11:57:42'),(12,'KG',3,'Kindergarten',0,'2014-03-19 11:57:58'),(13,'HS',2,'High School',0,'2014-03-19 12:15:25'),(14,'Toddler',1,'',0,'2014-03-20 11:53:35'),(15,'Toddler',3,'',0,'2014-03-20 11:54:12'),(16,'HS',5,'tes bro tlg nnti dhpus lgi ya',0,'2015-01-28 15:59:32');
