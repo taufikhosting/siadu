@@ -72,7 +72,7 @@
 			// echo 'ada data';exit();
 			echo '<div style="width:100%;height:300px;max-height:300px;overflow:auto;float:left">';
 			$xtable->head('@nis','@nama','{44px}');
-			$n=0;
+				$n=0;
 			while($r=mysql_fetch_array($t)){
 				$xtable->row_begin($r['replid']);
 				$xtable->td($r['nis'],100);
