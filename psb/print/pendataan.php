@@ -81,7 +81,10 @@
                             sumnet,
                             angsuran
                           FROM
-                            psb_calonsiswa';//.($_GET['nopendaftaran']!='where nopendaftaran '.$_GET['nopendaftaran']?'');
+                            psb_calonsiswa
+                          where 
+                            kelompok='.$_GET['kelompok'];
+                            //.($_GET['nopendaftaran']!='where nopendaftaran '.$_GET['nopendaftaran']?'');
                     $e = mysql_query($s);
                     $n = mysql_num_rows($e);
                             // var_dump($n);exit();
