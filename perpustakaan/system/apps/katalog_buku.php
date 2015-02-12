@@ -103,9 +103,11 @@ if($opt=='a'||$opt=='u'||$opt=='d'){ $q=false;
 		} else {
 		hiddenval('nbuku',0);
 		}
-		$fform->fi('ID buku',iText('idbuku',$r['idbuku'],$fform->rwidths,'','','disabled'));
+		$fform->fi('ID buku',iText('idbuku',$r['idbuku'],$fform->rwidths,'',''));
+		// $fform->fi('ID buku',iText('idbuku',$r['idbuku'],$fform->rwidths,'','','disabled'));
 		//hiddenval('idbuku',$r['idbuku']);
-		$fform->fi('Barkode',iText('barkode',$r['barkode'],$fform->rwidths,'','','disabled'));
+		$fform->fi('Barkode',iText('barkode',$r['barkode'],$fform->rwidths,'',''));
+		// $fform->fi('Barkode',iText('barkode',$r['barkode'],$fform->rwidths,'','','disabled'));
 		//$fform->fi('Callnumber',iText('callnumber',$r['callnumber'],$fform->rwidths));
 		hiddenval('callnumber',$r['callnumber']);
 		$fform->fi('Sumber',iRadio('sumber1','sumber',0,'Beli',$r['sumber'],'','onclick="katalog_buku_getkode('.$cid.')"'));
