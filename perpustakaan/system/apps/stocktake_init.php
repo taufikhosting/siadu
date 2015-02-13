@@ -10,7 +10,7 @@ $q=dbInsert($dbtable,$inp);
 if($q){
 $id=mysql_insert_id();
 $tbl="so_".$id;
-$sql="CREATE TABLE IF NOT EXISTS `joshso`.`".$tbl."` (
+$sql="CREATE TABLE IF NOT EXISTS `sister_siaduso`.`".$tbl."` (
   `replid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `buku` int(10) unsigned NOT NULL DEFAULT '0',
   `barkode` char(50) NOT NULL,

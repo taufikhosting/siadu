@@ -6,7 +6,7 @@ while($r=dbFA($t)){?>
 <tr><td width="26px">
 	<?php if($r['level']!='admin'){?><img src="<?=IMGR?>staff.png" title="Staff"/><?php } else { ?><img src="<?=IMGR?>admin.png" title="Admin"/><?php }?>
 	</td><td width="400px"><b><?=$r['alias']?><?=(($r['level']=='admin')?" (Admin)":"")?></b>
-		<?php if($_SESSION['joshr']==$r['name']) echo " (current user)";?>
+		<?php if($_SESSION['sister_siadur']==$r['name']) echo " (current user)";?>
 	</td><td align="right">
 	<div class="prefopt">
 	<input type="button" title="Edit" class="prefedit" onclick="m_user('uf',false,<?=$r['dcid']?>)"/> &nbsp;

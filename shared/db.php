@@ -35,8 +35,7 @@ function dbUpdate($t,$f,$r=""){
 		foreach($f as $k => $v){
 			if(!$i)$s.=",";else $i=false;
 			$s.="`".$k."`='".addslashes($v)."'";
-		}
-		$q="UPDATE ".$t." SET ".$s.($r==""?"":" WHERE ".$r);
+		}$q="UPDATE ".$t." SET ".$s.($r==""?"":" WHERE ".$r);
 		$_SESSION['libdb_dbUpdate']=$q;
 		return dbQsql($q);
 	}else return false;
@@ -44,15 +43,19 @@ function dbUpdate($t,$f,$r=""){
 
 function dbInsert($t,$f){
 	$i=true;
-	if(count($f)>0){$s="";
+	if(count($f)>0){
+		$s="";
 		foreach($f as $k => $v){
-			if(!$i)$s.=",";else $i=false;
+			if(!$i)
+				$s.=",";
+			else 
+				$i=false;
 			$s.="`".$k."`='".addslashes($v)."'";
-		}
-		$q="INSERT INTO ".$t." SET ".$s;
+		}$q="INSERT INTO ".$t." SET ".$s;
 		$_SESSION['libdb_dbIsert']=$q;
 		return dbQsql($q);
-	}else return false;
+	}else 
+		return false;
 }
 
 function dbDel($t,$r){

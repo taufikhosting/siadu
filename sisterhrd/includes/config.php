@@ -16,7 +16,11 @@ define('AURACMS_FUNC', true);
 
 $mysql_user = 'root';
 $mysql_password = '';
+<<<<<<< HEAD:sisterhrd/includes/config.php
 $mysql_database = 'sisterelyon';
+=======
+$mysql_database = 'sister_siadu';
+>>>>>>> e48e85890c3f6481cd25170a34d555da9349a9f4:sisfohrd/includes/config.php
 $mysql_host = 'localhost';
 
 /******************

@@ -7,7 +7,7 @@ define('IMGR',ROOTLNK.'shared/images/');
 define('DBHOST','localhost');
 define('DBUSER','root');
 define('DBPSWD','admin');
-define('DBNAME','josh');
+define('DBNAME','sister_siadu');
 
 /* System Directory */
 define('ROTDIR',ROOTDIR.'repository/');

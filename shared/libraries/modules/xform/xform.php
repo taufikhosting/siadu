@@ -148,6 +148,21 @@ class xform{
 		echo $f;
 		echo '</div></div>';
 	}
+	
+	// by : epiii ------------
+	function fi2($a,$f,$f2){
+		$out='<div class="xrowl">
+				<div class="xlabel" style="width:'.$this->labelw.'px">
+					'.($a==''?'':$a.':').'
+				</div>
+				<div class="sfont" style="float:left;width:'.$this->fieldw.'px">
+					'.$f.$f2.'
+				</div>
+			</div>';
+		echo $out;
+	}
+	//end of by : epiii ------------
+
 	function fl($a,$f){
 		echo '<div class="xrowl"><div class="xlabel" style="width:'.$this->labelw.'px">'.$a.':</div><div class="xlabel" style="height:20px;width:'.$this->feildw.'px">';
 		echo $f;

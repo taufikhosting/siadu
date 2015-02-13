@@ -21,10 +21,10 @@ define('HRD_FLNK',HRD_RLNK.'upload/');
 define('DBHOST','localhost');
 define('DBUSER','root');
 define('DBPSWD','admin');
-define('DBNAME','joshlib');
+define('DBNAME','sister_siadulib');
 
-define('DB_HRD','`joshr`.`employee`');
-define('DB_HRD_PHOTO','`joshr`.`emp_photo`');
+define('DB_HRD','`sister_siadur`.`employee`');
+define('DB_HRD_PHOTO','`sister_siadur`.`emp_photo`');
 
 /* System Directory */
 define('ROOTDIR','E:/localhost/sites/www/new/');

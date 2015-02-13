@@ -1,15 +1,19 @@
 <?php
-require_once(MODDIR.'control.php');
-$opt=gpost('opt');
-$c=gpost('c');
-if($opt=='find'){
-	$keyw=gpost('nama');
-	$c=gpost('c');
-	$sql="SELECT * FROM ".DB_HRD." WHERE nip='$keyw' OR nama LIKE '%$keyw%' ORDER BY nama";
-	//echo $sql;
-	$t=mysql_query($sql);
-	$ndata=mysql_num_rows($t);
-	if($ndata>0){?>
+	require_once(MODDIR.'control.php');
+	$opt =gpost('opt');
+	$c   =gpost('c');
+
+	if($opt=='find'){ //search view 
+ 		$keyw =gpost('nama');
+		$c    =gpost('c');
+		// $sql  ="SELECT * FROM ".DB_HRD." WHERE nip='$keyw' OR nama LIKE '%$keyw%' ORDER BY nama";
+		$sql  ="SELECT * FROM hrd_karyawan WHERE nip	='$keyw' OR nama LIKE '%$keyw%' ORDER BY nama";
+		// print_r($sql);exit();
+
+		$t     =mysql_query($sql);
+		$ndata =mysql_num_rows($t);
+		if($ndata>0){
+?>
 	<div style="max-height:300px;overflow:auto">
 	<table class="xtable" border="0" cellspacing="1px" cellpadding="4px" width="100%">
 	<tr>
@@ -18,14 +22,18 @@ if($opt=='find'){
 		<th class="alc">Pilihan</th>
 	</tr>
 	<?php $x=$ndata>2?0:2;
-	while($r=mysql_fetch_array($t)){ if($ndata>2) $x=$x==0?2:0; else $x=2; ?>
-		<tr class="xtr<?=$x?>">
-			<td width="*"><?=$r['nama']?></td>
-			<td width="100px"><?=$r['nip']?></td>
-			<td width="40px" align="center">
-				<button class="btn" onclick="<?=($c==""?"aka_setpegawai":$c)?>('<?=$r['nip']?>','<?=$r['nama']?>',<?=$r['replid']?>);close_fform2();">Pilih</button>
-			</td>
-		</tr>
+	while($r=mysql_fetch_array($t)){ 
+		if($ndata>2) 
+			$x=$x==0?2:0; 
+		else 
+			$x=2; ?>
+			<tr class="xtr<?=$x?>">
+				<td width="*"><?=$r['nama']?></td>
+				<td width="100px"><?=$r['nip']?></td>
+				<td width="40px" align="center">
+					<button class="btn" onclick="<?=($c==""?"aka_setpegawai":$c)?>('<?=$r['nip']?>','<?=$r['nama']?>',<?=$r['id']?>);close_fform2();">Pilih</button>
+				</td>
+			</tr>
 	<?php }?>
 	</table>
 	</div>
@@ -33,12 +41,12 @@ if($opt=='find'){
 	<div class="infobox" style="float:left">Tidak ditemukan guru dengan nip atau nama <b><?=$keyw?></b></div>
 	<?php }
 } else {
-$sql="SELECT * FROM ".DB_HRD." ORDER BY nama";
-//echo $sql;
-$t=mysql_query($sql);
-$ndata=mysql_num_rows($t);
-
-$fwidth=500;
+	// $sql   ="SELECT * FROM ".DB_HRD." ORDER BY nama";
+	$sql   ="SELECT * FROM hrd_karyawan ORDER BY nama";
+	// var_dump($sql);exit();	
+	$t     =mysql_query($sql);
+	$ndata =mysql_num_rows($t);
+	$fwidth=500;
 ?>
 <table cellspacing="0" cellpadding="0" width="100%"><tr><td id="fformt2" align="center" style="padding-top:100px">
 <div id="fformbox2" class="fformbox" style="width:<?=($fwidth+20)?>px">
@@ -63,12 +71,21 @@ $fwidth=500;
 							<th class="alc">Pilihan</th>
 						</tr>
 						<?php $x=$ndata>2?0:2;
-						while($r=mysql_fetch_array($t)){ if($ndata>2) $x=$x==0?2:0; else $x=2; ?>
+						// while($r=mysql_fetch_array($t)){ // default view
+						while($r=mysql_fetch_assoc($t)){ // default view
+							// echo '<pre>';
+							// print_r($r);
+							// echo '</pre>';
+							// exit();
+							if($ndata>2) 
+								$x=$x==0?2:0; 
+							else 
+								$x=2; ?>
 							<tr class="xtr<?=$x?>">
 								<td width="*"><?=$r['nama']?></td>
 								<td width="100px"><?=$r['nip']?></td>
 								<td width="40px" align="center">
-									<button class="btn" onclick="<?=($c==""?"aka_setpegawai":$c)?>('<?=$r['nip']?>','<?=$r['nama']?>',<?=$r['replid']?>);close_fform2();">Pilih</button>
+									<button class="btn" onclick="<?=($c==""?"aka_setpegawai":$c)?>('<?=$r['nip']?>','<?=$r['nama']?>',<?=$r['id']?>);close_fform2();">Pilih</button>
 								</td>
 							</tr>
 						<?php }?>

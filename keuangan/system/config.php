@@ -4,7 +4,7 @@ define('RLNK',ROOTLNK.'keuangan/');
 define('IMGR',ROOTLNK.'shared/images/');
 
 /* Database */
-define('DBNAME','josh');
+define('DBNAME','sister_siadu');
 
 /* System Directory */
 define('ROTDIR',ROOTDIR.'keuangan/');

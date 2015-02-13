@@ -17,7 +17,9 @@ foreach($inp as $key=>$val){
 	$sql.="`".$key."`='".addslashes($val)."'";
 }
 
-if(mysql_query($sql)) $_SESSION[ASID.'notifbox']='<div id="notifbox" class="infobox">Data calon pegawai telah ditambahkan.</div>';
-else $_SESSION[ASID.'notifbox']='<div id="notifbox" class="warnbox">Data calon siswa tidak dapat ditambahkan. Terjadi kesalahan teknis program. Silahkan menghubungi administrator.</div>';
+if(mysql_query($sql)) 
+	$_SESSION[ASID.'notifbox']='<div id="notifbox" class="infobox">Data calon pegawai telah ditambahkan.</div>';
+else 
+	$_SESSION[ASID.'notifbox']='<div id="notifbox" class="warnbox">Data calon siswa tidak dapat ditambahkan. Terjadi kesalahan teknis program. Silahkan menghubungi administrator.</div>';
 
 ?>

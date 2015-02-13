@@ -1,57 +1,135 @@
-<?php require_once(APPMOD.'psb/proses.php');
-/* Load App libraries */
-require_once(DBFILE);
-require_once(LIBDIR.'common.php');
-require_once(MODDIR.'date.php');
-define('IMGDIR',ROTDIR.'images/');
+<?php
+  session_start();
+  // error_reporting(0);
+  require_once('../../shared/config.php');
+  require_once('../system/config.php');
+  // require_once '../../shared/db.php';
+  // require_once(DBFILE);
+  // require_once(LIBDIR.'common.php');
+  require_once(MODDIR.'date.php');
+  require_once(MODDIR.'xtable/xtablepf.php');
+  require_once '../../shared/libraries/mpdf/mpdf.php';
+  require_once '../../shared/tglindo.php';
+  
+  $token = base64_encode(md5('pendataan'.$_SESSION['psb_admin_id'].$_SESSION['psb_admin_name']));
+  // print_r($token);exit();
+  if(!isset($_SESSION)){ // login 
+    echo 'user has been logout';
+  }else{ // logout
+    if(isset($_GET['token']) and $token===$_GET['token']){
+          $dep = mysql_fetch_assoc(mysql_query('select nama as departemen from Departemen where replid='.$_GET['departemen']));
+          $pros= mysql_fetch_assoc(mysql_query('select proses from psb_proses  where replid='.$_GET['proses']));
+          $kel = mysql_fetch_assoc(mysql_query('select kelompok from psb_kelompok where replid='.$_GET['kelompok']));
+          // var_dump($pros['proses']);exit();
+            ob_start(); // digunakan untuk convert php ke html
+          $out='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+            <html xmlns="http://www.w3.org/1999/xhtml">
+              <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <title>SIADU::Sar - inventaris</title>
+              </head>
+  
+              <body>
+                <table width="100%">
+                  <tr>
+                    <td align="left" width="40%"><img width="150px" src="../../shared/images/logo.png" alt="" /></td>
+                    <td width="60%">Pendataan Calon Siswa</td>
+                  </tr>
+                </table>
 
-$dept=gpost('departemen');
-$departemen=departemen_r($dept);
-$proses=proses_r($pros,$dept);
-// cell($a,$w=0,$c=1,$r=1,$al='',$b=-1,$bg='',$s='',$atr='')
-$cid=gets('token');
+                <table>
+                  <tr>
+                    <td>Departemen</td>
+                    <td>: '.$dep['departemen'].'</td>
+                  </tr>
+                  <tr>
+                    <td>Periode</td>
+                    <td>: '.$pros['proses'].'</td>
+                  </tr>
+                  <tr>
+                    <td>Kelompok</td>
+                    <td>: '.$kel['kelompok'].'</td>
+                  </tr>
+                </table>
+                ';
 
+                $out.='<table class="isi" width="100%">';
+                $out.='<tr class="head">
+                      <td align="center" rowspan="2">No. Pendaftaran</td>
+                      <td align="center"  rowspan="2">Nama</td>
+                      <td align="center" rowspan="2">Uang Pangkal</td>
+                      <td align="center" colspan="3">Discount</td>
+                      <td align="center" rowspan="2">Denda</td>
+                      <td align="center" rowspan="2">Uang Pangkal Net</td>
+                      <td align="center">Angsuran</td>
+                    </tr>
+                    <tr class="head">
+                      <td align="center">Subsidi</td>
+                      <td align="center">Tunai</td>
+                      <td align="center">Tunai</td>
+                      <td align="center">x Bulan</td>
+                    </tr>
+                    ';
 
-$pros=gpost('proses');
-
-$query = mysql_query("SELECT * FROM psb_calonsiswa WHERE replid='$cid' LIMIT 0,1");
-
-
-$token=doc_decrypt($token);
-/*
-	$gb = mysql_query("SELECT nama,fname FROM rep_file WHERE replid=13")
-	$data = mysql_fetch_assoc($gb)
-	$gambar = $data[fname];
-*/	
-$proses=mysql_fetch_array(mysql_query("SELECT * FROM psb_proses WHERE replid='".$r['proses']."' LIMIT 0,1"));
-$kelompok=mysql_fetch_array(mysql_query("SELECT * FROM psb_kelompok WHERE replid='".$r['kelompok']."' LIMIT 0,1"));
-$departemen=mysql_fetch_array(mysql_query("SELECT * FROM departemen WHERE replid='".$proses['departemen']."' LIMIT 0,1"));
-
-$doc=new doc();
-$doc->dochead('Pendataan Calon Siswa',100);
-//$doc->nl();
-
-//$doc->row_blank(5);
-
-//$t=dbQSql($token);
-$no=1;
-$doc->head('@Nomor Pendaftaran{2}','@Nama{2}','@Uang Pangkal{R,2}','Discount{C,1,3}','Denda{R,2}','Uang pangkal net{R,2,90px}','Angsuran{R}');
-$doc->head('Subsidi{R}','Saudara{R}','Tunai{R}','!x bulan{R}');
-
-while($r=dbFA($query)){
-
-$doc->nl();
-//$doc->cell($no++,20,'c');
-$doc->cell($r['nopendaftaran'],90,'r');
-$doc->cell($r['nama']);
-$doc->cell(fRp($r['sumpokok']),90,'r');
-$doc->cell(fRp($r['disctb']),90,'r');
-$doc->cell(fRp($r['discsaudara']),90,'r');
-$doc->cell(fRp($r['disctunai']),90,'r');
-$doc->cell(fRp($r['denda']),90,'r');
-$doc->cell(fRp($r['angsuran']).'<br/>x '.$r['jmlangsur'].' bulan',90,'r');
-
+                    $s = 'SELECT
+                            nopendaftaran,
+                            nama,
+                            disctb,
+                            discsaudara,
+                            disctunai,
+                            denda,
+                            sumnet,
+                            angsuran
+                          FROM
+                            psb_calonsiswa
+                          where 
+                            kelompok='.$_GET['kelompok'];
+                            //.($_GET['nopendaftaran']!='where nopendaftaran '.$_GET['nopendaftaran']?'');
+                    $e = mysql_query($s);
+                    $n = mysql_num_rows($e);
+                            // var_dump($n);exit();
+                    $nox = 1;
+                    if($n==0){
+                      $out.='<tr>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>';
+                    }else{
+                      while ($r=mysql_fetch_assoc($e)) {
+                        // var_dump($r);
+                        $out.='<tr >
+                                  <td>'.$r['nopendaftaran'].'</td>
+                                  <td>'.$r['nama'].'</td>
+                                  <td align="right">'.fRp($r['sumpokok']).'</td>
+                                  <td align="right">'.fRp($r['disctb']).'</td>
+                                  <td align="right">'.fRp($r['discsaudara']).'</td>
+                                  <td align="right">'.fRp($r['disctunai']).'</td>
+                                  <td align="right">'.fRp($r['denda']).'</td>
+                                  <td align="right">'.fRp($r['sumnet']).'</td>
+                                  <td align="right">'.fRp($r['angsuran']).'</td>
+                              </tr>';
+                        // $nox++;
+                      }
+                    }
+            $out.='</table><br>';
+          echo $out; 
+          // exit();
+  
+        #generate html -> PDF ------------
+          $out2 = ob_get_contents();
+          ob_end_clean(); 
+          $mpdf=new mPDF('c','A4','');   
+          $mpdf->SetDisplayMode('fullpage');   
+          $stylesheet = file_get_contents('../../shared/libraries/mpdf/r_cetak.css');
+          $mpdf->WriteHTML($stylesheet,1);  // The parameter 1 tells that this is css/style only and no body/html/text
+          $mpdf->WriteHTML($out);
+          $mpdf->Output();
+    }else{
+      echo 'maaf token - url tidak valid';
+    }
 }
-
-
-$doc->end(); ?>

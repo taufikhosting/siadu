@@ -308,7 +308,7 @@ if($q=="addemployee"){
 	}
 	dbUpdate("emp_ainfo",$inp,"empid='$dcid'");
 	
-	$_SESSION['joshreditinfo']="Employee's information has been updated.";
+	$_SESSION['sister_siadureditinfo']="Employee's information has been updated.";
 	
 	header('location:'.RLNK.'employee_edit.php?nid='.$dcid);
 } else {

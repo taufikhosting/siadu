@@ -23,13 +23,13 @@ $xtable->search_keyon('barkode=>'.$tbl.'.barkode:EQ-0');
 // Query
 //$sql="SELECT * FROM ".$tbl." ORDER BY cek,ts";
 $db=new xdb($tbl);
-$db->field($tbl.":*","josh.pus_katalog:judul");
-$db->join("buku","josh.pus_buku");
-$db->joinother("josh.pus_buku","katalog","josh.pus_katalog");
+$db->field($tbl.":*","sister_siadu.pus_katalog:judul");
+$db->join("buku","sister_siadu.pus_buku");
+$db->joinother("sister_siadu.pus_buku","katalog","sister_siadu.pus_katalog");
 $db->where($xtable->search_sql_get());
 $t=$db->query();
 $xtable->ndata=mysql_num_rows($t);
-$t=$db->query($xtable->pageorder_sql($tbl.".barkode","josh.pus_katalog.judul",$tbl.".cek,@".$tbl.".barkode",$tbl.".ts"));
+$t=$db->query($xtable->pageorder_sql($tbl.".barkode","sister_siadu.pus_katalog.judul",$tbl.".cek,@".$tbl.".barkode",$tbl.".ts"));
 
 $ncek_y=mysql_num_rows(mysql_query("SELECT * FROM ".$tbl." WHERE cek='Y'"));
 $ncek=mysql_num_rows(mysql_query("SELECT * FROM ".$tbl));

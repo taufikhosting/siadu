@@ -11,27 +11,44 @@
   require_once '../../shared/tglindo.php';
   
   $token = base64_encode(md5('inventaris'.$_SESSION['sar_admin_id'].$_SESSION['sar_admin_name']));
+<<<<<<< HEAD
+=======
+  // print_r($token);exit();
+>>>>>>> e48e85890c3f6481cd25170a34d555da9349a9f4
   if(!isset($_SESSION)){ // login 
     echo 'user has been logout';
   }else{ // logout
     if(isset($_GET['token']) and $token===$_GET['token']){
+<<<<<<< HEAD
+=======
+        // echo 'token udah bener n tampil';
+>>>>>>> e48e85890c3f6481cd25170a34d555da9349a9f4
           ob_start(); // digunakan untuk convert php ke html
           $out='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             <html xmlns="http://www.w3.org/1999/xhtml">
               <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<<<<<<< HEAD
                 <title>SIADU::Keu - Jurnal Umum</title>
+=======
+                <title>SIADU::Sar - inventaris</title>
+>>>>>>> e48e85890c3f6481cd25170a34d555da9349a9f4
               </head>
 
               <body>
                 <p align="center">
                   <b>
+<<<<<<< HEAD
                     JURNAL UMUM <br>
+=======
+                    Inventaris<br>
+>>>>>>> e48e85890c3f6481cd25170a34d555da9349a9f4
                   </b>
                 </p>
 
                 <table class="isi" width="100%">
                     <tr class="head">
+<<<<<<< HEAD
                       <td align="center">Tanggal</td>
                       <td align="center">No. Jurnal / No. Bukti</td>
                       <td align="center">Uraian</td>
@@ -43,11 +60,79 @@
                     $jum = mysql_num_rows($exe);
                     $nox = 1;
                     if($jum==0){
+=======
+                      <td align="center">Kode</td>
+                      <td align="center">Grup Barang</td>
+                      <td align="center">Jumlah Unit</td>
+                      <td align="center">Unit Tersedia</td>
+                      <td align="center">Unit Dipinjam</td>
+                      <td align="center">Total Aset</td>
+                      <td align="center">Keterangan</td>
+                    </tr>';
+
+                    $s = 'SELECT
+                            g.replid,
+                            g.kode,
+                            g.nama,
+                            IFNULL(tbtot.jum,0) u_total,
+                            IFNULL(tbpjm.jum,0) u_dipinjam,
+                            IFNULL(tbtot.jum,0) - IFNULL(tbpjm.jum,0) u_tersedia,
+                            IFNULL(tbaset.aset,0) aset,
+                            g.keterangan
+                          FROM
+                            sar_grup g
+                            LEFT JOIN (
+                              SELECT 
+                                k.grup,
+                                count(*) jum 
+                              from 
+                                sar_katalog k
+                                left JOIN sar_barang b on b.katalog = k.replid
+                              GROUP BY
+                                k.grup
+                            )tbtot on tbtot.grup = g.replid
+                            
+                            LEFT JOIN(
+                              SELECT 
+                                k.grup,
+                                count(*)jum
+                              from 
+                                sar_peminjaman pj
+                                left JOIN sar_pengembalian kb on kb.peminjaman = pj.replid
+                                LEFT JOIN sar_barang b on b.replid = pj.barang
+                                left JOIN sar_katalog k on k.replid = b.katalog
+                              WHERE
+                                kb.replid is NULL
+                              GROUP BY  
+                                k.grup
+                            )tbpjm on tbpjm.grup = g.replid
+
+                            LEFT JOIN(
+                              SELECT
+                                k.grup,
+                                SUM(b.harga)aset
+                              from 
+                                sar_barang b
+                                join sar_katalog k on k.replid = b.katalog
+                              GROUP BY 
+                                k.grup
+                            )tbaset on tbaset.grup = g.replid
+                          WHERE
+                            g.lokasi = '.$_GET['lokasi'].' 
+                          ORDER BY
+                            g.kode asc';
+                            // var_dump($s);exit();
+                    $e = mysql_query($s);
+                    $n = mysql_num_rows($e);
+                    $nox = 1;
+                    if($n==0){
+>>>>>>> e48e85890c3f6481cd25170a34d555da9349a9f4
                       $out.='<tr>
                         <td>-</td>
                         <td>-</td>
                         <td>-</td>
                         <td>-</td>
+<<<<<<< HEAD
                       </tr>';
                     }else{
                       while ($res=mysql_fetch_assoc($exe)) {
@@ -85,6 +170,23 @@
                         // end of detil jurnal --------
                           $out.='</td>';
                         $out.='</tr>';
+=======
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>';
+                    }else{
+                      while ($r=mysql_fetch_assoc($e)) {
+                        $out.='<tr>
+                                  <td>'.$r['kode'].'</td>
+                                  <td>'.$r['nama'].'</td>
+                                  <td>'.$r['u_total'].'</td>
+                                  <td>'.$r['u_dipinjam'].'</td>
+                                  <td>'.$r['u_tersedia'].'</td>
+                                  <td>'.fRp($r['aset']).'</td>
+                                  <td>'.$r['keterangan'].'</td>
+                            </tr>';
+>>>>>>> e48e85890c3f6481cd25170a34d555da9349a9f4
                         $nox++;
                       }
                     }

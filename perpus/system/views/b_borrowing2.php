@@ -9,7 +9,7 @@ if($mtype=='m'){
 	$sql="SELECT * FROM catalog ".$filt." ORDER BY title";
 	$mmt="student name or NIS";
 } else {
-	$sql="SELECT * FROM `joshr`.`employee` WHERE `name` LIKE '%$mid%' OR `nip` LIKE '$mid%'";
+	$sql="SELECT * FROM `sister_siadur`.`employee` WHERE `name` LIKE '%$mid%' OR `nip` LIKE '$mid%'";
 	$mmt="staff name or NIP";
 }
 $tpf=mysql_query($sql);

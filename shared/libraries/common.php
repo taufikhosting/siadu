@@ -285,11 +285,14 @@ function app_form_getpegawai($d='pegawai',$v='x',$c='',$s='float:left'){
 	if($v=='x')$v=gpost($d);
 	if(is_array($v))$v=$v[$d];
 	if($v!=0&&$v!=''&&$v!='0'){
-		$q=mysql_query("SELECT * FROM hrd_pegawai WHERE replid='$v' LIMIT 0,1");
+		// $q=mysql_query("SELECT * FROM hrd_pegawai WHERE replid='$v' LIMIT 0,1");
+		$sql ="SELECT * FROM hrd_karyawan WHERE id='$v' LIMIT 0,1";
+		$q   =mysql_query($sql);
 		if(mysql_num_rows($q)>0){
-		$h=mysql_fetch_array($q);
-		$ng=$h['nip'];
-		$ag=$h['nama'];}
+			$h=mysql_fetch_array($q);
+			$ng=$h['nip'];
+			$ag=$h['nama'];
+		}
 	}
 	$k= '<div style="'.$s.'">';
 	$k.= iText('nippegawai',$ng,'float:left;width:100px;margin-right:5px;cursor:default','nip','onclick="aka_getpegawai(\''.$c.'\')"','readonly');
@@ -315,7 +318,7 @@ function app_form_gpost(){
 	$a=func_get_args();
 	$n=count($a);
 	for($i=0;$i<$n;$i++){
-		if($a[$i]=='photo'){
+		if($a[$i]=='photo'){ //img
 			$id=gpost('photo');
 			if($id!=''){
 				if(intval($id)!=0){
@@ -326,8 +329,7 @@ function app_form_gpost(){
 					$s['photo']='';
 				}
 			}
-		}
-		else {
+		}else { // others 
 			$s[$a[$i]]=gpost($a[$i]);
 		}
 	}
@@ -490,8 +492,7 @@ function farray(){
 	$n=count($a);
 	for($i=0;$i<$n;$i++){
 		$s[$a[$i]]='';
-	}
-	return $s;
+	}return $s;
 }
 
 function appmod_use(){

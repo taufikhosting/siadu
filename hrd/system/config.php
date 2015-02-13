@@ -13,7 +13,7 @@ define('FLNK',RLNK.'upload/');
 define('DBHOST','localhost');
 define('DBUSER','root');
 define('DBPSWD','');
-define('DBNAME','joshr');
+define('DBNAME','sister_siadur');
 
 /* System Directory */
 define('ROTDIR','/xampp/htdocs/siadu/hrd/');

@@ -10,14 +10,14 @@ if(mysql_num_rows($t)>0) $stocktaking=true;
 else $stocktaking=false;
 
 if(gets('cover')=='show'){
-	$_SESSION['joshlibcatcover']='s';
+	$_SESSION['sister_siadulibcatcover']='s';
 }
 else if(gets('cover')=='hide'){
-	$_SESSION['joshlibcatcover']='h';
+	$_SESSION['sister_siadulibcatcover']='h';
 }
 $cover=true;
-if(!empty($_SESSION['joshlibcatcover'])){
-	if($_SESSION['joshlibcatcover']=='h') $cover=false;
+if(!empty($_SESSION['sister_siadulibcatcover'])){
+	if($_SESSION['sister_siadulibcatcover']=='h') $cover=false;
 }
 
 // Searching:

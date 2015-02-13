@@ -117,13 +117,13 @@ $lap_sum=gets('lap_sum',0);
 // 2. Queries: samakan dg Query >> Edit
 $t=mysql_query("SELECT * FROM pus_stockhist WHERE replid='$cid'");
 $data_so=mysql_fetch_array($t);
-$tbl="joshso.".$data_so['tabel'];
+$tbl="sister_siaduso.".$data_so['tabel'];
 if($lap_cetak==0) $fl="";
 else if($lap_cetak==1) $fl=" WHERE ".$tbl.".cek='Y'";
 else if($lap_cetak==2) $fl=" WHERE ".$tbl.".cek='N'";
 else if($lap_cetak==3) $fl=" WHERE ".$tbl.".cek='N' AND ".$tbl.".note<>''";
 else if($lap_cetak==4) $fl=" WHERE ".$tbl.".cek='N' AND ".$tbl.".note=''";
-$t=mysql_query("SELECT ".$tbl.".cek,".$tbl.".note,josh.pus_buku.barkode,josh.pus_buku.callnumber,josh.pus_katalog.isbn,josh.pus_katalog.judul,josh.pus_katalog.pengarang,josh.pus_katalog.tahunterbit,josh.pus_pengarang.nama as npengarang,josh.pus_penerbit.nama as npenerbit FROM ".$tbl." LEFT JOIN josh.pus_buku ON josh.pus_buku.replid=".$tbl.".buku LEFT JOIN josh.pus_katalog ON josh.pus_katalog.replid=josh.pus_buku.katalog LEFT JOIN josh.pus_pengarang ON josh.pus_pengarang.replid=josh.pus_katalog.pengarang LEFT JOIN josh.pus_penerbit ON josh.pus_penerbit.replid=josh.pus_katalog.penerbit".$fl." ORDER BY ".$tbl.".cek DESC, josh.pus_buku.barkode");
+$t=mysql_query("SELECT ".$tbl.".cek,".$tbl.".note,sister_siadu.pus_buku.barkode,sister_siadu.pus_buku.callnumber,sister_siadu.pus_katalog.isbn,sister_siadu.pus_katalog.judul,sister_siadu.pus_katalog.pengarang,sister_siadu.pus_katalog.tahunterbit,sister_siadu.pus_pengarang.nama as npengarang,sister_siadu.pus_penerbit.nama as npenerbit FROM ".$tbl." LEFT JOIN sister_siadu.pus_buku ON sister_siadu.pus_buku.replid=".$tbl.".buku LEFT JOIN sister_siadu.pus_katalog ON sister_siadu.pus_katalog.replid=sister_siadu.pus_buku.katalog LEFT JOIN sister_siadu.pus_pengarang ON sister_siadu.pus_pengarang.replid=sister_siadu.pus_katalog.pengarang LEFT JOIN sister_siadu.pus_penerbit ON sister_siadu.pus_penerbit.replid=sister_siadu.pus_katalog.penerbit".$fl." ORDER BY ".$tbl.".cek DESC, sister_siadu.pus_buku.barkode");
 
 
 $pdf->AddPage();

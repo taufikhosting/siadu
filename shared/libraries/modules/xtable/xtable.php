@@ -174,12 +174,12 @@ class xtable{
 	}
 	function use_db(&$db,$a=-1,$s=0){
 		$this->ndata=mysql_num_rows($db->query());
-		if($a==-1)$a=$this->page_order_sql;
+		if($a==-1)
+			$a=$this->page_order_sql;
 		$this->tbl_sql=$db->getsql();
 		if($a!=-1 && $a!=''){
 			$this->tbl_sql.=$a;
-		}
-		return $db->query($a,$s);
+		}return $db->query($a,$s);
 	}
 	// Text formatting for display
 	function format_title($a){
@@ -752,12 +752,10 @@ class xtable{
 		if($this->cari!=0){
 			if(!$this->search_infodisp) $this->search_info();
 			else hiddenval('xtable'.$this->xtableid.'_usesearch',$this->usesearch);
-		}
-		else {
-		if($b!=''){
-			echo '<div class="infobox2" style="margin-top:10px">'.$b.'</div>';
-		}
-		hiddenval('xtable'.$this->xtableid.'_usesearch',$this->usesearch);
+		}else {
+			if($b!=''){
+				echo '<div class="infobox2" style="margin-top:10px">'.$b.'</div>';
+			}hiddenval('xtable'.$this->xtableid.'_usesearch',$this->usesearch);
 		}
 	}
 	// button bar
@@ -766,6 +764,19 @@ class xtable{
 		echo '<div class="tbltopbar" style="width:'.$w.'">';
 		$this->btnbar_isbegin=true;
 	}
+
+	function btnbar_print2($a='',$t='',$p){
+		$par='';
+		foreach ($p as $key => $val) {
+			$par.='&'.$key.'='.$val;
+		}
+		// var_dump($par);exit();
+		$o = 'window.open(\'print/'.$a.'.php?token='.$t.$par.'\',\'_blank\');';
+		echo '<button class="btn" style="float:left;margin-right:4px" onclick="'.$o.'">
+					<div class="bi_pri">Cetak</div>
+			  </button>';
+	}
+
 	function btnbar_end(){
 		echo '</div>';
 		$this->btnbar_isbegin=false;
@@ -790,12 +801,19 @@ class xtable{
 	function btnbar_print($a=''){
 		if($this->ndata>0){
 			if($a=='')
+<<<<<<< HEAD
 				// $a='E(\'xtable'.$this->xtableid.'_print_form\').submit()';
 				$a='E(\'xtable'.$this->xtableid.'_print_form\').submit()';
 			// var_dump($a);
 			echo '<button class="btn" style="float:left;margin-right:4px" onclick="'.$a.'">
 						<div class="bi_pri">Cetak</div>
 				  </button>';
+=======
+				 $a='E(\'xtable'.$this->xtableid.'_print_form\').submit()';
+			echo '<button class="btn" style="float:left;margin-right:4px" onclick="'.$a.'">
+					<div class="bi_pri">Cetak</div>
+				</button>';
+>>>>>>> e48e85890c3f6481cd25170a34d555da9349a9f4
 		}
 	}
 	function btnbar_print2($a='',$t=''){

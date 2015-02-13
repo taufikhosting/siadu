@@ -1,0 +1,22 @@
+url : http://siaduelyon.hol.es/
+-------------------------------
+cpanel hosting (idhositinger)
+-user : elyonhosting14@gmail.com
+-pass : 1tambah1=2
+* buka gmail->login ..terus.. buka idhostinger.com -> login
+-------------------------------
+email (gmail) :
+-user : elyonhosting14@gmail.com
+-pass : 1tambah1=2
+-------------------------------
+ftp via filezilla :
+-host : 185.28.20.230
+-Username : u451742974
+-Password : 1tambah1=2
+-------------------------------
+mysql db :
+-host : mysql.idhostinger.com
+-db : u451742974_siadu
+-user : u451742974_siadu
+-pass : 1tambah1=2
+-------------------------------

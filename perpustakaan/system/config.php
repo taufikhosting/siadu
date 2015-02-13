@@ -4,7 +4,7 @@ define('RLNK',ROOTLNK.'perpustakaan/');
 define('IMGR',ROOTLNK.'shared/images/');
 
 /* Database */
-define('DBNAME','josh');
+define('DBNAME','sister_siadu');
 
 /* System Directory */
 define('ROTDIR',ROOTDIR.'perpustakaan/');

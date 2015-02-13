@@ -391,7 +391,7 @@ function stocktake_ctable(){
 	$t=mysql_query("SELECT tabel FROM pus_stockhist WHERE status<>'5' LIMIT 0,1");
 	//log_print("pus: SELECT tabel FROM pus_stockhist WHERE status='1' LIMIT 0,1");
 	$r=mysql_fetch_array($t);
-	return "joshso.".$r['tabel'];
+	return "sister_siaduso.".$r['tabel'];
 }
 
 function buku_judul($a){

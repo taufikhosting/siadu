@@ -3,13 +3,16 @@ require_once(MODDIR.'control.php');
 $opt=gpost('opt');
 
 // departemen >>
-$dept=gpost('departemen');
-$departemen=departemen_r($dept);
-if($ADMIN_DEPT!=0)$dept=$ADMIN_DEPT;
+$dept       =gpost('departemen');
+$departemen =departemen_r($dept);
+if($ADMIN_DEPT!=0)
+	$dept=$ADMIN_DEPT;
 
-$optcari=Array('agama'=>'Agama','kelamin'=>'Jenis kelamin','kelompok'=>'Kelompok','periode'=>'Periode');
-$ocari=gpost('optcari');
-if($ocari=='')$ocari='agama';
+$optcari =Array('agama'=>'Agama','kelamin'=>'Jenis kelamin','kelompok'=>'Kelompok','periode'=>'Periode');
+$ocari   =gpost('optcari');
+if($ocari=='')
+	$ocari='agama';
+// var_dump($optcari);exit();
 ?>
 <div class="tbltopbar" style="width:100%">
 <div class="sfont" style="margin-top:4px;margin-right:10px;float:left"><b>Departemen:</b></div>
