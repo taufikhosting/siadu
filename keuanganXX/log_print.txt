@@ -1,0 +1,15 @@
+Dec 16, 2013 : dapat debet:37500000
+Dec 16, 2013 : dapat debet:0
+Dec 16, 2013 : mysql_num_rows(t):5;
+Jan 7, 2014 : mysql_num_rows(t):5;
+Jan 7, 2014 : mysql_num_rows(t):5;
+Jan 20, 2014 : mysql_num_rows(t):4;
+Feb 13, 2014 : mysql_num_rows(t):4;
+Apr 7, 2014 : mysql_num_rows(t):0;
+Sep 16, 2014 : mysql_num_rows(t):0;
+Sep 21, 2014 : mysql_num_rows(t):2;
+Sep 21, 2014 : mysql_num_rows(t):2;
+Sep 22, 2014 : mysql_num_rows(t):2;
+Sep 22, 2014 : mysql_num_rows(t):2;
+Sep 22, 2014 : mysql_num_rows(t):0;
+Sep 22, 2014 : mysql_num_rows(t):0;

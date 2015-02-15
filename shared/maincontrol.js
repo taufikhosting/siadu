@@ -322,40 +322,39 @@ function gPage_seekloader(prw){
 function gPage(a,b){
 	var usession=E("usession").value;
 	if(usession!=""){
-	EHide("copyright");
-	EHide("panel");
-	EShow("pagebox");
-	var pw=$("#page").width();
-	var ph=$("#page").height();
-	if(ph<=450) ph=450;
-	$("#pagepreview").width(pw);
-	$("#loader").width(pw);
-	$("#loader").height(ph);
-	EHide("page");
-	EShow("loader");
-	//page_isloading=true; page_timeout=0; gPage_seekloader(0);
-	if(b!="") b="&"+b;
-	var xtable_param="";
-	var xt=E("xtable_page_name");
-	//alert(xt);
-	if(xt!=null){
-		//alert(E("xtable_page_name").value);
-		//alert(a+" : "+E("xtablefmod").value);
-		if(a==E("xtable_page_name").value){
-			xtable_param=xtable_pageparam();
+		EHide("copyright");
+		EHide("panel");
+		EShow("pagebox");
+		var pw=$("#page").width();
+		var ph=$("#page").height();
+		if(ph<=450) 
+			ph=450;
+		$("#pagepreview").width(pw);
+		$("#loader").width(pw);
+		$("#loader").height(ph);
+		EHide("page");
+		EShow("loader");
+		if(b!="") 
+			b="&"+b;
+		var xtable_param="";
+		var xt=E("xtable_page_name");
+
+		if(xt!=null){
+			if(a==E("xtable_page_name").value){
+				xtable_param=xtable_pageparam();
+			}
 		}
-	}
-	//alert("xtable_param:"+xtable_param);
-	_("_apps&app=view&page="+a+b+xtable_param,function(r){
-		E("cpage").value=a;
-		E("page").innerHTML=r;
-		E("pagepreview").innerHTML=r;
-		var pvh=$("#pagepreview").height();
-		if(pvh<=450) pvh=450;
-		if(pvh!=ph){
-			$("#loader").animate({height:pvh},500,showPage());
-		} else showPage();
-	});
+
+		_("_apps&app=view&page="+a+b+xtable_param,function(r){
+			E("cpage").value=a;
+			E("page").innerHTML=r;
+			E("pagepreview").innerHTML=r;
+			var pvh=$("#pagepreview").height();
+			if(pvh<=450) pvh=450;
+			if(pvh!=ph){
+				$("#loader").animate({height:pvh},500,showPage());
+			} else showPage();
+		});
 	}
 }
 function getPage(a,b){
@@ -772,8 +771,8 @@ function fform_std(o,cid,g,fmod,c,f,s,cc,fcb){
 				if(fcb!=0)
 					fcb();
 			}
-		}
-	)}else{ var p=true; var v="";
+		})
+	}else{ var p=true; var v="";
 		if(g){
 			p=svalidate_r(f);
 			if(p){
@@ -829,8 +828,11 @@ function fform2_std(o,cid,g,fmod,c,f,s,cc,fcb){
 }
 
 function fform_purl(f){
-	var d=""; for(var i=0;i<f.length;i++) d+="&"+f[i]+"="+E(f[i]).value;
+	var d=""; 
+	for(var i=0;i<f.length;i++) 
+		d+="&"+f[i]+"="+E(f[i]).value;
 	return d;
+	// alert(d);
 }
 function gpage_purl(f){
 	var d=""; for(var i=0;i<f.length;i++){

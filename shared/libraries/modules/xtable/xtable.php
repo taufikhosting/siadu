@@ -818,21 +818,24 @@ class xtable{
 	function btnbar_f(){
 		echo '<div class="tbltopbar" style="width:100%">'; $this->btnbar_isbegin=true;
 		if($this->xtopt!='urut'){
-		$a=func_get_args();
-		$n=count($a);
-		for($i=0;$i<$n;$i++){
-			if($a[$i]=='add') $this->btnbar_add();
-			else if($a[$i]=='print') $this->btnbar_print();
-			else if($a[$i]=='updn') $this->btnbar_updn();
-			else if($a[$i]=='help') $this->btnbar_help();
-			else if($a[$i]=='srcbox') $this->search_box();
-			else echo $a[$i];
-		}} else {
+			$a=func_get_args();
+			$n=count($a);
+			for($i=0;$i<$n;$i++){
+				if($a[$i]=='add') $this->btnbar_add();
+				else if($a[$i]=='print') $this->btnbar_print();
+				else if($a[$i]=='updn') $this->btnbar_updn();
+				else if($a[$i]=='help') $this->btnbar_help();
+				else if($a[$i]=='srcbox') $this->search_box();
+				else echo $a[$i];
+			}
+		} else {
 			$this->btnbar_updn();
-		}
-		echo '</div>'; $this->btnbar_isbegin=false;
-		if($this->cari!=0 && !$this->search_infodisp) $this->search_info();
+		}echo '</div>'; 
+		$this->btnbar_isbegin=false;
+		if($this->cari!=0 && !$this->search_infodisp) 
+			$this->search_info();
 	}
+
 	function search_kformat($a1){
 		//$a1="nopendaftaran(no pendaftaran)=>nama:EQ-1";
 		//echo " a1:".$a1."; ";

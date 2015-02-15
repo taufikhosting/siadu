@@ -4,6 +4,7 @@ define('RLNK',ROOTLNK.'keuangan/');
 define('IMGR',ROOTLNK.'shared/images/');
 
 /* Database */
+// define('DBNAME','josh');
 define('DBNAME','sister_siadu');
 
 /* System Directory */
@@ -52,7 +53,8 @@ $APP_PAGES=Array(
 		'tileset'=>Array('key'=>'administrasiakademik','title'=>'Transaksi Keuangan','slide'=>'2','pos'=>'0px','tipe'=>2),
 		'pages'=>Array(
 			app_page('transaksi','Transaksi','Transaksi keuangan dan akuntansi.',$APP_COLOR_THEME1[0],'penbook.png'),
-			app_page('modul','Modul Pembayaran','Membuat modul pembayaran administrasi siswa dan calon siswa.',$APP_COLOR_THEME1[1],'book.png'),
+			app_page('modul','COA','Membuat modul pembayaran administrasi siswa dan calon siswa.',$APP_COLOR_THEME1[1],'book.png'),
+			// app_page('modul','Modul Pembayaran','Membuat modul pembayaran administrasi siswa dan calon siswa.',$APP_COLOR_THEME1[1],'book.png'),
 			//app_page('modultransaksi','Pembayaran Siswa dan Calon Siswa','Mendata Transaksi pembayaran.',$APP_COLOR_THEME1[3],'penbook.png'),
 			app_page('modul_psb','Pembayaran Pendaftaran','Mendata pembayaran biaya pendaftaran calon siswa.',$APP_COLOR_THEME1[3],'penbook.png'),
 			app_page('modul_usp','Pembayaran Uang Pangkal','Mendata pembayaran uang pangkal siswa.',$APP_COLOR_THEME1[2],'penbook.png'),

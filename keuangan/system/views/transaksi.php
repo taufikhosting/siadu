@@ -77,9 +77,16 @@
 	*/
 	echo '</div>';
 
-	echo '<div style="float:left;width:100%;margin-bottom:40px">';
-		echo inputDate('tanggal1',$tanggal1).'<div class="sfont" style="float:left;margin-right:4px;margin-top:4px">&nbsp;sampai&nbsp;</div>'.inputDate('tanggal2',$tanggal2).'<button style="float:left;margin-left:30px;margin-right:4px" class="btnz" onclick="transaksi_get()"><div class="">Tampilkan &raquo;</div></button>';
-	echo '</div>';
+		echo '<div style="float:left;width:100%;margin-bottom:40px">';
+			// echo inputDate('tanggal1',$tanggal1).'<div class="sfont" style="float:left;margin-right:4px;margin-top:4px">&nbsp;sampai&nbsp;</div>'.inputDate('tanggal2',$tanggal2).'<button style="float:left;margin-left:30px;margin-right:4px" class="btnz" onclick="transaksi_get()"><div class="">Tampilkan &raquo;</div></button>';
+			$tglSearch = inputDate('tanggal1',$tanggal1);
+			$tglSearch.='<div class="sfont" style="float:left;margin-right:4px;margin-top:4px">&nbsp;sampai&nbsp;</div>';
+			$tglSearch.= inputDate('tanggal2',$tanggal2);
+			$tglSearch.='<button style="float:left;margin-left:30px;margin-right:4px" class="btnz" onclick="transaksi_get()">
+							<div class="">Tampilkan &raquo;</div>';
+			$tglSearch.='</button>';
+		echo $tglSearch;
+		echo '</div>';
 
 	echo '</div>';
 
