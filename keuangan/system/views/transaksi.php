@@ -91,6 +91,7 @@
 	echo '</div>';
 
 	$gptab=gpost('gptab_index','1');
+	// var_dump($gptab);exit();
 	echo '<div style="float:left;width:100%;margin-bottom:10px;border-bottom:1px solid #01a8f7">',
 			'<div id="gptab1" class="gptab'.($gptab=='1'?'1':'').'" onclick="transaksi_tab_get(1)">Jurnal Umum</div>',
 			'<div id="gptab2" class="gptab'.($gptab=='2'?'1':'').'" onclick="transaksi_tab_get(2)">Buku Besar</div>',
@@ -102,6 +103,7 @@
 			'<div id="gptab8" class="gptab'.($gptab=='8'?'1':'').'" onclick="transaksi_tab_get(8)">Buku Tambahan</div>',
 			'</div>';
 	hiddenval('gptab_index',$gptab);
+	// hiddenval('gptab_index',3);
 
 	echo '<div id="transaksi_tab_1" style="float:left;width:100%;display:'.($gptab=='1'?'':'none').'">';
 		require_once(VWDIR.'transaksi_jurnalumum.php');
@@ -129,4 +131,9 @@
 	echo '</div>';
 
 	hiddenval('transaksi_tab_num',8);
+	// $hh = hiddenval('transaksi_tab_num',8);
+	// var_dump($hh);
+	// echo '<script>
+	// 	alert(hiddenval(\'transaksi_tab_num\',8);
+	// </script>'; 
 ?>

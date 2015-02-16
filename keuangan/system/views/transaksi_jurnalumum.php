@@ -95,7 +95,11 @@
 						'@nominal{R'.($ct_jurnaldetil==1?',h':'').'}',
 						'Detil Jurnal'.($ct_jurnaldetil==1?'':'{h}'));
 			$row=0;
-			while($r=mysql_fetch_array($t)){
+			// while($r=mysql_fetch_array($t)){
+			while($r=mysql_fetch_assoc($t)){
+				// echo '<pre>';
+				// print_r($r);
+				// echo '</pre>';
 				$xtable->row_begin();
 					if($r['jenis']==JT_INCOME) $cl='#00c804';
 					else if($r['jenis']==JT_OUTCOME) $cl='#ff1b1b';
@@ -106,14 +110,30 @@
 					else if($r['jenis']==JT_CALONSISWA) $cl='#00c804';
 					else if($r['jenis']==JT_UMUM) $cl='#008aff';
 					else $cl='';
+
+					$nomer = '<b>
+								<span style="color:'.$cl.'">'.$r['nomer'].'</span><br>
+								<span>'.jt_jenisbukti($r['jenis']).'</span><br>
+								<span>'.$r['nobukti'].'</span>
+							</b>'; 
 					$xtable->td(fhtgl($r['tanggal']),80);
-					$xtable->td('<b><span style="color:'.$cl.'">'.$r['nomer'].'<br/>
-						<span style="color:#444">'.jt_jenisbukti($r['jenis']).'</span>
-						'.($r['nobukti']==''?'':'<br/><span style="color:#444">'.$r['nobukti'].'</span>').'</span></b>',120);
+					$xtable->td($nomer,120);
 					$xtable->td(nl2br($r['uraian']),($ct_jurnaldetil==1?300:''),'','id="xtd_urai'.$row.'"');
 					$xtable->td(fRp($r['nominal']),100,'r','id="xtd_nom'.$row.'" style="display:'.($ct_jurnaldetil==1?'none':'').'"');
-					
-					$t1=mysql_query("SELECT keu_jurnal.debet,keu_jurnal.kredit,keu_rekening.kode as koderek,keu_rekening.nama as nrek FROM keu_jurnal LEFT JOIN keu_rekening ON keu_rekening.replid=keu_jurnal.rek WHERE keu_jurnal.transaksi='".$r['replid']."' ORDER BY keu_jurnal.replid");
+
+					$sqlx ="SELECT 
+							keu_jurnal.debet,
+							keu_jurnal.kredit,
+							keu_rekening.kode as koderek,
+							keu_rekening.nama as nrek 
+						FROM 
+							keu_jurnal 
+							LEFT JOIN keu_rekening ON keu_rekening.replid=keu_jurnal.rek 
+						WHERE 
+							keu_jurnal.transaksi='".$r['replid']."' 
+						ORDER BY 
+							keu_jurnal.replid";
+					$t1=mysql_query($sqlx);
 					if(mysql_num_rows($t1)>0){
 						$s='<div style="background:#fff">
 								<table class="xtable_norm" cellspacing="0" cellpadding="4px" width="100%">';
@@ -128,6 +148,7 @@
 					} else {
 						$s='';
 					}
+
 					$xtable->td($s,'','','id="xtd_jd'.$row.'" style="display:'.($ct_jurnaldetil==1?'':'none').'"');
 					
 					$s='<button class="btn" title="Cetak bukti transaksi" onclick="transaksi_print(\''.$r['nomer'].'\')"><div class="bi_prib">&nbsp;</div></button>';

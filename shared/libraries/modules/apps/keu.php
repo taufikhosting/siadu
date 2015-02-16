@@ -19,6 +19,20 @@ function jt_name($a){
 	else return '';
 }
 
+// epiii -------
+function jt_jenisbukti($a){
+	if($a==JT_INCOME) return 'BKM';
+	else if($a==JT_OUTCOME) return 'BKK';
+	else if($a==JT_INBANK) return 'BBM';
+	else if($a==JT_OUTBANK) return 'BBK';
+	else return '';
+}
+function tahunbuku_getsaldoawal(){
+	$r=tahunbuku_getaktif();
+	return $r['saldoawal'];
+}
+// epiii -------
+
 define('RT_SPP',1);
 define('RT_PSB',2);
 define('RT_USP',3);
