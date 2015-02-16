@@ -131,9 +131,4 @@
 	echo '</div>';
 
 	hiddenval('transaksi_tab_num',8);
-	// $hh = hiddenval('transaksi_tab_num',8);
-	// var_dump($hh);
-	// echo '<script>
-	// 	alert(hiddenval(\'transaksi_tab_num\',8);
-	// </script>'; 
 ?>

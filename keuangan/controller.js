@@ -242,24 +242,6 @@ function transaksi_tab_get(a){
 	} else {
 		$("#transaksi_tampil_menu").animate({opacity:1},"fast");
 	}
-	// // var x = E("transaksi_tab_num").value;
-	// var n=parseInt(x);
-	// alert(x);
-	// // return false;
-	// // var n=parseInt(E("transaksi_tab_num").value);
-	// for(var i=1;i<=n;i++){
-	// 	EHide("transaksi_tab_"+i);
-	// 	E("gptab"+i).className="gptab";
-	// }
-	// E("gptab_index").value=a;
-	// EShow("transaksi_tab_"+a);
-	// E("gptab"+a).className="gptab1";
-	
-	// if(a==8){
-	// 	$("#transaksi_tampil_menu").animate({opacity:0},"fast");
-	// } else {
-	// 	$("#transaksi_tampil_menu").animate({opacity:1},"fast");
-	// }
 }
 
 function transaksi_bukubesar_get(a){
