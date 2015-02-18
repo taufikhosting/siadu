@@ -2,8 +2,8 @@
 mysql_connect(DBHOST,DBUSER,DBPSWD)or die("Database connection failed: ".DBUSER."@".DBHOST);
 mysql_select_db(DBNAME)or die("Can't open database: ".DBNAME);
 function dbQsql($s){
-$_SESSION['libdb_dbQsql']=$s;
-return mysql_query($s);
+	$_SESSION['libdb_dbQsql']=$s;
+	return mysql_query($s);
 }
 function dbFA($q){
 return mysql_fetch_array($q);
@@ -53,7 +53,8 @@ function dbInsert($t,$f){
 			$s.="`".$k."`='".addslashes($v)."'";
 		}$q="INSERT INTO ".$t." SET ".$s;
 		$_SESSION['libdb_dbIsert']=$q;
-		return dbQsql($q);
+		return $q;
+		// return dbQsql($q);
 	}else 
 		return false;
 }
