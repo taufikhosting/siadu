@@ -8,6 +8,7 @@
 	// var_dump($tbuku);
 
 	if($tbuku!=0){
+		// Page Selection Bar
 		$PSBar = new PSBar_2(140);
 		$PSBar->begin();
 			$PSBar->selection('Tahun buku','<b>'.$tahunbuku['nama'].'</b>');
@@ -16,8 +17,9 @@
 
 		$xtable->btnbar_f('add');
 
-		$db = new xdb("keu_budget,departemen","keu_budget.*,departemen.nama as departemen","keu_budget.tahunbuku='$tbuku' and keu_budget.id_department=departemen.replid","keu_budget.nama");
-		$t  = $db->query();
+		// Query
+		$db =new xdb("keu_budget","*","tahunbuku='$tbuku'","nama");
+		$t  =$db->query();
 		$f 	= $db->field();
 		$t2 = 'SELECT
 					b.*,
@@ -57,13 +59,12 @@
 				$xtable->td($s,484,'r');
 				$xtable->td($r['departemenx']);
 				$xtable->td(nl2br($r['keterangan']));
+				// $xtable->td($r['keterangan']);
 				$s='<button title="Daftar transaksi" class="btn"><div class="bi_lisb">&nbsp;</div></button>';
 				$xtable->opt($r['replid'],'u','d');
 				
 			$xtable->row_end();}$xtable->foot();
-		}else{
-			$xtable->nodata();
-		}
+		}else{$xtable->nodata();}
 	} else {
 		echo '<div class="infobox">Tidak ada tahun buku yang aktif.</div>';
 	}

@@ -9,13 +9,21 @@
   require_once(MODDIR.'xtable/xtablepf.php');
   require_once '../../shared/libraries/mpdf/mpdf.php';
   require_once '../../shared/tglindo.php';
-  
+  // $tanggal1 =gpost('tanggal1',$tgl_f);
+  // $tanggal2 =gpost('tanggal2',$tgl_l);
+  // var_dump($tanggal2);
+  // exit();
+
   $token = base64_encode(md5('transaksi_jurnalumum'.$_SESSION['keu_admin_id'].$_SESSION['keu_admin_name']));
   if(!isset($_SESSION)){ // login 
     echo 'user has been logout';
   }else{ // logout
     if(isset($_GET['token']) and $token===$_GET['token']){
           ob_start(); // digunakan untuk convert php ke html
+          $sql = 'SELECT * FROM keu_transaksi';
+          $exe = mysql_query($sql);
+          $jum = mysql_num_rows($exe);
+
           $out='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             <html xmlns="http://www.w3.org/1999/xhtml">
               <head>
@@ -24,12 +32,20 @@
               </head>
 
               <body>
-                <p align="center">
-                  <b>
-                    JURNAL UMUM <br>
-                  </b>
-                </p>
+                <table width="100%">
+                  <tr>
+                    <td align="left" width="45%"><img width="150px" src="../../shared/images/logo.png" alt="" /></td>
+                    <td width="55%">Jurnal Umum</td>
+                  </tr>
+                </table>
 
+                <div>
+                  Tanggal :
+                  <span>
+
+                  </span>
+                </div>
+                <b>Total '.$jum.' Data</b>
                 <table class="isi" width="100%">
                     <tr class="head">
                       <td align="center">Tanggal</td>
@@ -38,9 +54,6 @@
                       <td align="center">Detil Jurnal</td>
                     </tr>';
 
-                    $sql = 'SELECT * FROM keu_transaksi';
-                    $exe = mysql_query($sql);
-                    $jum = mysql_num_rows($exe);
                     $nox = 1;
                     if($jum==0){
                       $out.='<tr>

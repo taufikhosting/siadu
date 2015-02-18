@@ -68,26 +68,44 @@
 		$db->where_and("keu_transaksi.tanggal<='$tanggal2'");
 		$db->where_and($w==""?"":"(".$w.")");
 		$db->where_and($xtable->search_sql_get());
-		//$db->order("keu_transaksi.tanggal,keu_transaksi.nomer");
+
 		$t=$db->query();
 		$xtable->ndata=mysql_num_rows($t);
 		$t=$db->query($xtable->pageorder_sql('keu_transaksi.tanggal','keu_transaksi.nomer','','keu_transaksi.nominal'));
-		//$t=$db->query($xtable->pageorder_sql('kode','nama'));
 
 		$a     = 'transaksi_jurnalumum';
 		$token = base64_encode(md5($a.$_SESSION['keu_admin_id'].$_SESSION['keu_admin_name']));
 		$xtable->btnbar_begin();
 			$xtable->btnbar_print2($a,$token);
-			// $xtable->btnbar_print2('transaksi_jurnalumum',$t);
-			// $xtable->btnbar_print2($a,$t);
-			//echo '<button class="btn" style="float:left;margin-right:4px" onclick="E(\'pageprinter\').submit()"><div class="bi_pri">Cetak</div></button>';
 			$xtable->search_box('Cari uraian atau nomor jurnal');
 			echo iCheckx('ct_jurnaldetil','Tampilkan detil jurnal',$ct_jurnaldetil,'float:right;margin-left:4px;margin-right:30px;margin-top:4px','onclick="transaksi_jurnadetil(this.checked)"');
 		$xtable->btnbar_end();
 
+// $a     = 'katalog';
+// $token = base64_encode(md5($a.$_SESSION['pus_admin_id'].$_SESSION['pus_admin_name']));
+// // $token = base64_encode(md5($a.$_SESSION['psb_admin_id'].$_SESSION['psb_admin_name']));
+// // $xtable->btnbar_begin();
+// // if($ncalon<$kapasitas){ 
+// // 	$xtable->btnbar_add(); 
+// // } else { 
+// // echo '<div class="infobox" style="float:left;margin-left:40px">Kuota periode pendaftaran ini telah penuh.</div>'; }
+// $par=array(
+// 	'kat' =>$_GET['xtable_keyon'],
+// 	'obj' =>$_GET['xtable_keyword']
+// );
+// // var_dump($_GET['xtable_keyon']);
+// $xtable->btnbar_print2($a,$token,$par);
+
+
+
+
 		$xtable->search_info('data transaksi dengan uraian atau nomor jurnal "<b>{keyw}</b>".');
 
 		if($xtable->ndata>0){
+			$tanggal1 =gpost('tanggal1',$tgl_f);
+			$tanggal2 =gpost('tanggal2',$tgl_l);
+			var_dump($tanggal1);
+			var_dump($tanggal2);
 			// Table head
 			$xtable->head('@!Tanggal',
 						'@!No. Jurnal / <br/>Jenis Bukti / <br/>No. Bukti',
@@ -95,7 +113,6 @@
 						'@nominal{R'.($ct_jurnaldetil==1?',h':'').'}',
 						'Detil Jurnal'.($ct_jurnaldetil==1?'':'{h}'));
 			$row=0;
-			// while($r=mysql_fetch_array($t)){
 			while($r=mysql_fetch_assoc($t)){
 				// echo '<pre>';
 				// print_r($r);
