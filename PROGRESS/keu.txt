@@ -17,7 +17,14 @@ __________________  transaksi keuangan  ____________________
 		.belum ada
 		.tidak bisa cetak berdasarkan 'pencarian' 
 _____________________  referensi  __________________________
-.....
-..
-.
+* tahun buku 
+	+ field "saldo awal" dihapus
+* kode rekening
+	- combo box filtering : tahun buku
+	+ tambah field nominal(saldo awal)
+	+ saldo awal --> textbox:
+		+ saat awal : input manual  
+		- selanjutnya : auto fetch
+* set biaya
+	- tambah field : joining_fee(nominal)	
 _____________________________________________________________

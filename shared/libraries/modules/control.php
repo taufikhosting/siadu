@@ -9,20 +9,26 @@ function isSelect($a,$b){
 	if($a==$b) return ' selected ';
 	return '';
 }
-function iText($d='',$v='',$s='',$p='',$cb='',$at=''){ $bc=""; $bc2="";
-	if($cb!=""){$n=preg_match("/onblur=\".+\"/", $cb,$m); 
-	if($n>0){
-		$bc=str_replace("\"","",$m[0]);
-		$bc=";".str_replace("onblur=","",$bc);
-		$cb=str_replace($m[0],"",$cb);
-	}}
-	if($cb!=""){$n=preg_match("/onfocus=\".+\"/", $cb,$m); 
-	if($n>0){
-		$bc2=str_replace("\"","",$m[0]);
-		$bc2=";".str_replace("onfocus=","",$bc2);
-		$cb=str_replace($m[0],"",$cb);
-	}}
-	if(is_array($v)) $v=$v[$d];
+function iText($d='',$v='',$s='',$p='',$cb='',$at=''){ 
+	$bc=""; $bc2="";
+	if($cb!=""){
+		$n=preg_match("/onblur=\".+\"/", $cb,$m); 
+		if($n>0){
+			$bc=str_replace("\"","",$m[0]);
+			$bc=";".str_replace("onblur=","",$bc);
+			$cb=str_replace($m[0],"",$cb);
+		}
+	}
+	if($cb!=""){
+		$n=preg_match("/onfocus=\".+\"/", $cb,$m); 
+		if($n>0){
+			$bc2 =str_replace("\"","",$m[0]);
+			$bc2 =";".str_replace("onfocus=","",$bc2);
+			$cb  =str_replace($m[0],"",$cb);
+		}
+	}
+	if(is_array($v)) 
+		$v=$v[$d];
 	$v=str_replace('"',"''",$v);
 	$v=str_replace("\\","",$v);
 	return "<input type=\"text\" class=\"iText\"".(($d=="")?"":" id=\"".$d."\" name=\"".$d."\" ").(($s=="")?"":" style=\"".$s."\" ").(($v=="")?"":" value=\"".$v."\" ").(($p=="")?"":" placeholder=\"".$p."\" ").($cb==""?"":" ".$cb." ").($at==""?"":" ".$at." ")."onfocus=\"this.className='iTextx'".$bc2."\" onblur=\"this.className='iText'".$bc."\"/>";

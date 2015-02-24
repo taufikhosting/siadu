@@ -21,7 +21,8 @@ class fform{
 	public $optional_button;
 	public $title_style;
 	public $nobtn_action='';
-	
+
+	// $fform   =new fform('rekening','keu_rekening',$cid,'kode rekening');
 	function __construct($f,$o='af',$id=0,$d=''){
 		global $APPREG_fform;
 		$this->fmod=$f;
@@ -138,17 +139,24 @@ class fform{
 		$fw=$this->opt=='hf'?500:$fw;
 	
 		echo '<table cellspacing="0" cellpadding="0" width="100%"><tr>',
-		'<td id="fformt'.$this->fformid.'" align="center" style="padding-top:'.$this->ptop.'px">',
-		'<div id="fformbox'.$this->fformid.'" class="fformbox" style="padding:5px;width:'.($fw+20).'px;margin-bottom:30px">';
+				'<td id="fformt'.$this->fformid.'" align="center" style="padding-top:'.$this->ptop.'px">',
+					'<div id="fformbox'.$this->fformid.'" class="fformbox" 
+					style="padding:5px;width:'.($fw+20).'px;margin-bottom:30px">';
 		if($ut==1)
-		echo '<div id="fform_title'.$this->fformid.'" class="fformtitle" style="'.$this->title_style.'"><span style="margin-left:-2px;float:left">'.$t.'</span><div id="ffload'.$this->fformid.'" class="ffload" style="display:none"></div></div>';
-		else echo '<div id="fform_title'.$this->fformid.'" class="fformtitle" style="display:none"><span style="margin-left:-2px;float:left">'.$t.'</span><div id="ffload" class="ffload" style="display:none"></div></div>';		
-		echo '<div id="fformct'.$this->fformid.'" class="fformct" style="width:'.$fw.'px"><div id="fformcb"><div style="">',
-		'<table class="stable" cellspacing="0" cellpadding="4px" width="'.$fw.'px">';
-		
-		$this->rwidths="width:".($this->fwidth-$this->lwidth-18)."px";
-		
-		$this->nobtn_action='close_fform'.$this->fformid.'();';
+			echo '<div id="fform_title'.$this->fformid.'" class="fformtitle"style="'.$this->title_style.'">
+					 <span style="margin-left:-2px;float:left">'.$t.'</span>
+					 <div id="ffload'.$this->fformid.'" class="ffload" style="display:none"></div>
+				</div>';
+		else 
+			echo '<div id="fform_title'.$this->fformid.'" class="fformtitle" style="display:none">
+					<span style="margin-left:-2px;float:left">'.$t.'</span>
+					<div id="ffload" class="ffload" style="display:none"></div>
+				</div>';		
+		echo '<div id="fformct'.$this->fformid.'" class="fformct" style="width:'.$fw.'px">
+				<div id="fformcb"><div style="">',
+				'<table class="stable" cellspacing="0" cellpadding="4px" width="'.$fw.'px">';
+				$this->rwidths="width:".($this->fwidth-$this->lwidth-18)."px";
+				$this->nobtn_action='close_fform'.$this->fformid.'();';
 	}
 	function foot($y=1,$no=1){
 		if($this->box_isbegin) $this->box_end();
@@ -163,14 +171,21 @@ class fform{
 			$this->yes_act='close_fform()'; $no=0;
 		}
 		
-		echo '</table></div>',
-		'<table cellspacing="0" cellpadding="3px" width="'.$fw.'px" style="margin-top:10px"><tr>'.($this->optional_button==''?'':'<td>'.$this->optional_button.'</td>').'<td style="" align="right" width="140px">';
-		if($no==1) echo'<input id="fform_no_btn" type="button" class="btn" onclick="'.$this->nobtn_action.'" value="'.$this->btnlabel_n().'"/>';
-		if($y==1) echo '&nbsp;<input id="fform'.$this->fformid.'_yes_btn" type="button" class="btnz" value="'.$this->btnlabel_y().'" onclick="'.$this->yes_act.'"/>';
-		echo '<input type="hidden" id="fform'.$this->fformid.'_action" value="'.$this->yes_act.'"/>',
-		'<input type="hidden" id="fform'.$this->fformid.'_option" value="'.$this->opt.'"/>',
-		'<input type="hidden" id="fform'.$this->fformid.'_globalkey" value="'.$this->globalkey.'"/>',
-		'</td></tr></table>',
+		echo '</table>
+		</div>',
+		'<table cellspacing="0" cellpadding="3px" width="'.$fw.'px" style="margin-top:10px">
+			<tr>'.($this->optional_button==''?'':'<td>'.$this->optional_button.'</td>').'
+			<td style="" align="right" width="140px">';
+		if($no==1) 
+			echo'<input id="fform_no_btn" type="button" class="btn" onclick="'.$this->nobtn_action.'" value="'.$this->btnlabel_n().'"/>';
+		if($y==1) 
+				echo '&nbsp;<input id="fform'.$this->fformid.'_yes_btn" type="button" class="btnz" value="'.$this->btnlabel_y().'" onclick="'.$this->yes_act.'"/>';
+				echo '<input type="hidden" id="fform'.$this->fformid.'_action" value="'.$this->yes_act.'"/>',
+					'<input type="hidden" id="fform'.$this->fformid.'_option" value="'.$this->opt.'"/>',
+					'<input type="hidden" id="fform'.$this->fformid.'_globalkey" value="'.$this->globalkey.'"/>',
+				'</td>
+			</tr>
+		</table>',
 		'</div></div></div></td></tr></table>';
 	}
 

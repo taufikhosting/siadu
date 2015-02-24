@@ -12,6 +12,7 @@
 		$PSBar->begin();
 			$PSBar->selection('Tahun buku','<b>'.$tahunbuku['nama'].'</b>');
 			hiddenval('tahunbuku',$tahunbuku['replid']);
+			$PSBar->selection_departemen($fmod,$dept);
 		$PSBar->end();
 
 		$xtable->btnbar_f('add');

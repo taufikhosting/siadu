@@ -28,35 +28,16 @@ function tahunbuku_get(){
 	gPage("tahunbuku");
 }
 function tahunbuku_form(o,cid,g){
-	var f=[['nama','Nama tahun buku'],['kode','Kode awalan kwitansi',false,'w',10],['tanggal1','Tanggal dibuka',true,'t'],['saldoawal','Saldo awal',false,'c'],['keterangan','',false]];
+	var f=[['nama','Nama tahun buku'],
+			['kode','Kode awalan kwitansi',false,'w',10],
+			['tanggal1','Tanggal dibuka',true,'t'],
+			// ['saldoawal','Saldo awal',false,'c'],
+			['keterangan','',false]];
 	fform_std(o,cid,g,"tahunbuku",tahunbuku_get,f);
 }
 function tahunbuku_status_form(o,cid,g){
 	var f=[['aktif']];
 	fform_std(o,cid,g,"tahunbuku_status",tahunbuku_get,f);
-}
-/** Halaman rekening **/
-function rekening_get(){
-	var d=['skategorirek'];
-	gPage("rekening",gpage_purl(d));
-}
-function rekening_form(o,cid,g){
-	var d=['skategorirek'];
-	var f=[['kategorirek'],['kode','',true,'w',10],['nama','Nama tahun buku'],['keterangan','',false]];
-	if(E('skategorirek').value!='0'){
-		f=[['kode','',true,'w',10],['kategorirek'],['nama','Nama tahun buku'],['keterangan','',false]];
-	}
-	fform_std(o,cid,g,"rekening",rekening_get,f,fform_purl(d));
-}
-function rekening_setkode(){
-	/*
-	var k=E('kategorirek').value;
-	var ck=0;
-	if(E('kode').value!='') ck=parseInt(E('kode').value);
-	if(k!='0' && (E('kode').value=='' || (ck>=1 && ck<=7))){
-		E('kode').value=k;
-	}
-	*/
 }
 
 /** Halaman transaksi **/
@@ -289,6 +270,39 @@ function budget_get(){
 }
 function budget_form(o,cid,g){
 	var d=['tahunbuku'];
-	var f=[['nama','Nama anggaran'],['nominal','Nominal anggaran',true,'c'],['keterangan','',false]];
+	var f=[['nama','Nama anggaran'],
+			['nominal','Nominal anggaran',true,'c'],
+			['keterangan','',false]];
 	fform_std(o,cid,g,"budget",budget_get,f,fform_purl(d));
+}
+
+/** Halaman rekening **/
+function rekening_get(){
+	var d=['skategorirek'];
+	gPage("rekening",gpage_purl(d));
+}
+function rekening_form(o,cid,g){
+	var d=['skategorirek'];
+	var f=[['kategorirek'],
+			['kode','',true,'w',10],
+			['nama','Nama tahun buku'],
+			['nominal','Saldo Awal',true,'c'],
+			['keterangan','',false]];
+	if(E('skategorirek').value!='0'){
+		f=[['kode','',true,'w',10],
+			['kategorirek'],
+			['nama','Nama tahun buku'],
+			['nominal','Saldo Awal',true,'c'],
+			['keterangan','',false]];
+	}fform_std(o,cid,g,"rekening",rekening_get,f,fform_purl(d));
+}
+function rekening_setkode(){
+	/*
+	var k=E('kategorirek').value;
+	var ck=0;
+	if(E('kode').value!='') ck=parseInt(E('kode').value);
+	if(k!='0' && (E('kode').value=='' || (ck>=1 && ck<=7))){
+		E('kode').value=k;
+	}
+	*/
 }

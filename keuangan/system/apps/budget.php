@@ -21,6 +21,7 @@
 		$q=false;
 		if($opt=='a'){ // add
 			$q=dbInsert($dbtable,$inp);
+			// var_dump($inp);
 		}else if($opt=='u') { // edit
 			$q=dbUpdate($dbtable,$inp,"replid='$cid'");
 		}else if($opt=='d'){ // delete
@@ -30,18 +31,22 @@
 	} else { // view form : update , delete , add  
 		$a=0;
 		if($opt=='uf'||$opt=='df'){ // update / delete form 
-			$sel = $dbtable.'.*';
+			/*$sel = $dbtable.'.*';
 			$r=dbSFA($sel,$dbtable.',departemen',"W/keu_budget.replid='$cid' and keu_budget.id_department=departemen.replid");  // shared/db.php
 			$a=0;
-			$departemen = departemen_r($a);
+			$departemen = departemen_r($a);*/
+			$r=dbSFA("*",$dbtable,"W/replid='$cid'");
 		} else { // opt == 'af' //  add form 
 			// $r                  = farray('tahunbuku','nama','nominal','keterangan','id_department'); //shared/libraries/common.php 
 			// $r['id_department'] = gpost('sid_department'); // shared/libraries/common.php
 			// $departemen      = departemen_r($r['id_department']); //shared/libraries/modules/app/keu/rekening.php 
-			$r               = farray('tahunbuku','nama','nominal','keterangan','departemen'); //shared/libraries/common.php 
+			// $departemen      = departemen_r($r['departemen']); //shared/libraries/modules/app/keu/rekening.php 
+/*			$r               = farray('tahunbuku','nama','nominal','keterangan','departemen'); //shared/libraries/common.php 
 			$r['departemen'] = gpost('departemen'); // shared/libraries/common.php
-			$departemen      = departemen_r($r['departemen']); //shared/libraries/modules/app/keu/rekening.php 
-			var_dump($departmen);//exit();
+
+			$fform->fl('Departemen',departemen_name($r['departemen']));
+*/
+			$r['departemen']=$inp['departemen'];
 		}
 
 		$fform->dimension(400,120);
@@ -49,7 +54,11 @@
 		if($opt=='af' || $opt=='uf'){ 
 			require_once(MODDIR.'control.php'); // Add or Edit form
 			// $fform->fi('Departemen',iSelect('id_department',$departemen,$r['id_department'],'','','',1)); // (tambahan) 
-			$fform->fi('Departemen',iSelect('departemen',$departemen,$r['departemen'],'','','',1)); // (tambahan) 
+			// $fform->fi('Departemen',iSelect('departemen',$departemen,$r['departemen'],'','','',1)); // (tambahan) 
+
+			// $fform->fi('Departemen',iSelect('departemen',$departemen,$r['departemen'],'','',1)); // (tambahan) 
+
+			$fform->fl('Departemen',departemen_name($r['departemen']));
 			$fform->fi('Nama anggaran',iText('nama',$r['nama'],$fform->rwidths));
 			$fform->fi('Nominal anggaran',iTextC('nominal',$r['nominal'],'width:120px'));
 			$fform->fa('Keterangan',iTextarea('keterangan',$r['keterangan'],$fform->rwidths,3));

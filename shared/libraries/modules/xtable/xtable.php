@@ -497,14 +497,15 @@ class xtable{
 	// columns
 	function opt_ud($id=0){
 		if($this->xtopt!='urut'){
-		if(admin_isoperator()){
-			$s='';
-			$s.='<td width="65px" align="center">';
-			$s.='<button class="btn" title="Edit" onclick="'.$this->fmod.'_form(\'uf\',\''.$id.'\')"><div class="bi_editb">&nbsp;</div></button>&nbsp;';
-			$s.='<button class="btn" title="Hapus" onclick="'.$this->fmod.'_form(\'df\',\''.$id.'\')"><div class="bi_delb">&nbsp;</div></button>';
-			$s.='</td>';
-			echo $s;
-		}}
+			if(admin_isoperator()){
+				$s='';
+				$s.='<td width="65px" align="center">';
+				$s.='<button class="btn" title="Edit" onclick="'.$this->fmod.'_form(\'uf\',\''.$id.'\')"><div class="bi_editb">&nbsp;</div></button>&nbsp;';
+				$s.='<button class="btn" title="Hapus" onclick="'.$this->fmod.'_form(\'df\',\''.$id.'\')"><div class="bi_delb">&nbsp;</div></button>';
+				$s.='</td>';
+				echo $s;
+			}
+		}
 	}
 	
 	function td($a='',$b='',$c='',$atr=''){
