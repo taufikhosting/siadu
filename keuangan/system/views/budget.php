@@ -43,6 +43,7 @@
 			$xtable->head('Nama Anggaran','Anggaran','Status anggaran','Departement','Keterangan');
 			// while($r=mysql_fetch_array($t)){
 			while($r=mysql_fetch_array($t3)){
+				var_dump($r);exit();
 				$xtable->row_begin();
 			
 				$xtable->td($r['nama'],200);
