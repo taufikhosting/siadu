@@ -18,14 +18,14 @@
 
 		$xtable->btnbar_f('add');
 
-		$db = new xdb(
-			"keu_budget,departemen",
-			"keu_budget.*,departemen.nama as departemenx",
-			"keu_budget.tahunbuku='$tbuku' and keu_budget.id_department=departemen.replid",
-			"keu_budget.nama"
-		);
-		$t  = $db->query();
-		$f 	= $db->field();
+		// $db = new xdb(
+		// 	"keu_budget,departemen",
+		// 	"keu_budget.*,departemen.nama as departemenx",
+		// 	"keu_budget.tahunbuku='$tbuku' and keu_budget.id_departemen=departemen.replid",
+		// 	"keu_budget.nama"
+		// );
+		// $t  = $db->query();
+		// $f 	= $db->field();
 		$t2 = 'SELECT
 					b.*,
 					d.nama AS departemenx
@@ -35,6 +35,7 @@
 				WHERE
 					b.departemen = d.replid AND
 					b.tahunbuku='.$tbuku;
+		// $t3 = mysql_query($t) or die(mysql_error());
 		$t3 = mysql_query($t2) or die(mysql_error());
 		$xtable->ndata=mysql_num_rows($t3);
 		// $xtable->ndata=mysql_num_rows($t);
