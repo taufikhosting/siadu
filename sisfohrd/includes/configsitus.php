@@ -11,6 +11,7 @@ $data = $koneksi_db->sql_fetchrow($hasil);
 $email_master=$data['email_master'];
 $judul_situs =$data['judul_situs'];
 $url_situs =$data['url_situs'];
+//$url_situs ="http://localhost/sisfohrd";
 $slogan=$data['slogan'];
 $description=$data['description'];
 $keywords=$data['keywords'];

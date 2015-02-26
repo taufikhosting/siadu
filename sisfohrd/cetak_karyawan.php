@@ -34,7 +34,11 @@ $tglpercobaan = $data['tglpercobaan'];
 $tglkontrak = $data['tglkontrak'];
 $tglresign = $data['tglresign'];
 $golongan = $data['golongan'];
-
+$norek = $data['norek'];
+$namarek = $data['namarek'];
+if(!$fotolama){
+$fotolama = 'profile-default.jpg';
+}
 echo '<style type="text/css">
 .border {
 	background-color: transparent;
@@ -44,6 +48,7 @@ echo '<style type="text/css">
 }
 	th,td {
     padding: 5px;
+		font		: 150% Arial, Helvetica, sans-serif;
 	}
 .borderbawah {
 border-bottom:1px solid black;
@@ -171,6 +176,15 @@ echo'<tr>
 	<td>Alasan</td>
 	<td>: '.$alasan.'</td>
 </tr>';}
+echo'
+<tr>
+	<td>Account PaninBank</td>
+	<td>: '.$norek.'</td>
+</tr>
+<tr>
+	<td>Nama Rek_Payroll</td>
+	<td>: '.$namarek.'</td>
+</tr>';
 echo'
 </table></td><td valign="top">
 <table><tr>

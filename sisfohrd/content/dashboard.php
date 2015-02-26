@@ -78,7 +78,7 @@ $last_ping = datetimes($data['last_ping'],true);
 #####################################
 # Administrator
 #####################################
-if ($_SESSION['LevelAkses']=="Administrator"){
+if ($_SESSION['LevelAkses']){
 
 $tengah .='<div class="border"><font style="color:#21759B;"><b>Last Login :</b> '.$last_ping.'</font></div>';
 
