@@ -13,7 +13,6 @@
 
 	$fmod       ='pendataan';
 	$xform      =new xform($fmod,$opt,$cid);
-	
 	$pros       =gpost('proses');
 	$kel        =gpost('kelompok');
 	
@@ -76,69 +75,83 @@
 	$xform->fi('Kriteria calon',iSelect('kriteria',$kriteria,$data['kriteria'],'width:200px','pendataan_getSumPokok()'));
 	$xform->fi('Glongan',iSelect('golongan',$golongan,$data['golongan'],'width:200px','pendataan_getSumPokok()'));
 			
-		$xform->group_begin('Sumbangan');
-			if($opt=='af'){
-				$tq=mysql_query("SELECT * FROM psb_setbiaya WHERE pros='".$data['proses']."' AND kel='".$data['kelompok']."' AND krit='".$data['kriteria']."' AND gol='".$data['golongan']."' LIMIT 0,1");
-				if(mysql_num_rows($tq)>0){
-					$rq=mysql_fetch_array($tq);
-					$biaya=$rq['nilai'];
-					$spp=$rq['spp'];
-				} else{
-					$biaya=0;
-					$spp=0;
-				}
+	$xform->group_begin('Sumbangan');
+		if($opt=='af'){
+			$s1 = "SELECT * 
+					FROM psb_setbiaya 
+					WHERE 
+						pros ='".$data['proses']."' AND 
+						kel  ='".$data['kelompok']."' AND 
+						krit ='".$data['kriteria']."' AND 
+						gol  ='".$data['golongan']."' 
+					LIMIT 
+						0,1";
+			$tq = mysql_query($s1);
+			if(mysql_num_rows($tq)>0){
+				// $rq    =mysql_fetch_array($tq);
+				$rq       =mysql_fetch_assoc($tq);
+				// print_r($rq);exit();
+				$biaya    =$rq['nilai'];
+				$spp      =$rq['spp'];
+				$joiningf =$rq['joiningf']; /*epiii*/
 			} else {
-				$biaya=$data['sumpokok'];
-				$spp=$data['sppbulan'];
+				$biaya =0;
+				$spp   =0;
 			}
-			
-			$xform->fi('Uang pangkal',iTextC('sumpokok',$biaya,'width:200px','','onblur="pendataan_countnet()"').'&nbsp;<div id="loader3" class="loader3" style="margin-left:4px;display:none"></div>');
-			$xform->fi('Uang pangkal net',iTextC('sumnet',$biaya,'width:200px','','','disabled'));
+		} else {
+			$biaya    =$data['sumpokok'];
+			$spp      =$data['sppbulan'];
+			$joiningf =$data['joiningf']; /*epiii*/
+		}
+		$xform->fi('Uang pangkal',iTextC('sumpokok',$biaya,'width:200px','','onblur="pendataan_countnet()"').'&nbsp;<div id="loader3" class="loader3" style="margin-left:4px;display:none"></div>');
+		$xform->fi('Uang pangkal net',iTextC('sumnet',$biaya,'width:200px','','','disabled'));
+		$xform->fi('Joining Fee',iTextC('joiningf',$joiningf,'width:200px','','','disabled'));  /*epiii*/
+
+	$xform->group_begin('Angsuran');
+		$xform->fi('Lama angsuran',iSelect('jmlangsur',$cicilan,$data['jmlangsur'],'width:200px','pendataan_countnet()'));
+		if($opt=='af') 
+			$cicilpb=$data['jmlangsur']>0?$biaya/$data['jmlangsur']:0;
+		else 
+			$cicilpb=$data['angsuran'];
+		$xform->fi('Angsuran per bulan',iTextC('angsuran',$cicilpb,'width:200px','','','disabled'));
 		
-			$xform->group_begin('Angsuran');
-			$xform->fi('Lama angsuran',iSelect('jmlangsur',$cicilan,$data['jmlangsur'],'width:200px','pendataan_countnet()'));
-			if($opt=='af') 
-				$cicilpb=$data['jmlangsur']>0?$biaya/$data['jmlangsur']:0;
-			else 
-				$cicilpb=$data['angsuran'];
-			$xform->fi('Angsuran per bulan',iTextC('angsuran',$cicilpb,'width:200px','','','disabled'));
-			
-			$xform->group_begin('Uang Sekolah');
-			$xform->fi('Uang sekolah per bulan',iTextC('sppbulan',$spp,'width:200px'));
-		
-			$xform->col_begin('50%');
-			$xform->group_begin('Discount');
-			$xform->fi('Discount subsidi',iTextC('disctb',$data['disctb'],'width:200px','','onblur="pendataan_countnet()"'));
-			$xform->fi('Discount saudara',iTextC('discsaudara',$data['discsaudara'],'width:200px','','onblur="pendataan_countnet()"'));
-			//$xform->fi('Discount tunai',iTextC('disctunai',$data['disctunai'],'width:200px','','onblur="pendataan_countnet()"'));
-			$xform->fi2('Discount tunai',
-						iSelect(
-							'disctunai',
-							$discount,
-							$data['discount'],
-							'xwidth:200px',
-							'pendataan_countnet()'
-						),iTextC('disctunai2',
-							$data['disctunai2'],
-							'width:120px',
-							'',
-							'',
-							'disabled'
-						)
-					);
-			$xform->fi('Total discount',
-							iTextC('disctotal',
-									$data['disctotal'],
-									'width:200px',
-									'',
-									'',
-									'disabled'
-								)
-					);
-		
-			$xform->group_begin('Denda');
-			$xform->fi('Denda keterlambatan',iTextC('denda',$data['denda'],'width:200px'));
-			
+		$xform->group_begin('Uang Sekolah');
+		$xform->fi('Uang sekolah per bulan',iTextC('sppbulan',$spp,'width:200px'));
+
+		$xform->col_begin('50%');
+		$xform->group_begin('Discount');
+		$xform->fi('Discount subsidi',iTextC('disctb',$data['disctb'],'width:200px','','onblur="pendataan_countnet()"'));
+		$xform->fi('Discount saudara',iTextC('discsaudara',$data['discsaudara'],'width:200px','','onblur="pendataan_countnet()"'));
+		//$xform->fi('Discount tunai',iTextC('disctunai',$data['disctunai'],'width:200px','','onblur="pendataan_countnet()"'));
+		/*epiii*/
+		$xform->fi2('Discount tunai',
+					iSelect(
+						'disctunai',
+						$discount,
+						$data['discount'],
+						'xwidth:200px',
+						'pendataan_countnet()'
+					),iTextC('disctunai2',
+						$data['disctunai2'],
+						'width:120px',
+						'',
+						'',
+						'disabled'
+					)
+				);
+		$xform->fi('Total discount',
+						iTextC('disctotal',
+								$data['disctotal'],
+								'width:200px',
+								'',
+								'',
+								'disabled'
+							)
+				);
+		/*epiii*/
+
+	$xform->group_begin('Denda');
+	$xform->fi('Denda keterlambatan',iTextC('denda',$data['denda'],'width:200px'));
 	$xform->table_end(0);
 
 	$xform->table_begin();
@@ -268,8 +281,6 @@
 			echo '</div>';
 			echo '</div>';
 			echo '<a class="linkb" href="javascript:void(0)" onclick="pendataan_saudara_form(\'af\')">Tambah data saudara...</a>';
-		
-		
 		
 	$xform->table_end();
 ?>

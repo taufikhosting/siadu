@@ -1,0 +1,19 @@
+ _________________
+| NOTE  	  	  |	
+|  + : solved 	  |
+|  - : error/bug  |
+|  C : completed  |
+|  P : progress	  |
+|_________________|  
+|  * : menu	      |
+|_________________|
+
+__________________  home  ____________________
+
+* pendataan claon siswa (P)
+	+ add form : field joining fee 
+	- print : report by filtering & searching 
+_____________________  referensi  __________________________
+* set biaya
+	+ tambah field : joining_fee(nominal)	
+_____________________________________________________________
