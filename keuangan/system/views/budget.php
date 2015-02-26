@@ -26,22 +26,22 @@
 		);
 		$t  = $db->query();
 		$f 	= $db->field();
-		// $t2 = 'SELECT
-		// 			b.*,
-		// 			d.nama AS departemenx
-		// 		FROM
-		// 			keu_budget b,
-		// 			departemen d
-		// 		WHERE
-		// 			b.departemen = d.replid AND
-		// 			b.tahunbuku='.$tbuku;
-		// $t3 = mysql_query($t2) or die(mysql_error());
-		// $xtable->ndata=mysql_num_rows($t3);
-		$xtable->ndata=mysql_num_rows($t);
+		$t2 = 'SELECT
+					b.*,
+					d.nama AS departemenx
+				FROM
+					keu_budget b,
+					departemen d
+				WHERE
+					b.departemen = d.replid AND
+					b.tahunbuku='.$tbuku;
+		$t3 = mysql_query($t2) or die(mysql_error());
+		$xtable->ndata=mysql_num_rows($t3);
+		// $xtable->ndata=mysql_num_rows($t);
 		if($xtable->ndata>0){
 			$xtable->head('Nama Anggaran','Anggaran','Status anggaran','Departement','Keterangan');
-			while($r=mysql_fetch_array($t)){
-			// while($r=mysql_fetch_array($t3)){
+			// while($r=mysql_fetch_array($t)){
+			while($r=mysql_fetch_array($t3)){
 				$xtable->row_begin();
 			
 				$xtable->td($r['nama'],200);
