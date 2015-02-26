@@ -2,7 +2,10 @@
 require_once(APPMOD.'psb/kelompok.php');
 require_once(APPMOD.'psb/proses.php');
 require_once(APPMOD.'psb.php');
-$opt=gpost('opt'); $cid=gpost('cid'); if($cid=='')$cid=0; $keyw=gpost('keyword');
+$opt=gpost('opt'); 
+$cid=gpost('cid'); 
+if($cid=='')$cid=0; 
+$keyw=gpost('keyword');
 
 $fmod='penerimaan';
 $xtable = new xtable($fmod,'calon siswa');
@@ -18,14 +21,14 @@ $kel=gpost('kelompok');
 $kelompok=kelompok_r($kel,$pros);
 
 if(count($departemen)>0){
-$kapasitas=dbFetch("kapasitas","psb_proses","W/replid='$pros'");
-if($kapasitas>0){
-	$ncalon=dbSRow("psb_calonsiswa","W/proses='$pros' AND status<>0");
-	$nsiswa=dbSRow("psb_calonsiswa","W/proses='$pros' AND kelompok='$kel' AND status<>0");
-	$barw=300;
-	$wcalon=intval($ncalon*$barw/$kapasitas);
-	$wsiswa=intval($nsiswa*$barw/$kapasitas);
-}
+	$kapasitas=dbFetch("kapasitas","psb_proses","W/replid='$pros'");
+	if($kapasitas>0){
+		$ncalon=dbSRow("psb_calonsiswa","W/proses='$pros' AND status<>0");
+		$nsiswa=dbSRow("psb_calonsiswa","W/proses='$pros' AND kelompok='$kel' AND status<>0");
+		$barw=300;
+		$wcalon=intval($ncalon*$barw/$kapasitas);
+		$wsiswa=intval($nsiswa*$barw/$kapasitas);
+	}
 
 // Page Selection Bar
 $PSBar = new PSBar_2();

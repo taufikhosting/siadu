@@ -62,6 +62,7 @@
                       <td align="center" rowspan="2">Denda</td>
                       <td align="center" rowspan="2">Uang Pangkal Net</td>
                       <td align="center">Angsuran</td>
+                      <td align="center" rowspan="2">Joining Fee</td>
                     </tr>
                     <tr class="head">
                       <td align="center">Subsidi</td>
@@ -79,9 +80,13 @@
                             disctunai,
                             denda,
                             sumnet,
+                            joiningf,
                             angsuran
                           FROM
-                            psb_calonsiswa';//.($_GET['nopendaftaran']!='where nopendaftaran '.$_GET['nopendaftaran']?'');
+                            psb_calonsiswa
+                          where 
+                            kelompok='.$_GET['kelompok'];
+                            //.($_GET['nopendaftaran']!='where nopendaftaran '.$_GET['nopendaftaran']?'');
                     $e = mysql_query($s);
                     $n = mysql_num_rows($e);
                             // var_dump($n);exit();
@@ -109,6 +114,7 @@
                                   <td align="right">'.fRp($r['denda']).'</td>
                                   <td align="right">'.fRp($r['sumnet']).'</td>
                                   <td align="right">'.fRp($r['angsuran']).'</td>
+                                  <td align="right">'.fRp($r['joiningf']).'</td>
                               </tr>';
                         // $nox++;
                       }
@@ -120,7 +126,7 @@
         #generate html -> PDF ------------
           $out2 = ob_get_contents();
           ob_end_clean(); 
-          $mpdf=new mPDF('c','A4','');   
+          $mpdf=new mPDF('c','A4-L','');   
           $mpdf->SetDisplayMode('fullpage');   
           $stylesheet = file_get_contents('../../shared/libraries/mpdf/r_cetak.css');
           $mpdf->WriteHTML($stylesheet,1);  // The parameter 1 tells that this is css/style only and no body/html/text

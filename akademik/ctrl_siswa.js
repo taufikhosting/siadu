@@ -26,9 +26,13 @@ function siswa_pendataan_kelas_get(){
 }
 function siswa_pendataan_kelas_list_get(){
 	var d=['ff_departemen','ff_angkatan','kelas'];
-	
-	_("siswa_pendataan_kelas_list_get"+fform_purl(d)+xtable2_pageparam(),function(r){
-		EHtml("box_siswa_pendataan_kelas_list",r);
+	// function __(e,t){
+	// _("siswa_pendataan_kelas_list_get"+fform_purl(d)+xtable2_pageparam(),function(r){ //fungsi AJAX
+	// epiii
+	_("siswa_pendataan_kelas_list_get"+fform_purl(d)+xtable2_pageparam(),function(r){ //fungsi AJAX
+		// alert(r);
+		EHtml("box_siswa_pendataan_kelas_list",r); //ff_departemen=3&ff_angkatan=3&kelas=68
+		// EHtml("box_siswa_pendataan_kelas_list",'<b>halo bos</b>'); //ff_departemen=3&ff_angkatan=3&kelas=68
 	});
 }
 function siswa_pendataan_kelas_list_cek(cekall,ncek){
@@ -42,6 +46,8 @@ function siswa_pendataan_kelas_form(o,cid,g){
 	if(o=='a'){
 		s+="&data="+E("xtable2_selectedid").value;
 	}
+
+	// function fform_std(o,cid,g,fmod,c,f,s,cc,fcb){
 	fform_std(o,cid,g,"siswa_pendataan_kelas",siswa_pendataan_kelas_get,f,s,0,function(){
 		EHide("fform_yes_btn");
 	});

@@ -25,24 +25,19 @@ if($opt=='a'||$opt=='u'||$opt=='d'){ $q=false;
 	} else {
 		$r['departemen']=$inp['departemen'];
 	}
-	$fform->head();
-	if($opt=='af' || $opt=='uf'){ require_once(MODDIR.'control.php'); // Add or Edit form
 
+	$fform->head();
+	if($opt=='af' || $opt=='uf'){ 
+		require_once(MODDIR.'control.php'); // Add or Edit form
 		$fform->fl('Departemen',departemen_name($r['departemen']));
 		$fform->fi('Angkatan',iText('angkatan',$r['angkatan'],'width:60px'));
 		$fform->fa('Keterangan',iTextarea('keterangan',$r['keterangan'],$fform->rwidths,3));
-		
 	} else if($opt=='df'){ // Delete form 
-	
 		if(dbSRow("aka_siswa","W/angkatan='$cid'")>0){
 			$fform->reg['dlg_del']='<idata> masih digunakan. Apakah anda yakin untuk menghapus <idata> <data>?';
 			$fform->dlg_delw($r[$fmod],'Data-data kelas dan siswa yang termasuk dalam tingkat ini juga akan dihapus. Data yang sudah dihapus tidak dapat dikembalikan.');
-		}
-		else {
+		}else {
 			$fform->dlg_del($r[$fmod]);
 		}
-		
-		//$fform->dlg_del($r['nilai']);
-		
 	} $fform->foot();
 }?>

@@ -497,14 +497,15 @@ class xtable{
 	// columns
 	function opt_ud($id=0){
 		if($this->xtopt!='urut'){
-		if(admin_isoperator()){
-			$s='';
-			$s.='<td width="65px" align="center">';
-			$s.='<button class="btn" title="Edit" onclick="'.$this->fmod.'_form(\'uf\',\''.$id.'\')"><div class="bi_editb">&nbsp;</div></button>&nbsp;';
-			$s.='<button class="btn" title="Hapus" onclick="'.$this->fmod.'_form(\'df\',\''.$id.'\')"><div class="bi_delb">&nbsp;</div></button>';
-			$s.='</td>';
-			echo $s;
-		}}
+			if(admin_isoperator()){
+				$s='';
+				$s.='<td width="65px" align="center">';
+				$s.='<button class="btn" title="Edit" onclick="'.$this->fmod.'_form(\'uf\',\''.$id.'\')"><div class="bi_editb">&nbsp;</div></button>&nbsp;';
+				$s.='<button class="btn" title="Hapus" onclick="'.$this->fmod.'_form(\'df\',\''.$id.'\')"><div class="bi_delb">&nbsp;</div></button>';
+				$s.='</td>';
+				echo $s;
+			}
+		}
 	}
 	
 	function td($a='',$b='',$c='',$atr=''){
@@ -818,21 +819,24 @@ class xtable{
 	function btnbar_f(){
 		echo '<div class="tbltopbar" style="width:100%">'; $this->btnbar_isbegin=true;
 		if($this->xtopt!='urut'){
-		$a=func_get_args();
-		$n=count($a);
-		for($i=0;$i<$n;$i++){
-			if($a[$i]=='add') $this->btnbar_add();
-			else if($a[$i]=='print') $this->btnbar_print();
-			else if($a[$i]=='updn') $this->btnbar_updn();
-			else if($a[$i]=='help') $this->btnbar_help();
-			else if($a[$i]=='srcbox') $this->search_box();
-			else echo $a[$i];
-		}} else {
+			$a=func_get_args();
+			$n=count($a);
+			for($i=0;$i<$n;$i++){
+				if($a[$i]=='add') $this->btnbar_add();
+				else if($a[$i]=='print') $this->btnbar_print();
+				else if($a[$i]=='updn') $this->btnbar_updn();
+				else if($a[$i]=='help') $this->btnbar_help();
+				else if($a[$i]=='srcbox') $this->search_box();
+				else echo $a[$i];
+			}
+		} else {
 			$this->btnbar_updn();
-		}
-		echo '</div>'; $this->btnbar_isbegin=false;
-		if($this->cari!=0 && !$this->search_infodisp) $this->search_info();
+		}echo '</div>'; 
+		$this->btnbar_isbegin=false;
+		if($this->cari!=0 && !$this->search_infodisp) 
+			$this->search_info();
 	}
+
 	function search_kformat($a1){
 		//$a1="nopendaftaran(no pendaftaran)=>nama:EQ-1";
 		//echo " a1:".$a1."; ";

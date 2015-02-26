@@ -38,7 +38,36 @@ function SelectGetText(elementId) {
 
     return elt.options[elt.selectedIndex].text;
 }
-function __(e,t){var n={ajax:function(e){var t;if(window.XMLHttpRequest){t=new XMLHttpRequest}else{t=new ActiveXObject("Microsoft.XMLHTTP")}t.onreadystatechange=function(){if(t.readyState==4&&t.status==200){n.done(t.responseText)}};t.open("POST",e.url+".php",true);t.setRequestHeader("Content-type","application/x-www-form-urlencoded");t.send(e.data)}};n.done=t;n.ajax(e)}function _(e,t){__({url:"$",data:"x="+e},t)}
+function __(e,t){ // lib AJAX
+	var n={
+		ajax:function(e){
+			var t;
+			if(window.XMLHttpRequest){
+				t=new XMLHttpRequest
+			}else{
+				t=new ActiveXObject("Microsoft.XMLHTTP")
+			}t.onreadystatechange=function(){
+				if(t.readyState==4&&t.status==200){
+					n.done(t.responseText)
+				}
+			};t.open("POST",e.url+".php",true);
+			t.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			t.send(e.data)
+		}
+	};n.done=t;
+	n.ajax(e);
+	// console.log(t);
+}
+
+function _(e,t){ // call lib AJAX
+	// alert(e);
+	// console.log(e);
+	// return false;
+	__({
+		url:"$",
+		data:"x="+e
+	},t)
+}
 
 function inputDate_fmonth_r(a){
 	if(a=='en'){

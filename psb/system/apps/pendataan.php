@@ -7,10 +7,14 @@
 	// form Module
 	$fmod    ='pendataan';
 	$dbtable ='psb_calonsiswa';
-	$fform   =new fform($fmod,$opt,$cid,'Calon siswa');
+	$fform   = new fform($fmod,$opt,$cid,'Calon siswa');
 
 	// Data calon siswa
-	$inp=app_form_gpost('proses','kelompok','kriteria','golongan','sumpokok','sumnet','sppbulan','denda','disctb','discsaudara','disctunai','disctotal','angsuran','jmlangsur','nopendaftaran','nama','kelamin','tmplahir','tgllahir','agama','alamat','telpon','sekolahasal','darah','kesehatan','ketkesehatan','photo');
+	$inp=app_form_gpost(
+		'proses','kelompok','kriteria','golongan',
+		'sumpokok','sumnet','sppbulan','denda','disctb','discsaudara','disctunai','disctotal','angsuran','jmlangsur','joiningf', /*epiii*/
+		'nopendaftaran','nama','kelamin','tmplahir','tgllahir','agama','alamat','telpon','sekolahasal','darah','kesehatan','ketkesehatan','photo'
+	);
 
 	// Data ayah calon siswa
 	$ia =array('ayah-nama','ayah-warga','ayah-tmplahir','ayah-tgllahir','ayah-pekerjaan','ayah-telpon','ayah-pinbb','ayah-email');

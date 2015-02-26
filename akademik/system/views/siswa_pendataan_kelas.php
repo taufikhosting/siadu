@@ -14,14 +14,16 @@
 		$kls         =gpost('kelas');
 		$kelas       =kelas_r($kls,$ting,1);
 
-		// Page Selection Bar
 		$PSBar = new PSBar_2();
 		$PSBar->begin();
-		$PSBar->selection_departemen($fmod,$dept);
 
-		if(count($tahunajaran)>0){
+		/*filtering combo*/ 
+		$PSBar->selection_departemen($fmod,$dept); // departemen
+
+		// tahun ajaran  
+		if(count($tahunajaran)>0){ // jika ada 
 			$PSBar->selection('Tahun ajaran',iSelect('tahunajaran',$tahunajaran,$tajar,$PSBar->selws,$fmod."_get()"));
-		} else {
+		} else { //jika kosong
 			$PSBar->end();
 			hiddenval('tahunajaran',$tajar);
 			hiddenval('tingkat',$ting);
@@ -30,7 +32,8 @@
 			$PSBar->pass=false;
 		}
 		
-		if($PSBar->pass){
+		// tingkat 
+		if($PSBar->pass){ //default = true
 			if(count($tingkat)>0){
 				$PSBar->selection('Tingkat',iSelect('tingkat',$tingkat,$ting,$PSBar->selws,$fmod."_get()"));
 			} else {
@@ -42,6 +45,7 @@
 			}
 		}
 		
+		// kelas
 		if($PSBar->pass){
 			if(count($kelas)>0){
 				$PSBar->selection('Kelas',iSelect('kelas',$kelas,$kls,$PSBar->selws,$fmod."_get()"));
@@ -51,12 +55,13 @@
 				kelas_warn(0,'float:left');
 				$PSBar->pass=false;
 			}
-		}
-		$PSBar->end();
+		}$PSBar->end();
+		
+		// view 
 		if($PSBar->pass){
-			if($opt=='af'||$opt=='uf') 
+			if($opt=='af'||$opt=='uf') //form :: add n edit 
 				require_once(VWDIR.'siswa_form.php');
-			else{
+			else{ // tabel :: view
 				$xtable=new xtable($fmod,'siswa');
 				$xtable->search_keyon('nis=>aka_siswa.nis:EQ','nama=>aka_siswa.nama:LIKE');
 				$xtable->docname="Data Siswa Kelas ".kelas_name($kls)." T.A. ".tahunajaran_name($tajar);
@@ -65,8 +70,8 @@
 				$db->where_and($xtable->search_sql_get());
 				$t=$xtable->use_db($db,$xtable->pageorder_sql('nis','nisn','nama'));
 				$xtable->btnbar_f('add','print','srcbox');
+				
 				if($xtable->ndata>0){
-					// Table head
 					$xtable->head('@!NIS','@!NISN','@nama','Tempat Tanggal lahir');
 					while($r=mysql_fetch_array($t)){$xtable->row_begin();
 						$xtable->td($r['nis'],80);

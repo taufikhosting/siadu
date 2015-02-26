@@ -59,11 +59,12 @@ function pendataan_getSumPokok(){
 	var b=E("kelompok").value;
 	var c=E("kriteria").value;
 	var d=E("golongan").value;
-	EShow("loader3");
+	EShow("loader3"); //loading animation
 	_("pendataan_getsumpokok&proses="+a+"&kelompok="+b+"&kriteria="+c+"&golongan="+d,function(r){
 		var ns=r.split("-");
-		E("sumpokok").value=fRp(ns[0]);
-		E("sppbulan").value=fRp(ns[1]);
+		E("sumpokok").value=fRp(ns[0]); // uang gedung
+		E("sppbulan").value=fRp(ns[1]); // spp bulanan
+		E("joiningf").value=fRp(ns[2]); // spp bulanan
 		pendataan_countnet();
 		EHide("loader3");
 	});
@@ -104,13 +105,14 @@ function pendataan_cangsuran(){
 	}
 	E("angsuran").value=fRp(anpb.toString());
 }
-// function pendataan_
+
 function pendataan_countnet(){
 	pendataan_disctunairp();
 	pendataan_cdiscount();
 	pendataan_csumnet();
 	pendataan_cangsuran();
 }
+
 function pendataan_get(){
 	var d=['departemen','proses','kelompok'];
 	gPage("pendataan",gpage_purl(d));
@@ -121,17 +123,15 @@ function pendataan_cari(){
 	gPage("pendataan",gpage_purl(d)+"&act=cari&keyword="+keyw);
 }
 function pendataan_form(o,cid,g){
-	
 	var d=['departemen','proses','kelompok'];
 	if(o=='af'||o=='uf'){
-		
 		gPage("pendataan",gpage_purl(d)+"&opt="+o+"&cid="+cid);
-	}
-	else {
+	}else {
 		var f=[
 			['kriteria','Kriteria',true,'s'],
 			['golongan','Kriteria',true,'s'],
 			
+			['joiningf','Joining Fee',false,'c'],
 			['sumpokok','Sumbangan pokok',false,'c'],
 			['sumnet','Sumbangan net',false,'c'],
 			['sppbulan','Uang sekolah perbulan',false,'c'],
@@ -344,14 +344,17 @@ function biaya_save(){
 	var b=E("proses").value;
 	var c=E("kelompok").value;
 	
-	var tfields=E("tfields").value;
-	var tfield=tfields.split("~");
+	var tfields  =E("tfields").value;
+	var tfield   =tfields.split("~");
 	
-	var tfields2=E("tfields2").value;
-	var tfield2=tfields2.split("~");
+	var tfields2 =E("tfields2").value;
+	var tfield2  =tfields2.split("~");
 	
-	var tfields3=E("tfields3").value;
-	var tfield3=tfields3.split("~");
+	var tfields3 =E("tfields3").value;
+	var tfield3  =tfields3.split("~");
+	
+	var tfields4 =E("tfields4").value; /*epiii*/
+	var tfield4  =tfields4.split("~"); /*epiii*/
 	
 	var s="&departemen="+a+"&proses="+b+"&kelompok="+c;
 	for(var i=1;i<tfield.length;i++){
@@ -368,6 +371,12 @@ function biaya_save(){
 		s+="&"+tfield3[i]+"="+ufRp(E(tfield3[i]).value);
 		E(tfield3[i]).disabled='disabled';
 	}
+	
+	/*epiii*/
+	for(var i=1;i<tfield4.length;i++){
+		s+="&"+tfield4[i]+"="+ufRp(E(tfield4[i]).value);
+		E(tfield4[i]).disabled='disabled';
+	}/*epiii*/
 	
 	EHide("cbiaya");
 	EShow("loader2");

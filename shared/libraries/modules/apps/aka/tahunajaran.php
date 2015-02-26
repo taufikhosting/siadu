@@ -26,11 +26,11 @@ function tahunajaran_name($a){
 	return dbFetch("tahunajaran","aka_tahunajaran","W/replid='$a'");
 }
 function tahunajaran_warn($a=0,$f='float:left'){
-	if(!admin_isoperator()) $a=1;
-	if($a==0){
+	if(!admin_isoperator()) 
+		$a=1;
+	if($a==0){  // login as admin akademik 
 		echo '<div class="warnbox" style="'.$f.'">Tidak ditemukan data tahun ajaran pada departemen ini.<br/>Silahkan <a class="linkb" href="#&tahunajaran" onclick="PCBCODE=102;openPage('.app_page_getindex('tahunajaran').',\'tahunajaran\',false,\'departemen=\'+E(\'departemen\').value)">membuat data tahun ajaran</a> pada menu Referensi.</div>';
-	}
-	else if($a==1){
+	}else if($a==1){ //login as others
 		echo '<div class="warnbox" style="'.$f.'">Tidak ditemukan data tahun ajaran pada departemen ini.<br/>Silahkan menghubungi bagian akademik untuk membuat data tahun ajaran baru.</div>';
 	}
 }

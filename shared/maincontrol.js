@@ -153,7 +153,6 @@ $('document').ready(function(){
 	$(document).mousemove(function(event){
 	  body_get_mousexy(event.pageX,event.pageY);
 	});
-	
 });
 /* Fade Animation */
 function fadeTile(a){
@@ -322,40 +321,39 @@ function gPage_seekloader(prw){
 function gPage(a,b){
 	var usession=E("usession").value;
 	if(usession!=""){
-	EHide("copyright");
-	EHide("panel");
-	EShow("pagebox");
-	var pw=$("#page").width();
-	var ph=$("#page").height();
-	if(ph<=450) ph=450;
-	$("#pagepreview").width(pw);
-	$("#loader").width(pw);
-	$("#loader").height(ph);
-	EHide("page");
-	EShow("loader");
-	//page_isloading=true; page_timeout=0; gPage_seekloader(0);
-	if(b!="") b="&"+b;
-	var xtable_param="";
-	var xt=E("xtable_page_name");
-	//alert(xt);
-	if(xt!=null){
-		//alert(E("xtable_page_name").value);
-		//alert(a+" : "+E("xtablefmod").value);
-		if(a==E("xtable_page_name").value){
-			xtable_param=xtable_pageparam();
+		EHide("copyright");
+		EHide("panel");
+		EShow("pagebox");
+		var pw=$("#page").width();
+		var ph=$("#page").height();
+		if(ph<=450) 
+			ph=450;
+		$("#pagepreview").width(pw);
+		$("#loader").width(pw);
+		$("#loader").height(ph);
+		EHide("page");
+		EShow("loader");
+		if(b!="") 
+			b="&"+b;
+		var xtable_param="";
+		var xt=E("xtable_page_name");
+
+		if(xt!=null){
+			if(a==E("xtable_page_name").value){
+				xtable_param=xtable_pageparam();
+			}
 		}
-	}
-	//alert("xtable_param:"+xtable_param);
-	_("_apps&app=view&page="+a+b+xtable_param,function(r){
-		E("cpage").value=a;
-		E("page").innerHTML=r;
-		E("pagepreview").innerHTML=r;
-		var pvh=$("#pagepreview").height();
-		if(pvh<=450) pvh=450;
-		if(pvh!=ph){
-			$("#loader").animate({height:pvh},500,showPage());
-		} else showPage();
-	});
+
+		_("_apps&app=view&page="+a+b+xtable_param,function(r){
+			E("cpage").value=a;
+			E("page").innerHTML=r;
+			E("pagepreview").innerHTML=r;
+			var pvh=$("#pagepreview").height();
+			if(pvh<=450) pvh=450;
+			if(pvh!=ph){
+				$("#loader").animate({height:pvh},500,showPage());
+			} else showPage();
+		});
 	}
 }
 function getPage(a,b){
@@ -723,17 +721,15 @@ function svalidate_r(o,n){
 function fform_fetchvalue(f){
 	var v="";
 	for(var i=0;i<f.length;i++){
+		// alert(f[i][3]);
 		var fi=f[i][0];
 		if(f[i][3]=='x'){
 			v=v+"&"+fi+"="+tinyMCE.activeEditor.getContent();
-		}
-		else if(f[i][3]=='cx'){
+		}else if(f[i][3]=='cx'){
 			v=v+"&"+fi+"="+(E(fi).checked?'1':'0');
-		}
-		else if(f[i][3]=='c'){
+		}else if(f[i][3]=='c'){
 			v=v+"&"+fi+"="+ufRp(E(fi).value);
-		}
-		else if(f[i][3]=='r'||f[i][3]=='radio'){
+		}else if(f[i][3]=='r'||f[i][3]=='radio'){
 			var nr=parseInt(f[i][4]);
 			v=v+"&"+fi+"=";
 			for(var ii=1;ii<=nr;ii++){
@@ -741,19 +737,19 @@ function fform_fetchvalue(f){
 					v=v+E(fi+ii).value;
 				}
 			}
-		}
-		else{
+		}else{
 			var s=E(fi).value;
 			s=s.replace("&","%26");
 			s=s.replace("=","%3D");
 			v=v+"&"+fi+"="+s;
 		}
-	}
-	return v;
+	}return v;
 }
 
 function fform_std(o,cid,g,fmod,c,f,s,cc,fcb){
-	g   = typeof g !=='undefined'?g:false;cid = typeof cid !== 'undefined'?cid:0;s = typeof s !== 'undefined'?s:"";
+	g   = typeof g !=='undefined'?g:false;
+	cid = typeof cid !== 'undefined'?cid:0;
+	s   = typeof s !== 'undefined'?s:"";
 	f   = typeof f !== 'undefined'?f:[];
 	cc  = typeof cc !== 'undefined'?cc:0;
 	fcb = typeof fcb !== 'undefined'?fcb:0;
@@ -772,20 +768,22 @@ function fform_std(o,cid,g,fmod,c,f,s,cc,fcb){
 				if(fcb!=0)
 					fcb();
 			}
-		}
-	)}else{ var p=true; var v="";
+		})
+	}else{ 
+		var p=true; 
+		var v="";
 		if(g){
 			p=svalidate_r(f);
 			if(p){
 				if(cc!=0){
 					p=cc();
 				}
-			}
-			if(p){
+			}if(p){
 				ps+=fform_fetchvalue(f);
 			}
-		}
-		if(p) fform_sendclose(ps,c); PCBCODE=0;
+		}if(p) 
+			fform_sendclose(ps,c); 
+			PCBCODE=0;
 	}
 }
 
@@ -829,8 +827,11 @@ function fform2_std(o,cid,g,fmod,c,f,s,cc,fcb){
 }
 
 function fform_purl(f){
-	var d=""; for(var i=0;i<f.length;i++) d+="&"+f[i]+"="+E(f[i]).value;
+	var d=""; 
+	for(var i=0;i<f.length;i++) 
+		d+="&"+f[i]+"="+E(f[i]).value;
 	return d;
+	// alert(d);
 }
 function gpage_purl(f){
 	var d=""; for(var i=0;i<f.length;i++){

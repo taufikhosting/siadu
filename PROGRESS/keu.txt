@@ -1,0 +1,31 @@
+ _________________
+| NOTE  	  	  |	
+|  + : solved 	  |
+|  - : error/bug  |
+|  C : completed  |
+|  P : progress	  |
+|_________________|  
+|  * : menu	      |
+|_________________|
+
+__________________  transaksi keuangan  ____________________
+
+* transaksi (P)
+	+ data (view tabel masing2 tab) : tidak muncul
+	+ tab (jurnal_umum, buku_besar dll)  : tidak aktif (tidak bisa diklik)
+	- print button (masing2 tab) 
+		.belum ada
+		.tidak bisa cetak berdasarkan 'pencarian' 
+_____________________  referensi  __________________________
+* anggaran 
+	- combo filtering : departemen (no effect)
+	- view table : delete column "departemen"   
+* tahun buku 
+	+ field "saldo awal" dihapus
+* kode rekening
+	- combo box filtering : tahun buku
+	+ tambah field nominal(saldo awal)
+	+ saldo awal --> textbox:
+		+ saat awal : input manual  
+		- selanjutnya : auto fetch
+_____________________________________________________________
