@@ -1,4 +1,5 @@
 <?php 
+
 	appmod_use('keu/budget'); #shared/libraries/modules/apps/keu/budget
 	$fmod   ='budget';
 	$xtable = new xtable($fmod,'anggaran'); #shared/libraries/xdb
