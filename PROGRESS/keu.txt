@@ -17,6 +17,9 @@ __________________  transaksi keuangan  ____________________
 		.belum ada
 		.tidak bisa cetak berdasarkan 'pencarian' 
 _____________________  referensi  __________________________
+* anggaran 
+	- combo filtering : departemen (no effect)
+	- view table : delete column "departemen"   
 * tahun buku 
 	+ field "saldo awal" dihapus
 * kode rekening
