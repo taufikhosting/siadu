@@ -11,7 +11,8 @@
 	$fform   =new fform($fmod,$opt,$cid,'tahun buku');
 
 	$inp=app_form_gpost('nama','kode','tanggal1','keterangan');
-	if($opt=='a'||$opt=='u'||$opt=='d'){ $q=false;
+	if($opt=='a'||$opt=='u'||$opt=='d'){ 
+		$q=false;
 		if($opt=='a'){ // add
 			$q=dbUpdate($dbtable,array('aktif'=>0));
 			$q=dbInsert($dbtable,$inp);

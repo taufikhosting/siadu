@@ -25,6 +25,4 @@ _____________________  referensi  __________________________
 	+ saldo awal --> textbox:
 		+ saat awal : input manual  
 		- selanjutnya : auto fetch
-* set biaya
-	- tambah field : joining_fee(nominal)	
 _____________________________________________________________
