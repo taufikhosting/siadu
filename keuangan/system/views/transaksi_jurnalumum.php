@@ -104,8 +104,8 @@
 		if($xtable->ndata>0){
 			$tanggal1 =gpost('tanggal1',$tgl_f);
 			$tanggal2 =gpost('tanggal2',$tgl_l);
-			var_dump($tanggal1);
-			var_dump($tanggal2);
+			// var_dump($tanggal1);
+			// var_dump($tanggal2);
 			// Table head
 			$xtable->head('@!Tanggal',
 						'@!No. Jurnal / <br/>Jenis Bukti / <br/>No. Bukti',
