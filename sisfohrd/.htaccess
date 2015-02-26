@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /sisterelyon/sisfohrd
+RewriteBase /siadu/sisfohrd
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 

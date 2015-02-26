@@ -20,10 +20,7 @@ $mysql_database = 'sister_siadu';
 $mysql_host = 'localhost';
 
 /******************
-$mysql_user = 'ppikom_ppikom';
-$mysql_password = '5925460';
-$mysql_database = 'ppikom_hrd';
-$mysql_host = 'localhost';
+
 
 *****************/
 

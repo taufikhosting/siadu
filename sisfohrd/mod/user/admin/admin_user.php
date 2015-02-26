@@ -280,7 +280,7 @@ $stg	= int_filter(@$_GET['stg']);
 if($search){
 $query = $koneksi_db->sql_query("SELECT count(user) as t FROM `useraura` WHERE user like '%$search%' or email like '%$search%'");
 }else{
-$query = $koneksi_db->sql_query("SELECT count(user) as t FROM `useraura`");
+$query = $koneksi_db->sql_query("SELECT count(user) as t FROM `useraura` where user<>'superadmin'");
 }
 $rows = mysql_fetch_row ($query);
 $jumlah = $rows[0];
@@ -291,7 +291,7 @@ if ($jumlah > 0){
 if($search){
 $q = mysql_query ("SELECT * FROM `useraura` WHERE user like '%$search%' or email like '%$search%' LIMIT $offset,$limit");
 }else{
-$q = mysql_query ("SELECT * FROM `useraura` LIMIT $offset,$limit");
+$q = mysql_query ("SELECT * FROM `useraura` where user<>'superadmin' LIMIT $offset,$limit");
 }
 if($offset){
 $no = $offset+1;
