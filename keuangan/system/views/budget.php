@@ -30,7 +30,7 @@
 				WHERE
 					b.departemen = d.replid AND
 					b.tahunbuku='.$tbuku;
-		$t3 = mysql_query($t2);
+		$t3 = mysql_query($t2) or die(mysql_error());
 		$xtable->ndata=mysql_num_rows($t3);
 		if($xtable->ndata>0){
 			$xtable->head('Nama Anggaran','Anggaran','Status anggaran','Departement','Keterangan');
