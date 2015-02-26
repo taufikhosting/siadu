@@ -17,7 +17,8 @@
 			
 			$krit =$r['replid'];
 			$gol  =$h['replid'];
-			$sq   ="SELECT * FROM psb_setbiaya WHERE pros='$pros' AND kel='$kel' AND krit='$krit' AND gol='$gol' LIMIT 0,1";
+			$s1   ="SELECT * FROM psb_setbiaya WHERE pros='$pros' AND kel='$kel' AND krit='$krit' AND gol='$gol' LIMIT 0,1";
+			// var_dump($sq);exit();
 			$tq   =mysql_query($s1);
 			if(mysql_num_rows($tq)>0){
 				$sql = "UPDATE psb_setbiaya 
@@ -32,10 +33,7 @@
 							krit ='$krit' AND 
 							gol  ='$gol'";
 
-				$e =mysql_query($sql);
-				// var_dump($sql);
-				// if(mysql_query($sql));
-				// //echo $sql.'...OK<br/>'; else echo $sql.'...FAILED<br/>';
+				$e =mysql_query($sql) or die(mysql_error()) ;
 			}else {
 				$sql = "INSERT INTO psb_setbiaya 
 						SET departemen ='$dept',
@@ -47,10 +45,7 @@
 							daftar     ='$daftar', 
 							nilai      ='$nilai', 
 							spp        ='$spp'";
-				$e =mysql_query($sql);
-				// var_dump($sql);
-				// if(mysql_query($sql));
-				//echo $sql.'...OK<br/>'; else echo $sql.'...FAILED<br/>';
+				$e =mysql_query($sql) or die(mysql_error()) ;
 			}
 		}
 	}
