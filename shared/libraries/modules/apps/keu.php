@@ -75,22 +75,6 @@ function transaksi_lastct(){
 	}
 }
 
-function jurnal_post($tid,$nom,$rekd,$rekk){
-	$jurnal=array();
-	$jurnal['transaksi']=$tid;
-	
-	$jurnal['rek']=$rekd;
-	$jurnal['debet']=$nom;
-	$jurnal['kredit']=0;
-	$q=dbInsert("keu_jurnal",$jurnal);
-	
-	$jurnal['rek']=$rekk;
-	$jurnal['debet']=0;
-	$jurnal['kredit']=$nom;
-	$q=dbInsert("keu_jurnal",$jurnal);
-	
-	return $q;
-}
 function jurnal_repost($tid,$nom,$rekd,$rekk){
 	dbDel("keu_jurnal","transaksi='$tid'");
 	return jurnal_post($tid,$nom,$rekd,$rekk);
@@ -140,30 +124,46 @@ function transaksi_newnomer($jt=JT_UMUM){
 	$res['ct']=$ct;
 	return $res;
 }
+
+/*epiii*/
+function jurnal_post($tid,$nom,$rekd,$rekk){
+	$jurnal=array();
+		$jurnal['transaksi']=$tid; // masuk field : kredit
+		$jurnal['rek']=$rekd;
+		$jurnal['debet']=$nom;
+		$jurnal['kredit']=0;
+	$q=dbInsert("keu_jurnal",$jurnal);
+		$jurnal['rek']=$rekk; // masuk field : debet
+		$jurnal['debet']=0;
+		$jurnal['kredit']=$nom;
+	$q=dbInsert("keu_jurnal",$jurnal);
+	return $q;}
+
 function transaksi_post($no,$ct,$tgl,$urai,$nom,$rekd,$rekk,$rekkas=0,$rekitem=0,$jt=JT_UMUM,$pem=0,$kat=0,$pbrg=0,$bud=0){
 	$transid=0;
-	
 	$trans=array();
-	$trans['tahunbuku']=tahunbuku_getaktifid();
-	$trans['nomer']=$no;
-	$trans['tanggal']=$tgl;
-	$trans['rekkas']=$rekkas;
-	$trans['rekitem']=$rekitem;
-	$trans['uraian']=$urai;
-	$trans['nominal']=$nom;
-	$trans['kategori']=$kat;
-	$trans['pembayaran']=$pem;
-	$trans['penerimaanbrg']=$pbrg;
-	$trans['jenis']=$jt;
-	$trans['budget']=$bud;
-	$trans['ct']=$ct;
-	
+		$trans['tahunbuku']=tahunbuku_getaktifid();
+		$trans['nomer']=$no;
+		$trans['tanggal']=$tgl;
+		$trans['rekkas']=$rekkas;
+		$trans['rekitem']=$rekitem;
+		$trans['uraian']=$urai;
+		$trans['nominal']=$nom;
+		$trans['kategori']=$kat;
+		$trans['pembayaran']=$pem;
+		$trans['penerimaanbrg']=$pbrg;
+		$trans['jenis']=$jt;
+		$trans['budget']=$bud;
+		$trans['ct']=$ct;
 	if(dbInsert("keu_transaksi",$trans)){
-		$transid=mysql_insert_id();
+		$transid =mysql_insert_id();
 		jurnal_post($transid,$nom,$rekd,$rekk);
-	}
-	transaksi_cekpembayaran($transid);
+	}transaksi_cekpembayaran($transid);
 	return $transid;
+}
+
+function transaksi_saldo(){
+	
 }
 // New Posting
 function transaksi_posting_auto($urai,$jur,$jt=JT_UMUM,$kat=0){
@@ -235,9 +235,10 @@ function transaksi_update($tid,$tgl,$urai,$nom,$jur){
 	return $tid;
 }
 
-function transaksi_cekpembayaran($tid){
-	$t=mysql_query("SELECT pembayaran FROM keu_transaksi WHERE replid='$tid'");
-	$r=mysql_fetch_array($t);
+function transaksi_cekpembayaran($tid){ //cek apakah transasi termaseuk jenis "PEMBAYARAN" atau bukan 
+	$t =mysql_query("SELECT pembayaran FROM keu_transaksi WHERE replid='$tid'");
+	$r =mysql_fetch_assoc($t); /*epiii*/
+	// $r =mysql_fetch_array($t);
 	pembayaran_cek($r['pembayaran']);
 }
 
@@ -250,57 +251,63 @@ function pembayaran_getdatabysubj($mod,$sis,$d=1){
 }
 
 function pembayaran_getdata($a,$d=1){
-	$pemb=array();
-	$t=mysql_query("SELECT keu_pembayaran.* FROM keu_pembayaran WHERE keu_pembayaran.replid='$a' LIMIT 0,1");
-	$pemb=mysql_fetch_array($t);
+	$pemb =array();
+	$t    =mysql_query("SELECT keu_pembayaran.* FROM keu_pembayaran WHERE keu_pembayaran.replid='$a' LIMIT 0,1");
+	$pemb =mysql_fetch_assoc($t); /*epiii*/
+	// $pemb =mysql_fetch_array($t);
 	
-	$t0=mysql_query("SELECT kategori,reftipe,refid,nama,rek1,rek2,rek3 FROM keu_modul WHERE replid='".$pemb['modul']."' LIMIT 0,1");
-	$pemb['modul']=mysql_fetch_array($t0);
-	$pemb['rekkas']=$pemb['modul']['rek1'];
-	$pemb['rekitem']=$pemb['modul']['rek2'];
+	$t0 =mysql_query("SELECT kategori,reftipe,refid,nama,rek1,rek2,rek3 FROM keu_modul WHERE replid='".$pemb['modul']."' LIMIT 0,1");
+	// $pemb['modul'] =mysql_fetch_array($t0);
+	$pemb['modul']=mysql_fetch_assoc($t0); /*epiii*/
+	$pemb['rekkas']=$pemb['modul']['rek1']; //modal
+	$pemb['rekitem']=$pemb['modul']['rek2']; //pengeluaran
 	
 	if($d>0){
-	if($pemb['modul']['reftipe']==RT_SPP){
-		$t1=mysql_query("SELECT replid,tahunajaran as nama FROM aka_tahunajaran WHERE replid='".$pemb['modul']['refid']."' LIMIT 0,1");
-		$pemb['tahunajaran']=mysql_fetch_array($t1);
-		
-		$t2=mysql_query("SELECT replid,nama,nis FROM aka_siswa WHERE replid='".$pemb['siswa']."' LIMIT 0,1");
-		$pemb['siswa']=mysql_fetch_array($t2);
-		
-		$pemb['uraian']='Pembayaran '.$pemb['modul']['nama'].'.'.chr(13).'Siswa: '.$pemb['siswa']['nama'].'. No. pendaftaran: '.$pemb['siswa']['nis'].'.';
-		
-		$pemb['rekitem']=$pemb['modul']['rek3'];
-		
-	} else if($pemb['modul']['reftipe']==RT_PSB){
-		$t1=mysql_query("SELECT replid,proses as nama FROM psb_proses WHERE replid='".$pemb['modul']['refid']."' LIMIT 0,1");
-		$pemb['proses']=mysql_fetch_array($t1);
-		
-		$t2=mysql_query("SELECT replid,nama,nopendaftaran FROM psb_calonsiswa WHERE replid='".$pemb['siswa']."' LIMIT 0,1");
-		$pemb['calonsiswa']=mysql_fetch_array($t2);
-		
-		$pemb['uraian']='Pembayaran '.$pemb['modul']['nama'].'.'.chr(13).'Calon siswa: '.$pemb['calonsiswa']['nama'].'. No. pendaftaran: '.$pemb['calonsiswa']['nopendaftaran'].'.';
-	}
-	else if($pemb['modul']['reftipe']==RT_USP){
-		$t1=mysql_query("SELECT replid,angkatan as nama FROM aka_angkatan WHERE replid='".$pemb['modul']['refid']."' LIMIT 0,1");
-		$pemb['angkatan']=mysql_fetch_array($t1);
-		
-		$t2=mysql_query("SELECT replid,nama,nis FROM aka_siswa WHERE replid='".$pemb['siswa']."' LIMIT 0,1");
-		$pemb['siswa']=mysql_fetch_array($t2);
-		
-		$pemb['uraian']='Pembayaran '.$pemb['modul']['nama'].'.'.chr(13).'Siswa: '.$pemb['siswa']['nama'].'. No. pendaftaran: '.$pemb['siswa']['nis'].'.';
-		
-		$pemb['rekitem']=$pemb['modul']['rek3'];
-	}}
-	return $pemb;
+		if($pemb['modul']['reftipe']==RT_SPP){ //pembayaran SPP
+			$t1=mysql_query("SELECT replid,tahunajaran as nama FROM aka_tahunajaran WHERE replid='".$pemb['modul']['refid']."' LIMIT 0,1");
+			$pemb['tahunajaran']=mysql_fetch_array($t1);
+			
+			$t2=mysql_query("SELECT replid,nama,nis FROM aka_siswa WHERE replid='".$pemb['siswa']."' LIMIT 0,1");
+			$pemb['siswa']=mysql_fetch_array($t2);
+			
+			$pemb['uraian']='Pembayaran '.$pemb['modul']['nama'].'.'.chr(13).'Siswa: '.$pemb['siswa']['nama'].'. No. pendaftaran: '.$pemb['siswa']['nis'].'.';
+			
+			$pemb['rekitem']=$pemb['modul']['rek3'];
+			
+		} else if($pemb['modul']['reftipe']==RT_PSB){ //pembayran FORMULIR
+			$t1=mysql_query("SELECT replid,proses as nama FROM psb_proses WHERE replid='".$pemb['modul']['refid']."' LIMIT 0,1");
+			$pemb['proses']=mysql_fetch_array($t1);
+			
+			$t2=mysql_query("SELECT replid,nama,nopendaftaran FROM psb_calonsiswa WHERE replid='".$pemb['siswa']."' LIMIT 0,1");
+			$pemb['calonsiswa']=mysql_fetch_array($t2);
+			
+			$pemb['uraian']='Pembayaran '.$pemb['modul']['nama'].'.'.chr(13).'Calon siswa: '.$pemb['calonsiswa']['nama'].'. No. pendaftaran: '.$pemb['calonsiswa']['nopendaftaran'].'.';
+		}else if($pemb['modul']['reftipe']==RT_USP){ //pembayaran UANG PANGKAL
+			$t1=mysql_query("SELECT replid,angkatan as nama FROM aka_angkatan WHERE replid='".$pemb['modul']['refid']."' LIMIT 0,1");
+			$pemb['angkatan']=mysql_fetch_array($t1);
+			
+			$t2=mysql_query("SELECT replid,nama,nis FROM aka_siswa WHERE replid='".$pemb['siswa']."' LIMIT 0,1");
+			$pemb['siswa']=mysql_fetch_array($t2);
+			
+			$pemb['uraian']='Pembayaran '.$pemb['modul']['nama'].'.'.chr(13).'Siswa: '.$pemb['siswa']['nama'].'. No. pendaftaran: '.$pemb['siswa']['nis'].'.';
+			
+			$pemb['rekitem']=$pemb['modul']['rek3'];
+		}
+	}return $pemb;
 }
 function pembayaran_trans($pid,$no,$ct,$tgl,$rekkas,$rekitem,$urai,$nom){
 	$pemb=pembayaran_getdata($pid,0);
 	
-	if($pemb['modul']['kategori']==1||$pemb['modul']['kategori']==2) $jt=JT_SISWA;
-	else if($pemb['modul']['kategori']==3||$pemb['modul']['kategori']==4) $jt=JT_CALONSISWA;
-	$rekd=$rekkas; $rekk=$rekitem;
-	$q=transaksi_post($no,$ct,$tgl,$urai,$nom,$rekd,$rekk,$rekkas,$rekitem,$jt,$pid,$pemb['modul']['kategori']);
+	if($pemb['modul']['kategori']==1||$pemb['modul']['kategori']==2) // siswa resmi
+		$jt=JT_SISWA;
+	else if($pemb['modul']['kategori']==3||$pemb['modul']['kategori']==4)  //siswa calon
+		$jt=JT_CALONSISWA;
+	$rekd =$rekkas; // modal
+	$rekk =$rekitem; // pengeluaran
+	$q    =transaksi_post($no,$ct,$tgl,$urai,$nom,$rekd,$rekk,$rekkas,$rekitem,$jt,$pid,$pemb['modul']['kategori']);
 	
+	/*epiii*/	
+	// $ss = 'UPDATE keu_rekening SET ';
 	if($q){
 		$t=mysql_query("SELECT nominal FROM keu_transaksi WHERE pembayaran='$pid'");
 		$bayar=0;
@@ -322,7 +329,7 @@ function pembayaran_trans($pid,$no,$ct,$tgl,$rekkas,$rekitem,$urai,$nom){
 function pembayaran_cek($pid=0){
 	//log_print("pembayaran_cek(".$pid.")");
 	if($pid!=0){
-		$pemb=pembayaran_getdata($pid,0);
+		$pemb =pembayaran_getdata($pid,0);
 		
 		$t=mysql_query("SELECT nominal FROM keu_transaksi WHERE pembayaran='$pid'");
 		$bayar=0;
