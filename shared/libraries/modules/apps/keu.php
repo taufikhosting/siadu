@@ -256,17 +256,20 @@ function transaksi_cekpembayaran($tid){ //cek apakah transasi termaseuk jenis "P
 	pembayaran_cek($r['pembayaran']);
 }
 
+//ex :  mod = 4 sis = 190
 function pembayaran_getdatabysubj($mod,$sis,$d=1){
-	$pemb=array();
-	$t=mysql_query("SELECT keu_pembayaran.replid FROM keu_pembayaran WHERE keu_pembayaran.modul='$mod' AND keu_pembayaran.siswa='$sis' LIMIT 0,1");
-	$pemb=mysql_fetch_array($t);
-	
-	return pembayaran_getdata($pemb['replid'],$d);
+	// $pemb =array();
+	$sq = "SELECT keu_pembayaran.replid FROM keu_pembayaran WHERE keu_pembayaran.modul='$mod' AND keu_pembayaran.siswa='$sis' LIMIT 0,1";
+	$ex =mysql_query($sq);
+	$rs =mysql_fetch_assoc($ex);
+	return pembayaran_getdata($rs['replid'],$d);
+	// var_dump($rs);
 }
 
 function pembayaran_getdata($a,$d=1){
 	$pemb =array();
-	$t    =mysql_query("SELECT keu_pembayaran.* FROM keu_pembayaran WHERE keu_pembayaran.replid='$a' LIMIT 0,1");
+	$ss   = "SELECT keu_pembayaran.* FROM keu_pembayaran WHERE keu_pembayaran.replid='$a' LIMIT 0,1";
+	$t    =mysql_query($ss);
 	$pemb =mysql_fetch_assoc($t); /*epiii*/
 	// $pemb =mysql_fetch_array($t);
 	
@@ -275,6 +278,7 @@ function pembayaran_getdata($a,$d=1){
 	$pemb['modul']=mysql_fetch_assoc($t0); /*epiii*/
 	$pemb['rekkas']=$pemb['modul']['rek1']; //modal
 	$pemb['rekitem']=$pemb['modul']['rek2']; //pengeluaran
+	// print_r($pemb['modul']);
 	
 	if($d>0){
 		if($pemb['modul']['reftipe']==RT_SPP){ //pembayaran SPP
@@ -296,7 +300,7 @@ function pembayaran_getdata($a,$d=1){
 			$pemb['calonsiswa']=mysql_fetch_array($t2);
 			
 			$pemb['uraian']='Pembayaran '.$pemb['modul']['nama'].'.'.chr(13).'Calon siswa: '.$pemb['calonsiswa']['nama'].'. No. pendaftaran: '.$pemb['calonsiswa']['nopendaftaran'].'.';
-		}else if($pemb['modul']['reftipe']==RT_USP){ //pembayaran UANG PANGKAL
+		}else if($pemb['modul']['reftipe']==RT_USP){ //pembayaran UANG PANGKAL = 3
 			$t1=mysql_query("SELECT replid,angkatan as nama FROM aka_angkatan WHERE replid='".$pemb['modul']['refid']."' LIMIT 0,1");
 			$pemb['angkatan']=mysql_fetch_array($t1);
 			
@@ -305,7 +309,7 @@ function pembayaran_getdata($a,$d=1){
 			
 			$pemb['uraian']='Pembayaran '.$pemb['modul']['nama'].'.'.chr(13).'Siswa: '.$pemb['siswa']['nama'].'. No. pendaftaran: '.$pemb['siswa']['nis'].'.';
 			
-			$pemb['rekitem']=$pemb['modul']['rek3'];
+			$pemb['rekitem']=$pemb['modul']['rek3'];	
 		}
 	}return $pemb;
 }

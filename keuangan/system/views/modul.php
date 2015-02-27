@@ -72,7 +72,6 @@
 			
 			$u='<button class="btn" title="Edit" onclick="E(\'reftipe\').value='.$r['reftipe'].';modul_form(\'uf\',\''.$r['replid'].'\')"><div class="bi_editb">&nbsp;</div></button>';
 			$xtable->opt($r['replid'],$u,'d',$s);
-			
 		$xtable->row_end();}$xtable->foot();
 	}else{
 		$xtable->nodata();
