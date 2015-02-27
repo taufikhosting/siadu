@@ -58,14 +58,16 @@
 					$rekitem =gpost('rekitem'.$i);
 					if($rekitem!="-" && $nom!=0){
 						if($jt==JT_OUTCOME) {  
-							$rekd=$rekitem;  // pegneluaran
-							$rekk=$rekkas;  //modal
-						}else { 
-							$rekd=$rekkas; 
-							$rekk=$rekitem; 
+							$rekd =$rekitem;  // pegneluaran
+							$rekk =$rekkas;  //modal
+							$typ  ='out'; /*epiii*/
+						} else { 
+							$rekd =$rekkas; 
+							$rekk =$rekitem; 
+							$typ  ='in'; /*epiii*/
 						}
 						//transaksi_post($no,$ct,$tgl,$urai,$nom,$rekd,$rekk,$rekkas=0,$rekitem=0,$jt=JT_UMUM,$pem=0,$kat=0,$pbrg=0,$bud=0,$nobukti='')
-						$q =transaksi_post($no,$ct,$tgl,$urai,$nom,$rekd,$rekk,$rekkas,$rekitem,$jt,0,0,0,$bud,$nobukti);
+						$q = transaksi_post($typ,$no,$ct,$tgl,$urai,$nom,$rekd,$rekk,$rekkas,$rekitem,$jt,0,0,0,$bud,$nobukti);
 					}
 				}
 			}
@@ -95,18 +97,24 @@
 						$l++;
 					}
 				}$q=transaksi_update($cid,$tgl,$urai,$jur);
+				// }$q=transaksi_update($cid,$tgl,$urai,$jur);
 			} else { 
 				$rekkas  =gpost('rekkas');
 				$nom     =gpost('nominal');
 				$rekitem =gpost('rekitem');
 				if($rekitem!="-" && $nom!=0){
 					if($jt==JT_OUTCOME) { 
-						$rekd=$rekitem; 
-						$rekk=$rekkas; 
+						$rekd =$rekitem; 
+						$rekk =$rekkas; 
+						$typ  ='out'; /*epiii*/
 					}else { 
-						$rekd=$rekkas; 
-						$rekk=$rekitem; 
-					}$q=transaksi_edit($cid,$tgl,$urai,$nom,$rekd,$rekk,$rekkas,$rekitem);
+						$rekd =$rekkas; 
+						$rekk =$rekitem; 
+						$typ  ='in'; /*epiii*/
+					}
+					// $q=transaksi_edit($cid,$tgl,$urai,$nom,$rekd,$rekk,$rekkas,$rekitem);
+					$q=transaksi_edit($typ,$cid,$tgl,$urai,$nom,$rekd,$rekk,$rekkas,$rekitem);
+					// $q = transaksi_post($typ,$no,$ct,$tgl,$urai,$nom,$rekd,$rekk,$rekkas,$rekitem,$jt,0,0,0,$bud,$nobukti);
 				}
 			}
 		}else if($opt=='d'){ // delete
