@@ -1,14 +1,15 @@
 <?php
 define('ITEXTC_SHOW_NUL',0);
 
-define('JT_UMUM',0);
-define('JT_SISWA',1);
-define('JT_CALONSISWA',2);
-define('JT_INCOME',3);
-define('JT_OUTCOME',4);
-define('JT_INBANK',5);
-define('JT_OUTBANK',6);
-define('JT_INBRG',7);
+define('JT_UMUM',0); 	//in 
+define('JT_SISWA',1); 	//in
+define('JT_CALONSISWA',2); // in 
+define('JT_INCOME',3); 	//in
+define('JT_INBANK',5);	//in
+
+define('JT_INBRG',7);	//in
+define('JT_OUTCOME',4);	//out
+define('JT_OUTBANK',6); //out
 
 function jt_name($a){
 	if($a==JT_INCOME) return 'pemasukan kas';
@@ -100,9 +101,7 @@ function transaksi_edit($typ,$transid,$tgl,$urai,$nom,$rekd,$rekk,$rekkas=0,$rek
 	if(dbUpdate("keu_transaksi",$trans,"replid='$transid'")){
 		return jurnal_repost($transid,$nom,$rekd,$rekk);
 		return transaksi_saldo($typ,$rekd,$rekk,$nom);
-	}
-	
-	return 0;
+	}return 0;
 }
 
 function transaksi_hapus($transid){
@@ -173,12 +172,14 @@ function transaksi_post($typ,$no,$ct,$tgl,$urai,$nom,$rekd,$rekk,$rekkas=0,$reki
 	return $transid;
 }
 
+/*epiii*/
 function transaksi_saldo($typ,$rekd,$rekk,$nom){
 	$opt = $typ=='out'?'-':'+';
 	$id  = $typ=='out'?$rekk:$rekd;
 	$ss  = 'UPDATE keu_rekening SET nominal = (nominal '.$opt.' '.$nom.') WHERE replid ='.$id; 
+	// var_dump($ss);
 	$ee  = mysql_query($ss) or die(mysql_error());
-}
+}/*epiii*/
 
 // New Posting
 function transaksi_posting_auto($urai,$jur,$jt=JT_UMUM,$kat=0){
@@ -212,6 +213,9 @@ function transaksi_posting($no,$ct,$tgl,$urai,$jur,$jt=JT_UMUM,$kat=0){
 				$jurnal=$jur[$i];
 				$jurnal['transaksi']=$tid;
 				$q=dbInsert("keu_jurnal",$jurnal);
+				if($jurnal['debet']!=0){
+					transaksi_saldo('in',$jurnal['rek'],'',$jurnal['debet']);
+				} 
 			}
 		}
 	}transaksi_cekpembayaran($tid);

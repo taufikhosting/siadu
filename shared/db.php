@@ -55,8 +55,6 @@ function dbInsert($t,$f){
 			$s.="`".$k."`='".addslashes($v)."'";
 		}$q="INSERT INTO ".$t." SET ".$s;
 		$_SESSION['libdb_dbIsert']=$q;
-		// var_dump($q);
-		// return $q;
 		return dbQsql($q);
 	}else 
 		return false;

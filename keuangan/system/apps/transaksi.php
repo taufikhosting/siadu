@@ -27,7 +27,7 @@
 			$bud     =gpost('budget');
 			
 			// type : jurnal umum
-			if($jt==JT_UMUM){
+			if($jt==JT_UMUM){ // 0
 				$urai =gpost('uraian'); 
 				$jur  =array(); 
 				$l    =0; 
@@ -49,7 +49,7 @@
 				}
 				//function transaksi_posting($no,$ct,$tgl,$urai,$jur,$jt=JT_UMUM,$kat=0,$nobukti='')
 				$q=transaksi_posting($no,$ct,$tgl,$urai,$jur,JT_UMUM,0,$nobukti);
-			} else { // type : peMASUKan / pengeLUARan
+			} else { // type : income, outcome, pembayaran2(siswa, calonsiswa, bank, inventaris)
 				//transaksi_post($tgl,$urai,$nom,$rekd,$rekk,$jt=JT_INCOME,$mod=0);
 				$rekkas =gpost('rekkas');
 				for($i=1;$i<=8;$i++){
@@ -57,11 +57,11 @@
 					$nom     =gpost('nominal'.$i);
 					$rekitem =gpost('rekitem'.$i);
 					if($rekitem!="-" && $nom!=0){
-						if($jt==JT_OUTCOME) {  
-							$rekd =$rekitem;  // pegneluaran
-							$rekk =$rekkas;  //modal
+						if($jt==JT_OUTCOME) {  //4
+							$rekd =$rekitem;  // keluar
+							$rekk =$rekkas;  // modal
 							$typ  ='out'; /*epiii*/
-						} else { 
+						} else { // 1,2,3,5,7
 							$rekd =$rekkas; 
 							$rekk =$rekitem; 
 							$typ  ='in'; /*epiii*/

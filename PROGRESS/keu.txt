@@ -16,6 +16,7 @@ __________________  transaksi keuangan  ____________________
 	- print button (masing2 tab) 
 		.belum ada
 		.tidak bisa cetak berdasarkan 'pencarian' 
+	- inventory : form add : textbox nama barang : tidak bisa diisi 
 _____________________  referensi  __________________________
 * anggaran 
 	- combo filtering : departemen (no effect)
