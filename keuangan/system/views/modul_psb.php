@@ -45,6 +45,7 @@
 		$inp=array('modul'=>$modid,'siswa'=>0,'nominal'=>0,'cicilan'=>0);
 		$t=mysql_query("SELECT 
 							psb_calonsiswa.replid,
+							psb_calonsiswa.joiningf,
 							psb_kelompok.biaya 
 						FROM psb_calonsiswa 
 							LEFT JOIN psb_kelompok ON psb_kelompok.replid=psb_calonsiswa.kelompok
@@ -102,6 +103,7 @@
 			$xtable->td($r['nopendaftaran'],120);
 			$xtable->td($r['nama']);
 			$xtable->td(fRp($r['nominal']),110,'r');
+			$xtable->td(fRp($r['joiningf']),110,'r');
 			$xtable->td(fRp($r['jmlbayar']),110,'r');
 			
 			if($r['lunas']=='1')
