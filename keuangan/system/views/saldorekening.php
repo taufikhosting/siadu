@@ -14,8 +14,8 @@
 	$PSBar->end();
 
 	// Query
-	// $db=new xdb("keu_rekening");
-	$db=new xdb("keu_saldorekening");
+	$db=new xdb("keu_rekening");
+	// $db=new xdb("keu_saldorekening");
 	if($kat!==0)$db->where("kategorirek='$kat'");
 	// if($kat!==0)$db->where("kategorirek='$kat'");
 	$t=$db->query();
