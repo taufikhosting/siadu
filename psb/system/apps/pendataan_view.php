@@ -68,7 +68,7 @@ $jkelamin=Array('L'=>'Laki-laki','P'=>'Perempuan'); $a=0;
 					if($h['photo2']!=''){
 					// if($h['psize']>0){ 
 				?>
-				<img src="photo/<?php echo $r['replid'].'.jpg'; ?>" width="140px"/>
+				<img src="photo/<?php echo $r['nama'].'.jpg'; ?>" width="140px"/>
 				<!-- <img src="photo/$.php?id=<?=$r['replid']?>" width="140px"/> -->
 				<?php }else{?>
 				<div style="width:140px;height:150px;background:#f0f0f0"></div>
