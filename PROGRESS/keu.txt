@@ -10,6 +10,12 @@
 
 __________________  transaksi keuangan  ____________________
 
+* pembayaran Uang Pangkal 
+	+ rename uang pangkal -> DPP
+
+* modul pembayaran 
+	+ sembunyikan button tambah modul
+	+ rename coa -> modul pembayaran
 * transaksi (P)
 	+ data (view tabel masing2 tab) : tidak muncul
 	+ tab (jurnal_umum, buku_besar dll)  : tidak aktif (tidak bisa diklik)

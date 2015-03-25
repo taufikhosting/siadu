@@ -11,6 +11,7 @@
 __________________  home  ____________________
 
 * pendataan claon siswa (P)
+	+ view : photo siswa 
 	+ add form : field joining fee 
 	- print : report by filtering & searching 
 _____________________  referensi  __________________________
