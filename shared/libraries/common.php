@@ -364,8 +364,7 @@ function app_page_view(){
 		if(file_exists($fpage)){
 			notifbox();
 			require_once($fpage);
-		}
-		else{
+		}else{
 			echo '<div class="warnbox">Page is currently not available.</div>';
 		}
 	} else {
@@ -374,8 +373,7 @@ function app_page_view(){
 		if(file_exists($fpage)){
 			notifbox();
 			require_once($fpage);
-		}
-		else{
+		}else{
 			echo '<div class="warnbox">Halaman belum tersedia.</div>';
 		}
 	}

@@ -36,7 +36,26 @@ $sel++;}
 $fct=$w;
 
 if($sel>0){
-$t0=mysql_query("SELECT keu_jurnal.rek,keu_rekening.kode as koderek,keu_rekening.nama as nrek FROM keu_jurnal LEFT JOIN keu_rekening ON keu_rekening.replid=keu_jurnal.rek LEFT JOIN keu_transaksi ON keu_transaksi.replid=keu_jurnal.transaksi WHERE keu_transaksi.tahunbuku='$tahunbuku' AND keu_transaksi.tanggal >= '$tanggal1' AND keu_transaksi.tanggal <= '$tanggal2' ".($fct==""?"":" AND (".$fct.")")." GROUP BY keu_jurnal.rek ORDER BY keu_rekening.kategorirek,keu_rekening.kode");
+	$ss="SELECT 
+			keu_jurnal.rek,
+			keu_rekening.kode as koderek,
+			keu_rekening.nama as nrek 
+		FROM
+			keu_jurnal 
+			LEFT JOIN keu_rekening ON keu_rekening.replid=keu_jurnal.rek 
+			LEFT JOIN keu_transaksi ON keu_transaksi.replid=keu_jurnal.transaksi 
+		WHERE 
+			keu_transaksi.tahunbuku='$tahunbuku' AND 
+			keu_transaksi.tanggal >= '$tanggal1' AND 
+			keu_transaksi.tanggal <= '$tanggal2' ".($fct==""?"":" AND (".$fct.")")." 
+		GROUP BY 
+			keu_jurnal.rek 
+		ORDER BY
+			keu_rekening.kategorirek,
+			keu_rekening.kode";
+			// var_dump($ss);exit();
+$t0=mysql_query($ss);
+// $t0=mysql_query("SELECT keu_jurnal.rek,keu_rekening.kode as koderek,keu_rekening.nama as nrek FROM keu_jurnal LEFT JOIN keu_rekening ON keu_rekening.replid=keu_jurnal.rek LEFT JOIN keu_transaksi ON keu_transaksi.replid=keu_jurnal.transaksi WHERE keu_transaksi.tahunbuku='$tahunbuku' AND keu_transaksi.tanggal >= '$tanggal1' AND keu_transaksi.tanggal <= '$tanggal2' ".($fct==""?"":" AND (".$fct.")")." GROUP BY keu_jurnal.rek ORDER BY keu_rekening.kategorirek,keu_rekening.kode");
 
 $njurnal=mysql_num_rows($t0);
 
@@ -69,6 +88,15 @@ if($njurnal>0){
 	$s='<button style="float:left;margin-right:4px" class="btn" onclick=""><div class="bi_pri">Cetak</div></button>';
 	echo '<div class="tbltopbar" style="width:100%;margin-bottom:20px"><div style="width:800px">'.$s.'</div></div>';
 	*/
+		$a     = 'transaksi_bukubesar';
+		$token = base64_encode(md5($a.$_SESSION['keu_admin_id'].$_SESSION['keu_admin_name']));
+		$xtable->btnbar_begin();
+			$xtable->btnbar_print2($a,$token);
+			$xtable->search_box('Cari uraian atau nomor jurnal');
+			// echo iCheckx('ct_jurnaldetil','Tampilkan detil jurnal',$ct_jurnaldetil,'float:right;margin-left:4px;margin-right:30px;margin-top:4px','onclick="transaksi_jurnadetil(this.checked)"');
+		$xtable->btnbar_end();
+
+
 	for($i=0;$i<$njurnal;$i++){
 		$jd=$jurnal[$i];
 		$rek=$jd['rek'];
@@ -92,6 +120,7 @@ if($njurnal>0){
 		$db->where_and("keu_transaksi.tanggal <= '$tanggal2'");
 		$db->where_and($fct==""?"":"(".$fct.")");
 		$db->order("keu_transaksi.tanggal,keu_transaksi.nomer");
+		// var_dump($db);exit();
 		$t=$db->query();
 		$xtable->ndata=mysql_num_rows($t);
 

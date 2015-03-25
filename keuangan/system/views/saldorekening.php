@@ -1,7 +1,7 @@
 <?php 
-	appmod_use('keu/rekening');
-	$fmod              ='rekening';
-	$xtable            =new xtable($fmod,'kode rekening');
+	appmod_use('keu/saldorekening');
+	$fmod              ='saldorekening';
+	$xtable            =new xtable($fmod,'kode saldo rekening');
 	$xtable->pageorder ="kode";
 	
 	$kat               =gpost('skategorirek');
@@ -20,12 +20,12 @@
 	$xtable->ndata=mysql_num_rows($t);
 	$t=$db->query($xtable->pageorder_sql('kode','nama'));
 
-	$xtable->btnbar_f('add');
+	// $xtable->btnbar_f('add');
 	if($xtable->ndata>0){
-		// $xtable->head('@Kode{C}','@Rekening','Saldo Awal','Keterangan');
-		$xtable->head('@Kode{C}','@Rekening','Keterangan');
+		$xtable->head('@Kode{C}','@Rekening','Saldo Awal','Keterangan');
+		// $xtable->head('@Kode{C}','@Rekening','Keterangan');
 		$lkat=0;
-		while($r=mysql_fetch_array($t)){
+		while($r=mysql_fetch_assoc($t)){
 			$kr=substr($r['kode'],0,1);
 			if($lkat!=$r['kategorirek'] && $kat==0){
 				$l=strlen($r['kode'])-1;
@@ -37,9 +37,9 @@
 			}$xtable->row_begin();
 			$xtable->td($r['kode'],100,'c');
 			$xtable->td($r['nama'],250);
-			// $xtable->td(fRp($r['nominal']),250); /*epiii*/
+			$xtable->td(fRp($r['nominal']),250); /*epiii*/
 			$xtable->td(nl2br($r['keterangan']));
-			$xtable->opt_ud($r['replid']);
+			$xtable->opt_u($r['replid']);
 			$lkat=$r['kategorirek'];
 		}$xtable->foot();
 	}else{

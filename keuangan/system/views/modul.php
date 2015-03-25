@@ -11,8 +11,9 @@
 		$PSBar->selection('Kategori pembayaran',iSelect('kategori',$kategori,$kmod,$PSBar->selws,$fmod."_get()"));
 	$PSBar->end();
 
-	$s='<button class="btn" title="Tambah data modul pembayaran" style="float:left;margin-right:4px" onclick="E(\'reftipe\').value=0;modul_form(\'af\')"><div class="bi_add">Modul pembayaran</div></button>';
-	$xtable->btnbar_f($s);
+	/*button tambah modul pembayran*/
+	// $s='<button class="btn" title="Tambah data modul pembayaran" style="float:left;margin-right:4px" onclick="E(\'reftipe\').value=0;modul_form(\'af\')"><div class="bi_add">Modul pembayaran</div></button>';
+	// $xtable->btnbar_f($s);
 
 	// Query
 	$db=new xdb("keu_modul","*","kategori='$kmod'","nama");

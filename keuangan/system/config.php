@@ -44,8 +44,13 @@ $APP_PAGES=Array(
 	0=>Array(
 		'tileset'=>Array('key'=>'referensi','title'=>'Referensi','slide'=>'1','pos'=>'-980px','tipe'=>1),
 		'pages'=>Array(
+		// function app_page($k,$t,$d='',$s='#68c010',$c='',$p=0,$b='std'){
+		// return array('key'=>$k,'title'=>$t,'desc'=>$d,'color'=>$s,'icon'=>$c,'tipe'=>$p,'action'=>$b);
+		// }
 			app_page('tahunbuku','Tahun Buku','',$APP_COLOR_THEME2[0],''),
-			app_page('rekening','Kode Rekening','',$APP_COLOR_THEME2[1],''),
+			app_page('saldorekening','Saldo Awal','',$APP_COLOR_THEME2[3],''),
+			app_page('rekening','COA','',$APP_COLOR_THEME2[1],''),
+			// app_page('rekening','Kode Rekening','',$APP_COLOR_THEME2[1],''),
 			app_page('budget','Anggaran','',$APP_COLOR_THEME2[2],'')
 		)
 	),
@@ -53,11 +58,12 @@ $APP_PAGES=Array(
 		'tileset'=>Array('key'=>'administrasiakademik','title'=>'Transaksi Keuangan','slide'=>'2','pos'=>'0px','tipe'=>2),
 		'pages'=>Array(
 			app_page('transaksi','Transaksi','Transaksi keuangan dan akuntansi.',$APP_COLOR_THEME1[0],'penbook.png'),
-			app_page('modul','COA','Membuat modul pembayaran administrasi siswa dan calon siswa.',$APP_COLOR_THEME1[1],'book.png'),
+			app_page('modul','Modul Pembayaran','Membuat modul pembayaran administrasi siswa dan calon siswa.',$APP_COLOR_THEME1[1],'book.png'),
 			// app_page('modul','Modul Pembayaran','Membuat modul pembayaran administrasi siswa dan calon siswa.',$APP_COLOR_THEME1[1],'book.png'),
 			//app_page('modultransaksi','Pembayaran Siswa dan Calon Siswa','Mendata Transaksi pembayaran.',$APP_COLOR_THEME1[3],'penbook.png'),
 			app_page('modul_psb','Pembayaran Pendaftaran','Mendata pembayaran biaya pendaftaran calon siswa.',$APP_COLOR_THEME1[3],'penbook.png'),
-			app_page('modul_usp','Pembayaran Uang Pangkal','Mendata pembayaran uang pangkal siswa.',$APP_COLOR_THEME1[2],'penbook.png'),
+			app_page('modul_usp','Pembayaran DPP','Mendata pembayaran uang pangkal siswa.',$APP_COLOR_THEME1[2],'penbook.png'),
+			// app_page('modul_usp','Pembayaran Uang Pangkal','Mendata pembayaran uang pangkal siswa.',$APP_COLOR_THEME1[2],'penbook.png'),
 			app_page('modul_spp','Pembayaran Uang Sekolah','Mendata pembayaran uang sekolah siswa perbulan.',$APP_COLOR_THEME1[4],'penbook.png'),
 			app_page('invent','Inventory','Mendata barang inventory.',$APP_COLOR_THEME1[5],'dbox.png')
 		)

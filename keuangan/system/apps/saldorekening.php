@@ -10,8 +10,7 @@
 	$fmod    = "rekening";
 	$dbtable = "keu_rekening";
 	$fform   = new fform($fmod,$opt,$cid,'kode rekening');
-	$inp     = app_form_gpost('kategorirek','kode','nama','keterangan'); /*epiii*/
-	// $inp     = app_form_gpost('kategorirek','kode','nama','nominal','keterangan'); /*epiii*/
+	$inp     = app_form_gpost('kategorirek','kode','nama','nominal','keterangan'); /*epiii*/
 
 	if($opt=='a'||$opt=='u'||$opt=='d'){ 
 		$q=false;
@@ -29,8 +28,7 @@
 			$a=0;
 			$kategorirek=kategorirek_r($a);
 		} else {
-			$r                =farray('kategorirek','kode','nama','keterangan'); /*epiii*/
-			// $r                =farray('kategorirek','kode','nama','nominal','keterangan'); /*epiii*/
+			$r                =farray('kategorirek','kode','nama','nominal','keterangan'); /*epiii*/
 			$r['kategorirek'] =gpost('skategorirek');
 			$kategorirek      =kategorirek_r($r['kategorirek']);
 			if($r['kategorirek']!=0){
@@ -44,7 +42,7 @@
 			// $fform->fi('Kategori',iSelect('kategorirek',$kategorirek,$r['kategorirek'],'','rekening_setkode()'));
 			$fform->fi('Kode',iText('kode',$r['kode'],'width:80px'));
 			$fform->fi('Rekening',iText('nama',$r['nama'],$fform->rwidths));
-			// $fform->fi('Saldo',iTextC('nominal',$r['nominal'],'width:120px')); /*epiii*/
+			$fform->fi('Saldo',iTextC('nominal',$r['nominal'],'width:120px')); /*epiii*/
 			$fform->fa('Keterangan',iTextarea('keterangan',$r['keterangan'],$fform->rwidths,3));
 		} else if($opt=='df'){ // Delete form 
 			$fform->dlg_del($r['nama']);
