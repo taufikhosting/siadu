@@ -92,7 +92,7 @@ if($njurnal>0){
 		$token = base64_encode(md5($a.$_SESSION['keu_admin_id'].$_SESSION['keu_admin_name']));
 		$xtable->btnbar_begin();
 			$xtable->btnbar_print2($a,$token);
-			$xtable->search_box('Cari uraian atau nomor jurnal');
+			// $xtable->search_box('Cari uraian atau nomor jurnal');
 			// echo iCheckx('ct_jurnaldetil','Tampilkan detil jurnal',$ct_jurnaldetil,'float:right;margin-left:4px;margin-right:30px;margin-top:4px','onclick="transaksi_jurnadetil(this.checked)"');
 		$xtable->btnbar_end();
 

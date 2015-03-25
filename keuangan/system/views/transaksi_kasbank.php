@@ -124,6 +124,12 @@ $njurnal=mysql_num_rows($t0);
 
 hiddenval('njurnal',$njurnal);
 
+$a     = 'transaksi_kasbank';
+$token = base64_encode(md5($a.$_SESSION['keu_admin_id'].$_SESSION['keu_admin_name']));
+$xtable->btnbar_begin();
+	$xtable->btnbar_print2($a,$token);
+$xtable->btnbar_end();
+
 if($njurnal>0){
 	$jurnal=array();
 	$i=0;

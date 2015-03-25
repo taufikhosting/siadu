@@ -229,7 +229,8 @@
 					
 				echo '</div></td></tr>';			
 			}
-			if($jtrans==JT_OUTCOME){
+			// if($jtrans==JT_OUTCOME){
+			if($jtrans==JT_OUTCOME || $jtrans==JT_INCOME){
 				$fform->fi('<b>pada anggaran</b>',iSelect('budget',$budget,$r['budget'],$fform->rwidths,'transaksi_cekbudget()'));
 			} else {
 				hiddenval('budget',0);

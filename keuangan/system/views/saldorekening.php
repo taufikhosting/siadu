@@ -14,15 +14,17 @@
 	$PSBar->end();
 
 	// Query
-	$db=new xdb("keu_rekening");
+	// $db=new xdb("keu_rekening");
+	$db=new xdb("keu_saldorekening");
 	if($kat!==0)$db->where("kategorirek='$kat'");
+	// if($kat!==0)$db->where("kategorirek='$kat'");
 	$t=$db->query();
 	$xtable->ndata=mysql_num_rows($t);
 	$t=$db->query($xtable->pageorder_sql('kode','nama'));
 
 	// $xtable->btnbar_f('add');
 	if($xtable->ndata>0){
-		$xtable->head('@Kode{C}','@Rekening','Saldo Awal','Keterangan');
+		$xtable->head('@Kode{C}','@Rekening','Saldo Awal');
 		// $xtable->head('@Kode{C}','@Rekening','Keterangan');
 		$lkat=0;
 		while($r=mysql_fetch_assoc($t)){
@@ -38,7 +40,7 @@
 			$xtable->td($r['kode'],100,'c');
 			$xtable->td($r['nama'],250);
 			$xtable->td(fRp($r['nominal']),250); /*epiii*/
-			$xtable->td(nl2br($r['keterangan']));
+			// $xtable->td(nl2br($r['keterangan']));
 			$xtable->opt_u($r['replid']);
 			$lkat=$r['kategorirek'];
 		}$xtable->foot();

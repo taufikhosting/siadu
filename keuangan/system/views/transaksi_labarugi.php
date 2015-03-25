@@ -110,7 +110,12 @@ if(mysql_num_rows($t0)>0){
 	if($xtable->ndata>0){
 		//$s='<button style="float:left;margin-right:4px" class="btn" onclick=""><div class="bi_pri">Cetak</div></button>';
 		//echo '<div class="tbltopbar" style="width:100%;margin-bottom:25px"><div style="width:700px">'.$s.'</div></div>';
-		
+		$a     = 'transaksi_neracalabarugi';
+		$token = base64_encode(md5($a.$_SESSION['keu_admin_id'].$_SESSION['keu_admin_name']));
+		$xtable->btnbar_begin();
+			$xtable->btnbar_print2($a,$token);
+		$xtable->btnbar_end();
+
 		echo '<table class="stable" cellspacing="0" cellpadding="0" width="550px" border="0" style="margin-bottom:30px">';
 
 		$pendapatan=0; $beban=0;

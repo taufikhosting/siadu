@@ -38,12 +38,16 @@
 
 		if($opt=='af' || $opt=='uf'){ 
 			require_once(MODDIR.'control.php'); // Add or Edit form
-			$fform->fi('Kategori',iSelect('kategorirek',$kategorirek,$r['kategorirek'],''));
+			// $fform->fl('Departemen',departemen_name($r['departemen']));
 			// $fform->fi('Kategori',iSelect('kategorirek',$kategorirek,$r['kategorirek'],'','rekening_setkode()'));
-			$fform->fi('Kode',iText('kode',$r['kode'],'width:80px'));
-			$fform->fi('Rekening',iText('nama',$r['nama'],$fform->rwidths));
+			// $fform->fi('Kategori',iSelect('kategorirek',$kategorirek,$r['kategorirek'],''));
+			
+			$fform->fi('Kategori', kategorirek_name($r['kategorirek']));
+			$fform->fi('Rekening', rekening_name($r['replid']));
+			// $fform->fi('Kode',iText('kode',$r['kode'],'width:80px'));
+			// $fform->fi('Rekening',iText('nama',$r['nama'],$fform->rwidths));
 			$fform->fi('Saldo',iTextC('nominal',$r['nominal'],'width:120px')); /*epiii*/
-			$fform->fa('Keterangan',iTextarea('keterangan',$r['keterangan'],$fform->rwidths,3));
+			// $fform->fa('Keterangan',iTextarea('keterangan',$r['keterangan'],$fform->rwidths,3));
 		} else if($opt=='df'){ // Delete form 
 			$fform->dlg_del($r['nama']);
 		} $fform->foot();

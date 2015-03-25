@@ -23,6 +23,12 @@
 	$db->order("keu_transaksi.tanggal,keu_transaksi.nomer");
 	$t=$db->query();
 	$xtable->ndata=mysql_num_rows($t);
+	
+	$a     = 'transaksi_bukutambahan';
+	$token = base64_encode(md5($a.$_SESSION['keu_admin_id'].$_SESSION['keu_admin_name']));
+	$xtable->btnbar_begin();
+		$xtable->btnbar_print2($a,$token);
+	$xtable->btnbar_end();
 
 	echo '<div class="sfont" style="font-size:13px;float:left;width:1000px;text-align:left;margin-top:20px;margin-bottom:20px;text-align:center">Tahun Buku: '.$bukutahun['nama'].'</div>';
 

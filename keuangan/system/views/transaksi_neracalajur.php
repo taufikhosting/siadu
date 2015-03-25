@@ -94,6 +94,11 @@ if(mysql_num_rows($t0)>0){
 		//echo '<div class="tbltopbar" style="width:100%;margin-bottom:5px"><div style="width:700px">'.$s.'</div></div>';
 		
 		//echo '<div class="sfont" style="font-size:15px;float:left;width:1000px;text-align:center;margin-bottom:20px">Neraca Lajur</div>';
+		$a     = 'transaksi_neracalajur';
+		$token = base64_encode(md5($a.$_SESSION['keu_admin_id'].$_SESSION['keu_admin_name']));
+		$xtable->btnbar_begin();
+			$xtable->btnbar_print2($a,$token);
+		$xtable->btnbar_end();
 
 		$xtable->head_addrow('Kode Rekening{2,70px,C}','Nama Rekening{2}','Neraca Saldo{C,1,2}','Laba/Rugi{C,1,2}','Neraca{C,1,2}');
 		$xtable->head_addrow('Debet{R}','Kredit{R}','Debet{R}','Kredit{R}','Debet{R}','Kredit{R}');
