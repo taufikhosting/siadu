@@ -49,7 +49,7 @@ $jkelamin=Array('L'=>'Laki-laki','P'=>'Perempuan'); $a=0;
 	<div style="float:left;width:100%;padding-bottom:10px;margin-bottom:10px;height:300px;overflow:auto">
 	<div style="float:left;width:100%;margin-bottom:0px">
 	<div style="float:left">
-		<div class="xrowl2" style="margin-bottom:25px"><div class="xlbl"><b>Data Pribadi Siswa:</b></div></div>
+		<div class="xrowl2" style="margin-bottom:25px"><div class="xlbl"><b>Data Pribadi Siswa :</b></div></div>
 		<div class="xrowl2"><div class="xlbl" style="width:200px">Nama</div><div class="xlbl">: <?=$r['nama']?></div></div>
 		<div class="xrowl2"><div class="xlbl" style="width:200px">Jenis kelamin</div><div class="xlbl">: <?=$jkelamin[$r['kelamin']]?></div></div>
 		<div class="xrowl2"><div class="xlbl" style="width:200px">Tempat lahir</div><div class="xlbl">: <?=$r['tmplahir']?></div></div>
@@ -62,10 +62,14 @@ $jkelamin=Array('L'=>'Laki-laki','P'=>'Perempuan'); $a=0;
 		<div style="width:140px;height:200px;margin-right:30px;margin-top:20px">
 			<div style="border:4px solid #ffffff;width:140px;box-shadow: 0px 2px 5px rgba(0, 0, 0, .25)">
 				<?php
-				$q=mysql_query("SELECT LENGTH(photo) AS psize FROM psb_calonsiswa WHERE replid='".$r['replid']."'");
-				$h=mysql_fetch_array($q);
-				if($h['psize']>0){ ?>
-				<img src="photo/$.php?id=<?=$r['replid']?>" width="140px"/>
+					// $q=mysql_query("SELECT LENGTH(photo) AS psize FROM psb_calonsiswa WHERE replid='".$r['replid']."'");
+					$q =mysql_query("SELECT photo2 FROM psb_calonsiswa WHERE nama='".$r['nama']."'");
+					$h =mysql_fetch_assoc($q);
+					if($h['photo2']!=''){
+					// if($h['psize']>0){ 
+				?>
+				<img src="photo/<?php echo $r['replid'].'.jpg'; ?>" width="140px"/>
+				<!-- <img src="photo/$.php?id=<?=$r['replid']?>" width="140px"/> -->
 				<?php }else{?>
 				<div style="width:140px;height:150px;background:#f0f0f0"></div>
 				<?php }?>
