@@ -302,17 +302,21 @@ function rekening_form(o,cid,g){
 }
 function saldorekening_form(o,cid,g){
 	var d=['skategorirek'];
-	var f=[['kategorirek'],
-			['kode','',true,'w',10],
-			['nama','Nama tahun buku'],
+	var f=[
+			// ['kategorirek'],
+			// ['kode','',true,'w',10],
+			// ['nama','Nama tahun buku'],
 			['nominal','Saldo Awal',true,'c'],
-			['keterangan','',false]];
-	if(E('skategorirek').value!='0'){
-		f=[['kode','',true,'w',10],
-			['kategorirek'],
-			['nama','Nama tahun buku'],
+			// ['keterangan','',false]
+			];
+	if(E('skategorirek').value!='0'){ //edit
+		f=[
+			// ['kode','',true,'w',10],
+			// ['kategorirek'],
+			// ['nama','Nama tahun buku'],
 			['nominal','Saldo Awal',true,'c'],
-			['keterangan','',false]];
+			// ['keterangan','',false]
+			];
 	}fform_std(o,cid,g,"saldorekening",saldorekening_get,f,fform_purl(d));
 }
 function rekening_setkode(){

@@ -22,7 +22,7 @@ class fform{
 	public $title_style;
 	public $nobtn_action='';
 
-	// $fform   =new fform('rekening','keu_rekening',$cid,'kode rekening');
+	// $fform   = new fform('saldorekening','uf','1','Saldo Awal');
 	function __construct($f,$o='af',$id=0,$d=''){
 		global $APPREG_fform;
 		$this->fmod=$f;

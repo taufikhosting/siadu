@@ -1,16 +1,20 @@
 <?php 
 	require_once(MODDIR.'fform/fform.php'); 
 	$opt=gpost('opt');
+	// var_dump($opt);exit();
 	$cid=gpost('cid');
 	if($cid=='')
 		$cid=0;
 	appmod_use('keu/rekening');
 
 	// form Module
-	$fmod    = "rekening";
-	$dbtable = "keu_rekening";
-	$fform   = new fform($fmod,$opt,$cid,'kode rekening');
-	$inp     = app_form_gpost('kategorirek','kode','nama','nominal','keterangan'); /*epiii*/
+	// $fmod    = "rekening";
+	$fmod    = "saldorekening";
+	$dbtable = "keu_saldorekening";
+	// $dbtable = "keu_rekening";
+	$fform   = new fform($fmod,$opt,$cid,'Saldo Awal');
+	$inp     = app_form_gpost('nominal'); /*epiii*/
+	// $inp     = app_form_gpost('kategorirek','kode','nama','nominal','keterangan'); /*epiii*/
 
 	if($opt=='a'||$opt=='u'||$opt=='d'){ 
 		$q=false;
@@ -24,11 +28,18 @@
 	} else { 
 		$a=0;
 		if($opt=='uf'||$opt=='df'){ // Prepocessing form
-			$r=dbSFA("*",$dbtable,"W/replid='$cid'"); 
+			// function dbSFA($s,$t,$f=""){
+			// $db->field("keu_saldorekening:replid,nominal",
+			// 			"keu_rekening:kode,nama");
+			// $db->join('replid','keu_saldorekening','rekening');
+			// $db->where_ands("keu_saldorekening:tahunbuku='$tbuku'");
+			$r=dbSFA("*",$dbtable." sr, keu_rekening r","W/sr.replid='$cid AND sr.rekening=r.replid '"); 
+			// var_dump($r);exit();
 			$a=0;
 			$kategorirek=kategorirek_r($a);
 		} else {
-			$r                =farray('kategorirek','kode','nama','nominal','keterangan'); /*epiii*/
+			$r                =farray('nominal'); /*epiii*/
+			// $r                =farray('kategorirek','kode','nama','nominal','keterangan'); /*epiii*/
 			$r['kategorirek'] =gpost('skategorirek');
 			$kategorirek      =kategorirek_r($r['kategorirek']);
 			if($r['kategorirek']!=0){
@@ -42,7 +53,7 @@
 			// $fform->fi('Kategori',iSelect('kategorirek',$kategorirek,$r['kategorirek'],'','rekening_setkode()'));
 			// $fform->fi('Kategori',iSelect('kategorirek',$kategorirek,$r['kategorirek'],''));
 			
-			$fform->fi('Kategori', kategorirek_name($r['kategorirek']));
+			// $fform->fi('Kategori', kategorirek_name($r['kategorirek']));
 			$fform->fi('Rekening', rekening_name($r['replid']));
 			// $fform->fi('Kode',iText('kode',$r['kode'],'width:80px'));
 			// $fform->fi('Rekening',iText('nama',$r['nama'],$fform->rwidths));

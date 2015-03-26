@@ -7,6 +7,7 @@ function dbQsql($s){
 }
 function dbFA($q){
 // return mysql_fetch_array($q);
+// var_dump(mysql_fetch_assoc($q));
 return mysql_fetch_assoc($q);
 }
 function dbQFA($s){
@@ -20,7 +21,7 @@ $h=array("W/","O/","D/","L/");
 $r=array(" WHERE "," ORDER BY "," DESC "," LIMIT ");
 if($f!="")$f=str_replace($h,$r,$f);
 return dbQsql("SELECT ".$s." FROM ".$t." ".$f);
-}  
+}
 function dbSFA($s,$t,$f=""){
 return dbFA(dbSel($s,$t,$f));
 }

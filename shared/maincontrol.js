@@ -834,7 +834,8 @@ function fform_purl(f){
 	// alert(d);
 }
 function gpage_purl(f){
-	var d=""; for(var i=0;i<f.length;i++){
+	var d=""; 
+	for(var i=0;i<f.length;i++){
 		if(i>0)d+="&";
 		d+=f[i]+"="+E(f[i]).value;
 	}
