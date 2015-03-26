@@ -104,7 +104,7 @@ body{
 <tr>
 	<td align="center"><div class="blbl" >Kepegawaian</div></td>
 	<td align="center"><div class="blbl" >Keuangan</div></td>
-	<td align="center"><div class="blbl" >Repository</div></td>
+	<td align="center"><div class="blbl" >Student  Service</div></td>
 	<td align="center"><div class="blbl" >Manajemen</div></td>
 </tr>
 </table>
