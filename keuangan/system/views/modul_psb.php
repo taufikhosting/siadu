@@ -70,7 +70,7 @@
 
 	// Query
 	$db=new xdb("keu_pembayaran");
-	$db->field("keu_pembayaran:*","psb_calonsiswa:nama,nopendaftaran","keu_transaksi:tanggal as tglbayar,nominal as jmlbayar");
+	$db->field("keu_pembayaran:*","psb_calonsiswa:nama,nopendaftaran,kelompok,golongan,kriteria","keu_transaksi:tanggal as tglbayar,nominal as jmlbayar");
 	$db->join("siswa","psb_calonsiswa");
 	$db->join("modul","keu_modul");
 	$db->join("replid","keu_transaksi","pembayaran");
@@ -79,6 +79,7 @@
 	if($tampil=='Y') $db->where_and("keu_pembayaran.lunas='1'");
 	if($tampil=='N') $db->where_and("keu_pembayaran.lunas='0'");
 	$db->where_and($xtable->search_sql_get());
+	// var_dump($db);exit();		
 
 	$t=$db->query();
 	$xtable->ndata=mysql_num_rows($t);
@@ -97,13 +98,22 @@
 	if($xtable->ndata>0){
 		// Table head
 		$xtable->head('@No pendaftaran','@Nama','Formulir{R}','Joining Fee{R}','Jumlah dibayar{R}','@Tanggal pembayaran','@Status');
-		
 		while($r=mysql_fetch_array($t)){$xtable->row_begin();
-		
+			$ss = 'SELECT joiningf,daftar formulir
+					FROM psb_setbiaya
+					WHERE
+						kel = '.$r['kelompok'].'
+						AND gol = '.$r['golongan'].'
+						AND krit = '.$r['kriteria'];
+			$ee = mysql_query($ss);
+			// var_dump($ee);exit();
+			$rr = mysql_fetch_assoc($ee);
+
 			$xtable->td($r['nopendaftaran'],120);
 			$xtable->td($r['nama']);
 			$xtable->td(fRp($r['nominal']),110,'r');
-			$xtable->td(fRp($r['joiningf']),110,'r');
+			$xtable->td(fRp($rr['joiningf']),110,'r');
+			// $xtable->td(fRp($r['joiningf']),110,'r');
 			$xtable->td(fRp($r['jmlbayar']),110,'r');
 			
 			if($r['lunas']=='1')
